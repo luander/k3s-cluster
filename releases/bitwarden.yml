@@ -51,9 +51,7 @@ spec:
           userKey: "username"
           passwordKey: "password"
 
-    env:
-    - YUBICO_CLIENT_ID: 57547
-    - YUBICO_SECRET_KEY: utq6mzHODevFnomOlZiB7k9qnsA=
+    env: {}
 
     persistence:
       type: statefulset
