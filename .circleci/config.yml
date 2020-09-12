@@ -1,0 +1,30 @@
+version: 2.1
+jobs:
+  validate-yamls:
+    docker:
+      - image: stefanprodan/hrval:v2.9.0
+    steps:
+      - checkout
+      - run:
+          name: Validate workloads
+          environment:
+            KUBE_VER: "1.16.0"
+          command: |
+            kubeval --strict --ignore-missing-schemas --kubernetes-version ${KUBE_VER} -d namespaces,workloads,releases
+      - run:
+          name: Validate releases
+          environment:
+            IGNORE_VALUES: "false"
+            KUBE_VER: "1.16.0"
+            HELM_VER: "v2"
+          command: |
+            hrval releases/ $IGNORE_VALUES $KUBE_VER $HELM_VER
+workflows:
+  version: 2
+  validate:
+    jobs:
+      - validate-yamls:
+          filters:
+            branches:
+              ignore:
+                - gh-pages

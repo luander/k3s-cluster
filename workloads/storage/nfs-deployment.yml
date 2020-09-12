@@ -1,0 +1,44 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: nfs-client-provisioner
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: nfs-client-provisioner
+  template:
+    metadata:
+      labels:
+        app: nfs-client-provisioner
+    spec:
+      serviceAccountName: nfs-client-provisioner
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: beta.kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
+      containers:
+      - name: nfs-client-provisioner
+        image: quay.io/external_storage/nfs-client-provisioner:latest
+        volumeMounts:
+        - name: nfs-client-root
+          mountPath: /persistentvolumes
+        env:
+        - name: PROVISIONER_NAME
+          value: nfs
+        - name: NFS_SERVER
+          value: 10.0.0.10
+        - name: NFS_PATH
+          value: /mnt/data/nfs
+      volumes:
+      - name: nfs-client-root
+        nfs:
+          server: 10.0.0.10
+          path: /mnt/data/nfs
