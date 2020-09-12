@@ -9,9 +9,9 @@ metadata:
 spec:
   releaseName: bitwarden
   chart:
-    repository: https://k8s-at-home.com/charts
+    repository: https://billimek.com/billimek-charts
     name: bitwardennrs
-    version: 1.0.0
+    version: 0.1.1
   values:
     replicaCount: 1
 
