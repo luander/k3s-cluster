@@ -19,7 +19,7 @@ spec:
       tag: 1.16.3
 
     bitwardenrs:
-      domain: "bitwarden.kube.luander.net"
+      domain: "https://bitwarden.kube.luander.net"
       signupsAllowed: true
       websockets:
         enabled: true
