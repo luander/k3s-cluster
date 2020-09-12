@@ -107,7 +107,8 @@ spec:
         # kubernetes.io/tls-acme: "true"
       hosts:
       - host: "bitwarden.kube.luander.net"
-        paths: []
+        paths:
+        - "/"
       tls: []
       #  - secretName: chart-example-tls
       #    hosts:
