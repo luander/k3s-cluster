@@ -20,7 +20,7 @@ spec:
 
     bitwardenrs:
       domain: "https://bitwarden.kube.luander.net"
-      signupsAllowed: true
+      signupsAllowed: false
       websockets:
         enabled: true
         port: 3012
@@ -33,27 +33,23 @@ spec:
           tokenKey: ""
       # Enable SMTP. https://github.com/dani-garcia/bitwarden_rs/wiki/SMTP-configuration
       smtp:
-        enabled: false
+        enabled: true
         # SMTP hostname, required if SMTP is enabled
-        host: ""
+        host: "mail.gandi.net"
         # SMTP sender e-mail address, required if SMTP is enabled
-        from: ""
+        from: "noreply@luander.net"
         # SMTP sender name, defaults to 'Bitwarden_RS'
-        fromName: ""
+        fromName: "Bitwarden"
         # Enable SSL connection
         ssl: true
         # SMTP port
         port: 587
-        # SMTP username
-        user: ""
-        # SMTP password. Required is user is specified, ignored if no user provided
-        password: ""
         # Use existing secret for SMTP authentication
         existingSecret:
-          enabled: false
-          name: ""
-          userKey: ""
-          passwordKey: ""
+          enabled: true
+          name: "bitwardensmtp"
+          userKey: "username"
+          passwordKey: "password"
 
     env: {}
 
