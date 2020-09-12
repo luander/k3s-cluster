@@ -4,6 +4,8 @@ kind: HelmRelease
 metadata:
   name: bitwarden
   namespace: bitwarden
+  annotations:
+    fluxcd.io/automated: "true"
 spec:
   releaseName: bitwarden
   chart:
