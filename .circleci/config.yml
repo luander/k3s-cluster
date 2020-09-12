@@ -16,7 +16,7 @@ jobs:
           environment:
             IGNORE_VALUES: "false"
             KUBE_VER: "1.16.0"
-            HELM_VER: "v2"
+            HELM_VER: "v3"
           command: |
             hrval releases/ $IGNORE_VALUES $KUBE_VER $HELM_VER
 workflows:
