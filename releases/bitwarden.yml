@@ -20,7 +20,7 @@ spec:
 
     bitwardenrs:
       domain: "https://bitwarden.kube.luander.net"
-      signupsAllowed: false
+      signupsAllowed: true
       websockets:
         enabled: true
         port: 3012
@@ -51,7 +51,17 @@ spec:
           userKey: "username"
           passwordKey: "password"
 
-    env: {}
+    env:
+    - name: YUBICO_CLIENT_ID
+      valueFrom:
+        secretKeyRef:
+          name: bitwardenyubikey
+          key: clientid
+    - name: YUBICO_SECRET_KEY
+      valueFrom:
+        secretKeyRef:
+          name: bitwardenyubikey
+          key: secret
 
     persistence:
       type: statefulset
