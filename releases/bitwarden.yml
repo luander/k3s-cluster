@@ -16,7 +16,7 @@ spec:
     image:
       repository: bitwardenrs/server
       pullPolicy: IfNotPresent
-      tag: "testing-alpine"
+      tag: 1.16.3
 
     bitwardenrs:
       domain: "bitwarden.kube.luander.net"
