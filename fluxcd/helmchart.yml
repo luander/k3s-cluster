@@ -8,8 +8,6 @@ spec:
   chart: flux
   repo: https://charts.fluxcd.io
   valuesContent: |-
-
-
     affinity: 
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
@@ -273,6 +271,8 @@ spec:
   chart: helm-operator
   repo: https://charts.fluxcd.io
   valuesContent: |-
+
+
     affinity: 
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
@@ -299,7 +299,7 @@ spec:
       port: 3030
 
     # Include the HelmRelease definition on install
-    createCRD: false
+    createCRD: true
     # Limit the operator scope to a single namespace
     allowNamespace:
     # Update dependencies for charts
