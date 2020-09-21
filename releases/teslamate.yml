@@ -57,15 +57,26 @@ spec:
         tag: 12.1
       postgresqlDataDir: "/data/pgdata"
 
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: beta.kubernetes.io/arch
-                    operator: In
-                    values:
-                      - amd64
+      master:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: beta.kubernetes.io/arch
+                      operator: In
+                      values:
+                        - amd64
+      slave:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: beta.kubernetes.io/arch
+                      operator: In
+                      values:
+                        - amd64
       ### PostgreSQL User to create.
       ##
       postgresqlUsername: teslamate
