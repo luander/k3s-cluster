@@ -8,7 +8,7 @@
     releaseName: opa
     chart:
       repository: https://kubernetes-charts.storage.googleapis.com/
-      name: opa
+      name: stable/opa
       version: 0.15.1
     values:
       # Default values for opa.
