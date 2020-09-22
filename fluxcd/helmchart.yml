@@ -238,7 +238,34 @@ spec:
     # #         name: flux-deploy-key
 
     # # Additional containers to be added to the flux pod.
-    # extraContainers: []
+    extraContainers:
+      - name: fluxcloud
+        image: justinbarrick/fluxcloud:v0.3.9
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3032
+        env:
+        - name: SLACK_URL
+          value: "https://hooks.slack.com/services/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"
+        - name: SLACK_CHANNEL
+          value: "#kubernetes"
+        # Or configure multiple channels
+        # (comma separated <channel>=<namespace>) string:
+        #  value: "#kubernetes=*,#team=team"
+        # Optional: legacy Slack API token
+        # - name: SLACK_TOKEN
+        #   valueFrom:
+        #     secretKeyRef:
+        #       key: token
+        #       name: slack-token
+        - name: SLACK_USERNAME
+          value: Flux Deployer
+        - name: SLACK_ICON_EMOJI
+          value: ":robot_face:"
+        - name: GITHUB_URL
+          value: "https://github.com/justinbarrick/fluxcloud/"
+        - name: LISTEN_ADDRESS
+          value: ":3032"
 
     # # Host aliases to be added to the Flux pod - see < - ip: <https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/>
     # hostAliases: {}
@@ -271,8 +298,6 @@ spec:
   chart: helm-operator
   repo: https://charts.fluxcd.io
   valuesContent: |-
-
-
     affinity: 
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
@@ -529,4 +554,31 @@ spec:
       tiller: {}
 
     sidecarContainers:
+      - name: fluxcloud
+        image: justinbarrick/fluxcloud:v0.3.9
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3032
+        env:
+        - name: SLACK_URL
+          value: "https://hooks.slack.com/services/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"
+        - name: SLACK_CHANNEL
+          value: "#kubernetes"
+        # Or configure multiple channels
+        # (comma separated <channel>=<namespace>) string:
+        #  value: "#kubernetes=*,#team=team"
+        # Optional: legacy Slack API token
+        # - name: SLACK_TOKEN
+        #   valueFrom:
+        #     secretKeyRef:
+        #       key: token
+        #       name: slack-token
+        - name: SLACK_USERNAME
+          value: Flux Deployer
+        - name: SLACK_ICON_EMOJI
+          value: ":robot_face:"
+        - name: GITHUB_URL
+          value: "https://github.com/justinbarrick/fluxcloud/"
+        - name: LISTEN_ADDRESS
+          value: ":3032"
 
