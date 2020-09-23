@@ -9,7 +9,7 @@
     chart:
       repository: https://kubernetes-charts.storage.googleapis.com/
       name: oauth2-proxy
-      version: 5.1.0
+      version: 3.2.3
     values:
       # Oauth client configuration specifics
       config:
