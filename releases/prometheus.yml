@@ -421,7 +421,7 @@
       kube-state-metrics:
         image:
           repository: bitnami/kube-state-metrics
-          tag: v2.0.0-alpha
+          tag: 1.9.7-debian-10-r86
         affinity:
           nodeAffinity:
             requiredDuringSchedulingIgnoredDuringExecution:
