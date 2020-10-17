@@ -210,15 +210,15 @@ spec:
     # #   - name: FOO
     # #     value: bar
 
-    # prometheus:
-    #   enabled: false
-    #   serviceMonitor:
-    #     # Enables ServiceMonitor creation for the Prometheus Operator
-    #     create: false
-    #     interval:
-    #     scrapeTimeout:
-    #     namespace:
-    #     additionalLabels: {}
+    prometheus:
+      enabled: true
+      serviceMonitor:
+        # Enables ServiceMonitor creation for the Prometheus Operator
+        create: false
+        interval:
+        scrapeTimeout:
+        namespace:
+        additionalLabels: {}
 
     # syncGarbageCollection:
     #   enabled: false
@@ -487,7 +487,7 @@ spec:
         users: []
 
     prometheus:
-      enabled: false
+      enabled: true
       serviceMonitor:
         # Enables ServiceMonitor creation for the Prometheus Operator
         create: false
