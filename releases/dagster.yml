@@ -8,7 +8,7 @@ spec:
   releaseName: dagster
   chart:
     repository: https://dagster-io.github.io/helm
-    name: dagster/dagster
+    name: dagster
     version: 0.10.8
   values:
     ####################################################################################################
