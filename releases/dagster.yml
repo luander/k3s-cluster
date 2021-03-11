@@ -76,7 +76,6 @@ spec:
       securityContext: 
         runAsUser: 1000
         runAsGroup: 1000
-        fsGroup: 1000
       resources: {}
       # If you want to specify resources, uncomment the following lines, adjust them as necessary,
       # and remove the curly braces after 'resources:'.
@@ -240,7 +239,6 @@ spec:
           securityContext: 
             runAsUser: 1000
             runAsGroup: 1000
-            fsGroup: 1000
           resources: {}
           replicaCount: 1
           # Liveness Probe and Startup Probe are optional. For more configuration docs, see:
@@ -306,7 +304,6 @@ spec:
       securityContext: 
         runAsUser: 1000
         runAsGroup: 1000
-        fsGroup: 1000
     ####################################################################################################
     # Scheduler: Configuration for the scheduler
     ####################################################################################################
@@ -445,7 +442,6 @@ spec:
           securityContext: 
             runAsUser: 1000
             runAsGroup: 1000
-            fsGroup: 1000
 
           # Specify resources.
           # Example:
@@ -635,7 +631,6 @@ spec:
       securityContext: 
         runAsUser: 1000
         runAsGroup: 1000
-        fsGroup: 1000
 
       resources: {}
       # If you want to specify resources, uncomment the following lines, adjust them as necessary,
@@ -799,7 +794,6 @@ spec:
       securityContext: 
         runAsUser: 1000
         runAsGroup: 1000
-        fsGroup: 1000
       resources: {}
 
       livenessProbe:
