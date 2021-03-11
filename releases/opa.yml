@@ -7,7 +7,7 @@
   spec:
     releaseName: opa
     chart:
-      repository: https://kubernetes-charts.storage.googleapis.com
+      repository: https://charts.helm.sh/stable
       name: opa
       version: 1.14.4
     values:

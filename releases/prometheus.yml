@@ -7,7 +7,7 @@
   spec:
     releaseName: prometheus
     chart:
-      repository: https://kubernetes-charts.storage.googleapis.com
+      repository: https://charts.helm.sh/stable
       name: prometheus
       version: 11.12.1
     values:  

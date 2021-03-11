@@ -7,7 +7,7 @@
   spec:
     releaseName: oauth2-proxy
     chart:
-      repository: https://kubernetes-charts.storage.googleapis.com/
+      repository: https://charts.helm.sh/stable
       name: oauth2-proxy
       version: 3.2.3
     values:
