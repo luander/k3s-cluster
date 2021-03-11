@@ -318,57 +318,6 @@ spec:
       #  ]
       type: DagsterDaemonScheduler
 
-      config:
-        # (deprecated) This configuration will only be used if the K8sScheduler is selected
-        k8sScheduler:
-          # Image for K8s CronJob(s) to launch K8s Job(s). This image needs access to dagster code
-          # (to call `dagster api launch_scheduled_execution`) and instance yaml
-          # but does not need access to user code.
-          image:
-            repository: "docker.io/dagster/dagster-celery-k8s"
-            tag: "latest"
-            pullPolicy: Always
-
-          # K8s Namespace for K8s CronJob(s) and launched K8s Job(s).
-          # By default, the release namespace is used.
-          schedulerNamespace: ~
-
-          # Set to true to load kubeconfig from within cluster
-          loadInclusterConfig: true
-
-          # File to load kubeconfig from. Only set this if loadInclusterConfig is false.
-          kubeconfigFile: ~
-
-          # Additional environment variables can be retrieved and set from Secrets. See:
-          # https://kubernetes.io/docs/concepts/configuration/secret/#use-case-as-container-environment-variables
-          #
-          # Example:
-          #
-          # envSecrets:
-          #   - name: secret
-          envSecrets: []
-          affinity:
-            nodeAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                nodeSelectorTerms:
-                  - matchExpressions:
-                      - key: beta.kubernetes.io/arch
-                        operator: In
-                        values:
-                          - amd64
-          securityContext: 
-            runAsUser: 1000
-            runAsGroup: 1000
-            fsGroup: 1000
-
-        ## Uncomment this configuration will only be used if the CustomScheduler is selected.
-        ## Using this setting requires a custom Dagit image that defines the user specified
-        ## scheduler in an installed python module.
-        # customScheduler:
-        #   module: ~
-        #   class: ~
-        #   config: {}
-
     ####################################################################################################
     # Run Launcher: Configuration for run launcher
     ####################################################################################################
