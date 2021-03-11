@@ -73,9 +73,7 @@ spec:
                       - amd64
       tolerations: []
       podSecurityContext: {}
-      securityContext: 
-        runAsUser: 1000
-        runAsGroup: 1000
+      securityContext: {}
       resources: {}
       # If you want to specify resources, uncomment the following lines, adjust them as necessary,
       # and remove the curly braces after 'resources:'.
