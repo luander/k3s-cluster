@@ -10,4 +10,3 @@ spec:
     repository: https://kubernetes.github.io/ingress-nginx
     name: ingress-nginx
     version: 3.24.0
-  values: {}
