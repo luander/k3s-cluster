@@ -1,0 +1,13 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: gitpod
+  namespace: 
+spec:
+  releaseName: gitpod
+  chart:
+    repository: https://charts.gitpod.io
+    name: gitpod
+    version: 1.1.0
+  values:
