@@ -14,7 +14,6 @@ spec:
     global:
       cattle:
         systemDefaultRegistry: ""
-
     image:
       longhorn:
         engine:
