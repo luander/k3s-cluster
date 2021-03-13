@@ -47,7 +47,7 @@ spec:
         snapshotter:
           repository: longhornio/csi-snapshotter
           tag: v2.1.1-lh1
-      pullPolicy: IfNotPresent
+      pullPolicy: Always
 
     service:
       ui:
