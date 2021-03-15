@@ -180,5 +180,5 @@ spec:
         name: Azure AD
         allow_sign_up: true
         allowed_domains: luander.net
-        allowed_groups: {}
+        allowed_groups:
         scopes: openid email profile
