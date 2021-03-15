@@ -36,14 +36,7 @@ spec:
         port: 80
 
     ingress:
-      annotations:
-        kubernetes.io/ingress.class: nginx
-      enabled: true
-      hosts:
-      - host: photos.kube.luander.net
-        paths: 
-        - "/"
-      tls: []
+      enabled: false
 
     persistence:
       config:
