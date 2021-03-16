@@ -106,4 +106,4 @@ spec:
                 - key: beta.kubernetes.io/arch
                   operator: In
                   values:
-                    - arm
+                    - arm64
