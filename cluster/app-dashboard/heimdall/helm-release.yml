@@ -1,0 +1,25 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: jackett
+  namespace: media
+spec:
+  releaseName: jackett
+  chart:
+    repository: https://k8s-at-home.com/charts
+    name: heimdall
+    version: 5.1.0
+  values:
+    env:
+       TZ: "Europe/London"
+       
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: "nginx"
+      hosts:
+      - host: kube.luander.net
+        paths:
+        - path: /
+          pathType: Prefix
