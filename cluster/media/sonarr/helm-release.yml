@@ -1,0 +1,96 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: sonarr
+  namespace: media
+spec:
+  releaseName: sonarr
+  chart:
+    repository: https://k8s-at-home.com/charts
+    name: sonarr
+    version: 9.3.0
+  values:
+    image:
+      repository: linuxserver/sonarr
+      pullPolicy: IfNotPresent
+      tag: version-3.0.5.1144
+
+    strategy:
+      type: Recreate
+
+    env: 
+      TZ: "Europe/London"
+      PUID: 1000
+      PGID: 1000
+
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: "nginx"
+        # nginx.ingress.kubernetes.io/auth-url: "https://auth.kube.luander.net/oauth2/auth"
+        # nginx.ingress.kubernetes.io/auth-signin: "https://auth.kube.luander.net/oauth2/start"
+        # nginx.ingress.kubernetes.io/configuration-snippet: |
+        #   # Bypass auth for requests from local network
+        #   # This works, but are there some security concerns?
+        #   satisfy any;
+        #   allow 192.168.0.0/16;
+        #   allow 172.16.0.0/12;
+        #   allow 10.0.0.0/8;
+        #   deny all;
+      hosts:
+      - host: sonarr.kube.luander.net
+        paths:
+        - path: /
+          pathType: Prefix
+      additionalIngresses:
+      - enabled: true
+        nameSuffix: "api"
+        annotations:
+          kubernetes.io/ingress.class: "nginx"
+        hosts:
+        - host: sonarr.kube.luander.net
+          paths:
+          - path: /api
+            pathType: Prefix
+
+    probes:
+      liveness:
+        enabled: true
+        ## Set this to true if you wish to specify your own livenessProbe
+        custom: true
+        ## The spec field contains the values for the default livenessProbe.
+        ## If you selected custom: true, this field holds the definition of the livenessProbe.
+        spec:
+          exec:
+            command:
+            - /usr/bin/env
+            - bash
+            - -c
+            - curl --fail localhost:8989/api/v3/system/status?apiKey=`IFS=\> && while
+              read -d \< E C; do if [[ $E = "ApiKey" ]]; then echo $C; fi; done < /config/config.xml`
+          failureThreshold: 5
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 10
+
+    persistence:
+      config:
+        enabled: true
+        storageClass: "longhorn"
+        accessMode: ReadWriteOnce
+        size: "25Gi"
+    additionalVolumeMounts:
+    - name: media
+      mountPath: "/media"
+    additionalVolumes:
+    - name: media
+      persistentVolumeClaim:
+        claimName: video-media
+    resources:
+      requests:
+        memory: 250Mi
+        cpu: 500m
+      limits:
+        memory: 1500Mi

@@ -1,0 +1,40 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: jackett
+  namespace: media
+spec:
+  releaseName: jackett
+  chart:
+    repository: https://k8s-at-home.com/charts
+    name: jackett
+    version: 7.2.0
+  values:
+    controllerType: deployment
+    image:
+      repository: linuxserver/jackett
+      tag: version-v0.17.710
+    env:
+       TZ: "Europe/London"
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: "internal"
+      hosts:
+      - host: jackett.kube.luander.net
+        paths:
+        - path: /
+          pathType: Prefix
+    persistence:
+      config:
+        enabled: true
+        storageClass: "longhorn"
+        accessMode: ReadWriteOnce
+        size: "1Gi"
+    resources:
+      requests:
+        memory: 250Mi
+        cpu: 500m
+      limits:
+        memory: 1500Mi

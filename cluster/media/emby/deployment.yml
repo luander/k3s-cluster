@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: emby
+  namespace: media
+  labels:
+    app: emby
+spec:
+  selector:
+    matchLabels:
+      app: emby
+  template:
+    metadata:
+      labels:
+        app: emby
+    spec:
+      securityContext:
+        fsGroup: 0
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: beta.kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
+      containers:
+      - name: emby
+        image: linuxserver/emby:4.5.4.0-ls78
+        ports:
+        - name: https
+          containerPort: 8920
+          protocol: TCP
+        - name: http
+          containerPort: 8096
+          protocol: TCP
+        volumeMounts:
+          - name: emby-data
+            mountPath: /config
+            subPath: "configs/emby/config"
+            readOnly: false
+          - name: emby-data
+            mountPath: /mnt/share
+            readOnly: false
+      volumes:
+        - name: emby-data
+          persistentVolumeClaim:
+              claimName: video-media
