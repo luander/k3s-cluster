@@ -36,14 +36,14 @@ spec:
           containerPort: 8096
           protocol: TCP
         volumeMounts:
-          - name: emby-data
+          - name: data
             mountPath: /config
             subPath: "configs/emby/config"
             readOnly: false
-          - name: emby-data
+          - name: data
             mountPath: /mnt/share
             readOnly: false
       volumes:
-        - name: emby-data
+        - name: data
           persistentVolumeClaim:
               claimName: video-media
