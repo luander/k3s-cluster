@@ -58,7 +58,7 @@ spec:
         nodePort: ""
 
     persistence:
-      defaultClass: false
+      defaultClass: true
       defaultClassReplicaCount: 3
       reclaimPolicy: Delete
       recurringJobs:
