@@ -69,7 +69,7 @@ spec:
         kubernetes.io/ingress.class: nginx
         # kubernetes.io/tls-acme: "true"
       hosts:
-      - host: "bitwarden.kube.luander.net"
+      - host: "bitwarden.luander.net"
         paths:
         - "/"
       tls: []
