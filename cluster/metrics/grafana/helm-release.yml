@@ -1,21 +1,22 @@
 ---
-apiVersion: helm.fluxcd.io/v1
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: grafana
   namespace: metrics
 spec:
-  releaseName: grafana
+  interval: 5m
   chart:
-    repository: https://grafana.github.io/helm-charts
-    name: grafana
-    version: 6.6.2
+    spec:
+      # renovate: registryUrl=https://grafana.github.io/helm-charts
+      chart: grafana
+      version: 6.6.4
+      sourceRef:
+        kind: HelmRepository
+        name: grafana-charts
+        namespace: flux-system
+      interval: 5m
   values:
-    image:
-      repository: grafana/grafana
-      tag: 7.4.3
-      sha: ""
-      pullPolicy: IfNotPresent
     ingress:
       enabled: true
       # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName

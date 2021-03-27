@@ -1,15 +1,21 @@
 ---
-apiVersion: helm.fluxcd.io/v1
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: sonarr
   namespace: media
 spec:
-  releaseName: sonarr
+  interval: 5m
   chart:
-    repository: https://k8s-at-home.com/charts
-    name: sonarr
-    version: 9.3.0
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: sonarr
+      version: 10.0.1
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
   values:
     image:
       repository: linuxserver/sonarr
@@ -28,16 +34,6 @@ spec:
       enabled: true
       annotations:
         kubernetes.io/ingress.class: "nginx"
-        # nginx.ingress.kubernetes.io/auth-url: "https://auth.kube.luander.net/oauth2/auth"
-        # nginx.ingress.kubernetes.io/auth-signin: "https://auth.kube.luander.net/oauth2/start"
-        # nginx.ingress.kubernetes.io/configuration-snippet: |
-        #   # Bypass auth for requests from local network
-        #   # This works, but are there some security concerns?
-        #   satisfy any;
-        #   allow 192.168.0.0/16;
-        #   allow 172.16.0.0/12;
-        #   allow 10.0.0.0/8;
-        #   deny all;
       hosts:
       - host: sonarr.kube.luander.net
         paths:

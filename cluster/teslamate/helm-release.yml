@@ -1,15 +1,21 @@
 ---
-apiVersion: helm.fluxcd.io/v1
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: teslamate
   namespace: teslamate
 spec:
-  releaseName: teslamate
+  interval: 5m
   chart:
-    repository: https://k8s-at-home.com/charts
-    name: teslamate
-    version: 3.0.1
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: teslamate
+      version: 3.6.3
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
   values:
     replicaCount: 1
 

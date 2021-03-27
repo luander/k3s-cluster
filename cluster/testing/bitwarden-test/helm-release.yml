@@ -1,25 +1,26 @@
 ---
-apiVersion: helm.fluxcd.io/v1
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: bitwarden
   namespace: testing
 spec:
-  releaseName: bitwarden-test
+  interval: 5m
   chart:
-    repository: https://k8s-at-home.com/charts
-    name: bitwardenrs
-    version: 1.0.0
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: bitwardenrs
+      version: 2.0.2
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
   values:
     replicaCount: 1
 
-    image:
-      repository: bitwardenrs/server
-      pullPolicy: IfNotPresent
-      tag: 1.16.3
-
     bitwardenrs:
-      domain: "https://bitwarden-test.kube.luander.net"
+      domain: "https://bitwarden.kube.luander.net"
       signupsAllowed: false
       websockets:
         enabled: true
@@ -58,43 +59,9 @@ spec:
       enabled: true
       size: 1Gi
       accessMode: ReadWriteOnce
-      ## Persistent Volume storage class
       storageClass: longhorn
       ## Use existing Persistent Volume Claim
       # existingClaim:
-
-    serviceAccount:
-      # Specifies whether a service account should be created
-      create: true
-      # Annotations to add to the service account
-      annotations: {}
-      # The name of the service account to use.
-      # If not set and create is true, a name is generated using the fullname template
-      name: ""
-
-    podAnnotations: {}
-
-    podSecurityContext: {}
-      # fsGroup: 2000
-
-    securityContext: {}
-      # capabilities:
-      #   drop:
-      #   - ALL
-      # readOnlyRootFilesystem: true
-      # runAsNonRoot: true
-      # runAsUser: 1000
-
-    service:
-      type: ClusterIP
-      port: 80
-      ## Provide any additional annotations which may be required. This can be used to
-      ## set the LoadBalancer service type to internal only.
-      ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#internal-load-balancer
-      ##
-      annotations: {}
-      labels: {}
-      additionalSpec: {}
 
     ingress:
       enabled: true
@@ -102,7 +69,7 @@ spec:
         kubernetes.io/ingress.class: nginx
         # kubernetes.io/tls-acme: "true"
       hosts:
-      - host: "bitwarden-test.kube.luander.net"
+      - host: "bitwarden.kube.luander.net"
         paths:
         - "/"
       tls: []
@@ -111,26 +78,9 @@ spec:
       #      - chart-example.local
 
     resources:
-      # We usually recommend not to specify default resources and to leave this as a conscious
-      # choice for the user. This also increases chances charts run on environments with little
-      # resources, such as Minikube. If you do want to specify resources, uncomment the following
-      # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
       limits:
-        cpu: 200m
-        memory: 256Mi
+        cpu: 500m
+        memory: 512Mi
       requests:
         cpu: 100m
         memory: 128Mi
-
-    autoscaling:
-      enabled: false
-      minReplicas: 1
-      maxReplicas: 5
-      targetCPUUtilizationPercentage: 80
-      # targetMemoryUtilizationPercentage: 80
-
-    nodeSelector: {}
-
-    tolerations: []
-
-    affinity: {}
