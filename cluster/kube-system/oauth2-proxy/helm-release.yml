@@ -17,6 +17,18 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
+    image:
+      tag: v7.1.1-arm64
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: beta.kubernetes.io/arch
+                  operator: In
+                  values:
+                    - arm64
+
     # Oauth client configuration specifics
     config:
       # Create a new secret with the following command
