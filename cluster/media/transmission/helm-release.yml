@@ -20,7 +20,7 @@ spec:
     replicaCount: 1
     image:
       repository: "haugene/transmission-openvpn"
-      tag: "latest-armhf" # Suffixed by -armhf to pull the ARM image
+      tag: "3.6"
       pullPolicy: "IfNotPresent"
     dnsPolicy: "None"
     dnsConfig:
@@ -104,12 +104,4 @@ spec:
     resources: {}
     nodeSelector: {}
     tolerations: []
-    affinity: 
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: beta.kubernetes.io/arch
-                  operator: In
-                  values:
-                    - arm64
+  
