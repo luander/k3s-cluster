@@ -26,7 +26,7 @@ My cluster is [k3s](https://k3s.io/) and multi-architecture being composed by 3 
 
 Key cluster components:
 
-  - [longhorn](https://longhorn.io/): Cluster storage, since version 1.1.0 it supports ARM64 processors and also has several improvements such a built-in support for ReadWriteMany, prometheus support and more.
+  - [longhorn](https://longhorn.io/): Cluster storage, since version 1.1.0 it supports ARM64 processors and also has several improvements such as built-in support for ReadWriteMany, prometheus support and more.
   
   TODO: more to come
 
