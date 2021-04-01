@@ -25,12 +25,12 @@ spec:
     envVarsFromSecret:
       AZURE_TENANT_ID:
         secretKeyRef: azkv-credentials
-          key: tenant_id
+        key: tenant_id
       AZURE_CLIENT_ID:
         secretKeyRef: azkv-credentials
-          key: client_id
+        key: client_id
       AZURE_CLIENT_SECRET:
         secretKeyRef: azkv-credentials
-          key: client_secret
+        key: client_secret
     serviceMonitor:
       enabled: true
