@@ -11,13 +11,22 @@ spec:
     spec:
       # renovate: registryUrl=https://external-secrets.github.io/kubernetes-external-secrets/
       chart: kubernetes-external-secrets
-      version: 6.4.0
+      version: 6.1.0
       sourceRef:
         kind: HelmRepository
         name: kubernetes-external-secrets-charts
         namespace: flux-system
       interval: 5m
   values:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+              - key: beta.kubernetes.io/arch
+                operator: In
+                values:
+                  - amd64
     nameOverride: external-secrets
     fullnameOverride: external-secrets
     env:

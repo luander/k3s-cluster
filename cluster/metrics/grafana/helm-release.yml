@@ -19,45 +19,14 @@ spec:
   values:
     ingress:
       enabled: true
-      # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
-      # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
       ingressClassName: nginx
-      # Values can be templated
       annotations: 
-        # kubernetes.io/ingress.class: nginx
-        # kubernetes.io/tls-acme: "true"
-      labels: {}
+        kubernetes.io/ingress.class: nginx
       path: /
-
-      # pathType is only for k8s > 1.19
       pathType: Prefix
-
       hosts:
         - grafana.kube.luander.net
-      ## Extra paths to prepend to every host configuration. This is useful when working with annotation based services.
-      extraPaths: []
-      # - path: /*
-      #   backend:
-      #     serviceName: ssl-redirect
-      #     servicePort: use-annotation
-      ## Or for k8s > 1.19
-      # - path: /*
-      #   pathType: Prefix
-      #   backend:
-      #     service:
-      #       name: ssl-redirect
-      #       port:
-      #         name: service
-
-
-      tls: []
-      #  - secretName: chart-example-tls
-      #    hosts:
-      #      - chart-example.local
-
-    ## Enable persistence using Persistent Volume Claims
-    ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
-    ##
+  
     persistence:
       type: pvc
       enabled: true
@@ -65,61 +34,19 @@ spec:
       accessModes:
         - ReadWriteOnce
       size: 10Gi
-      # annotations: {}
       finalizers:
         - kubernetes.io/pvc-protection
-      # selectorLabels: {}
-      # subPath: ""
-      # existingClaim:
 
-      ## If persistence is not enabled, this allows to mount the
-      ## local storage in-memory to improve performance
-      ##
-      inMemory:
-        enabled: false
-        ## The maximum usage on memory medium EmptyDir would be
-        ## the minimum value between the SizeLimit specified
-        ## here and the sum of memory limits of all containers in a pod
-        ##
-        # sizeLimit: 300Mi
-
-    ## Configure grafana datasources
-    ## ref: http://docs.grafana.org/administration/provisioning/#datasources
-    ##
     datasources:
       datasources.yaml:
         apiVersion: 1
         datasources:
         - name: Prometheus
           type: prometheus
-          url: http://prometheus-server.metrics.svc.cluster.local
+          url: http://prometheus-operated:9090
           access: proxy
           isDefault: true
 
-    ## Configure grafana dashboard providers
-    ## ref: http://docs.grafana.org/administration/provisioning/#dashboards
-    ##
-    ## `path` must be /var/lib/grafana/dashboards/<provider_name>
-    ##
-    dashboardProviders:
-      dashboardproviders.yaml:
-        apiVersion: 1
-        providers:
-        - name: 'default'
-          orgId: 1
-          folder: ''
-          type: file
-          disableDeletion: false
-          editable: true
-          options:
-            path: /var/lib/grafana/dashboards/default
-
-    ## Configure grafana dashboard to import
-    ## NOTE: To use dashboards you must also enable/configure dashboardProviders
-    ## ref: https://grafana.com/dashboards
-    ##
-    ## dashboards per provider, use provider name as key.
-    ##
     dashboards:
       default:
         prometheus-stats:
@@ -158,10 +85,6 @@ spec:
 
     envFromSecret: grafana-auth
 
-    ## Grafana's primary configuration
-    ## NOTE: values in map will be converted to ini format
-    ## ref: http://docs.grafana.org/installation/configuration/
-    ##
     grafana.ini:
       paths:
         data: /var/lib/grafana/data
