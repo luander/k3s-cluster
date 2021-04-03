@@ -20,8 +20,6 @@ spec:
     ingress:
       enabled: true
       ingressClassName: nginx
-      annotations: 
-        kubernetes.io/ingress.class: nginx
       path: /
       pathType: Prefix
       hosts:
@@ -101,3 +99,13 @@ spec:
         allowed_domains: luander.net
         allowed_groups:
         scopes: openid email profile
+
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+              - key: beta.kubernetes.io/arch
+                operator: In
+                values:
+                  - amd64
