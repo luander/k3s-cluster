@@ -17,6 +17,27 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
+    deploymentStrategy:
+        type: Recreate
+
+    env:
+      GF_EXPLORE_ENABLED: true
+      GF_PANELS_DISABLE_SANITIZE_HTML: true
+      GF_LOG_FILTERS: rendering:debug
+
+    dashboardProviders:
+      dashboardproviders.yaml:
+        apiVersion: 1
+        providers:
+        - name: 'default'
+          orgId: 1
+          folder: ''
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/default
+
     ingress:
       enabled: true
       ingressClassName: nginx
@@ -77,6 +98,25 @@ spec:
           datasource: Prometheus
 
     envFromSecret: grafana-auth
+
+    sidecar:
+      dashboards:
+        enabled: true
+        searchNamespace: ALL
+      datasources:
+        enabled: true
+        searchNamespace: ALL
+
+    plugins:
+    - natel-discrete-panel
+    - pr0ps-trackmap-panel
+    - grafana-piechart-panel
+    - vonage-status-panel
+    - grafana-worldmap-panel
+    - grafana-clock-panel
+
+    serviceMonitor:
+      enabled: true
 
     grafana.ini:
       paths:
