@@ -67,6 +67,10 @@ spec:
           gnetId: 2
           revision: 2
           datasource: Prometheus
+        kubernetes-cluster:
+          gnetId: 6417
+          revision: 1
+          datasource: Prometheus
         nginx-dashboard:
           url: https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/grafana/dashboards/nginx.json
           datasource: Prometheus
