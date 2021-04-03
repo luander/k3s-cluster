@@ -28,14 +28,9 @@ spec:
         - grafana.kube.luander.net
   
     persistence:
-      type: pvc
       enabled: true
       storageClassName: longhorn
-      accessModes:
-        - ReadWriteOnce
       size: 10Gi
-      finalizers:
-        - kubernetes.io/pvc-protection
 
     datasources:
       datasources.yaml:
