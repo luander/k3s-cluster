@@ -2,7 +2,7 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: devbu-io
+  name: luander-net
   namespace: networking
   annotations:
     reflector.v1.k8s.emberstack.com/secret-reflection-allowed: "true"
