@@ -1,0 +1,64 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: oauth2-proxy
+  namespace: kube-system
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: oauth2-proxy
+      version: 5.0.2
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    image:
+      tag: v7.1.1-arm64
+    replicaCount: 2
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: beta.kubernetes.io/arch
+                  operator: In
+                  values:
+                    - arm64
+
+    ingress:
+      enabled: true
+      path: /oauth2
+      annotations:
+        kubernetes.io/ingress.class: "nginx"
+      hosts:
+      - "auth.kube.luander.net"
+      tls:
+      - hosts:
+        - "auth.kube.luander.net"
+  
+    config:
+      configFile: |-
+        provider = "azure"
+        azure_tenant = "5da12343-3348-4c6e-b62a-5526ff29978c"
+        email_domains = [ "luander.net", "outlook.com" ]
+    authenticatedEmailsFile:
+      enabled: true
+      restricted_access: |-
+        iam@luander.net
+        luander.ribeiro@outlook.com
+        annagmiguel@outlook.com
+    resources:
+      limits:
+        cpu: 100m
+        memory: 300Mi
+      requests:
+        cpu: 100m
+        memory: 300Mi
+  valuesFrom:
+  - kind: Secret
+    name: "oauth2-proxy-helm-values"
