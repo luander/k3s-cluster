@@ -47,11 +47,6 @@ spec:
       provider: "azure"
       azure-tenant: "5da12343-3348-4c6e-b62a-5526ff29978c"
       email-domain: "*"
-      # pass-access-token: true
-      # set-xauthrequest: true
-      # resource: "6dae42f8-4368-4678-94ff-3960e28e3630"
-      # ssl-insecure-skip-verify: true
-      # upstream: "file:///dev/null"
       whitelist-domain: ".kube.luander.net"
       cookie-domain: ".kube.luander.net"
       cookie-secure: false
