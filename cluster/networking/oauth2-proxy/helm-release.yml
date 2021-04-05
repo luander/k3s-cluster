@@ -46,12 +46,14 @@ spec:
         provider = "azure"
         azure_tenant = "5da12343-3348-4c6e-b62a-5526ff29978c"
         email_domains = [ "luander.net", "outlook.com" ]
+
     authenticatedEmailsFile:
       enabled: true
       restricted_access: |-
         iam@luander.net
         luander.ribeiro@outlook.com
         annagmiguel@outlook.com
+
     resources:
       limits:
         cpu: 100m
