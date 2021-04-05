@@ -28,10 +28,9 @@ spec:
     ingress:
       enabled: true
       host: lh.kube.luander.net
-      tls: false
-      tlsSecret: longhorn.local-tls
       annotations:
         kubernetes.io/ingress.class: nginx
-      #  kubernetes.io/tls-acme: true
+        nginx.ingress.kubernetes.io/auth-url: "https://auth.kube.luander.net/oauth2/auth"
+        nginx.ingress.kubernetes.io/auth-signin: "https://auth.kube.luander.net/oauth2/start"
 
     enablePSP: true
