@@ -73,16 +73,53 @@ spec:
             resources:
               requests:
                 storage: 5Gi
-        
+
+    nodeExporter:
+      serviceMonitor:
+        relabelings:
+        - action: replace
+          regex: (.*)
+          replacement: $1
+          sourceLabels:
+          - __meta_kubernetes_pod_node_name
+          targetLabel: kubernetes_node
+ 
     grafana:
       enabled: false
 
     kubeEtcd:
       enabled: false
 
+    kubelet:
+      serviceMonitor:
+        metricRelabelings:
+        - action: replace
+          sourceLabels:
+          - node
+          targetLabel: instance
+
     prometheus:
+      ingress:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: "nginx"
+        hosts:
+        - "prometheus.kube.luander.net"
+        tls:
+        - hosts:
+          - "prometheus.kube.luander.net"
       prometheusSpec:
         retention: 30d
+        ruleSelector: {}
+        ruleNamespaceSelector: {}
+        ruleSelectorNilUsesHelmValues: false
+        serviceMonitorSelector: {}
+        serviceMonitorNamespaceSelector: {}
+        serviceMonitorSelectorNilUsesHelmValues: false
+        podMonitorSelector: {}
+        podMonitorNamespaceSelector: {}
+        podMonitorSelectorNilUsesHelmValues: false
+        enableAdminAPI: true
         walCompression: true
         resources: 
           requests:
