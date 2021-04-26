@@ -7,16 +7,11 @@
 
 ```sh
 kubectl create secret generic azkv-credentials \
-    --from-literal=tenant_id="tenant-id" \
-    --from-literal=client_id="client-id" \
-    --from-literal=client_secret="client-secret" \
+    --from-literal=AZURE_TENANT_ID="tenant-id" \
+    --from-literal=AZURE_CLIENT_ID="client-id" \
+    --from-literal=AZURE_CLIENT_SECRET="client-secret" \
     --namespace kube-system
 ```
-
-kubectl create secret generic openvpn \
-    --from-literal=username="WovDo4ZZLmZr9ABKPmqUmrU5" \
-    --from-literal=password="ft16ky3FX3HHodGBvTWR7civ" \
-    --namespace media
 
 ## Create a secret using aws-cli
 
