@@ -26,7 +26,7 @@ spec:
       type: Recreate
 
     env: 
-      TZ: "Europe/London"
+      TZ: "Europe/Amsterdam"
       PUID: 1000
       PGID: 1000
 
