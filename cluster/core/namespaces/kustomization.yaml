@@ -9,6 +9,6 @@ resources:
 - flux-system.yaml
 - teslamate.yaml
 - networking.yaml
-- metrics.yaml
+- monitoring.yaml
 - media.yaml
 - home.yaml

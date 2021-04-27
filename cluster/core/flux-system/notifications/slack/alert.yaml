@@ -41,7 +41,7 @@ spec:
     namespace: 'media'
     name: '*'
   - kind: HelmRelease
-    namespace: 'metrics'
+    namespace: 'monitoring'
     name: '*'
   - kind: HelmRelease
     namespace: 'networking'

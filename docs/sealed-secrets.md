@@ -46,7 +46,7 @@ kubeseal \
 ## Creating the sealed secret
 
 ```sh
-kubectl create secret generic prometheus-alertmanager-secret --dry-run=client --from-file=values.yml=projects/personal/k3s-cluster/cluster/metrics/prometheus/helm-values-secret.txt -n metrics -o yaml > unsealed-secret.yml
+kubectl create secret generic prometheus-alertmanager-secret --dry-run=client --from-file=values.yml=projects/personal/k3s-cluster/cluster/monitoring/prometheus/helm-values-secret.txt -n monitoring -o yaml > unsealed-secret.yml
 ```
 ```sh
 kubeseal --cert ./sealed-secrets-public-cert.pem -o yaml < unsealed-secret.yml > sealed-secret.yml

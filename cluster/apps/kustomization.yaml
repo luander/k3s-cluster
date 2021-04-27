@@ -5,7 +5,7 @@ resources:
 - app-dashboard
 - bitwarden
 - media
-- metrics
+- monitoring
 - networking
 - teslamate
 - system-upgrade
