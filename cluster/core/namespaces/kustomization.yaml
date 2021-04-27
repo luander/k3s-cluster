@@ -12,3 +12,4 @@ resources:
 - monitoring.yaml
 - media.yaml
 - home.yaml
+- falco-system.yaml
