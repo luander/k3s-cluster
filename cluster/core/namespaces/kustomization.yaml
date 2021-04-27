@@ -6,7 +6,6 @@ resources:
 - bitwarden.yaml
 - cert-manager.yaml
 - longhorn-system.yaml
-- system-upgrade.yaml
 - flux-system.yaml
 - teslamate.yaml
 - networking.yaml
