@@ -1,0 +1,130 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: teslamate
+  namespace: teslamate
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: teslamate
+      version: 3.6.3
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    replicaCount: 1
+
+    image:
+      repository: teslamate/teslamate
+      tag: edge
+      pullPolicy: IfNotPresent
+
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: nginx
+        nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_CLUSTER_DOMAIN}/oauth2/auth"
+        nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_CLUSTER_DOMAIN}/oauth2/start"
+        nginx.ingress.kubernetes.io/proxy-buffer-size: "64k"
+        nginx.ingress.kubernetes.io/proxy-buffers-number: "4"
+      path: /
+      hosts:
+        - "teslamate.${SECRET_CLUSTER_DOMAIN}"
+      tls:
+      - hosts:
+        - "teslamate.${SECRET_CLUSTER_DOMAIN}"
+
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: beta.kubernetes.io/arch
+                  operator: In
+                  values:
+                    - amd64
+
+    resources:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+
+    ## Configuration values for the postgresql dependency.
+    ## Ref: https://github.com/helm/charts/blob/master/stable/postgresql/README.md
+    postgresql:
+      image:
+        repository: postgres
+        tag: 12.1
+      postgresqlDataDir: "/data/pgdata"
+
+      master:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: beta.kubernetes.io/arch
+                      operator: In
+                      values:
+                        - amd64
+      slave:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: beta.kubernetes.io/arch
+                      operator: In
+                      values:
+                        - amd64
+      ### PostgreSQL User to create.
+      ##
+      postgresqlUsername: teslamate
+
+      ## PostgreSQL Password for the new user.
+      ## If not set, a random 10 characters password will be used.
+      ##
+      postgresqlPassword: teslamate
+
+      ## PostgreSQL Database to create.
+      ##
+      postgresqlDatabase: teslamate
+
+      ## Persistent Volume Storage configuration for PostgreSQL.
+      ##
+      ## Ref: https://kubernetes.io/docs/user-guide/persistent-volumes
+      ##
+      persistence:
+        ## Enable PostgreSQL persistence using Persistent Volume Claims.
+        ##
+        enabled: true
+
+        ## Persistent Volume Storage Class to be used by PersistentVolumes created
+        ## for PostgreSQL.
+        ##
+        ## If defined, storageClassName: <storageClass>
+        ## If set to "-", storageClassName: "", which disables dynamic provisioning
+        ## If undefined (the default) or set to null, no storageClassName spec is
+        ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+        ##   GKE, AWS & OpenStack)
+        ##
+        storageClass: longhorn
+
+        ## Persistent Volume Access Mode.
+        ##
+        accessModes:
+          - ReadWriteOnce
+
+        ## Persistent Volume Storage Size.
+        ##
+        size: 8Gi
+
+        mountPath: "/data/"

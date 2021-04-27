@@ -1,0 +1,19 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "${SECRET_CLUSTER_DOMAIN/./-}"
+  namespace: networking
+  annotations:
+    reflector.v1.k8s.emberstack.com/secret-reflection-allowed: "true"
+    reflector.v1.k8s.emberstack.com/secret-reflection-auto-enabled: "true"
+    reflector.v1.k8s.emberstack.com/secret-reflection-auto-namespaces: "kasten-io"
+spec:
+  secretName: "${SECRET_CLUSTER_DOMAIN/./-}-tls"
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: "${SECRET_CLUSTER_DOMAIN}"
+  dnsNames:
+  - "${SECRET_CLUSTER_DOMAIN}"
+  - "*.${SECRET_CLUSTER_DOMAIN}"

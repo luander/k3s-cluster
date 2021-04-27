@@ -19,7 +19,7 @@ _For full installation guide visit the [Flux installation guide](https://toolkit
 Set the `GITHUB_TOKEN` environment variable to a personal access token you created in Github.
 To generate a personal access token follow the [official guide here](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token)
 ```sh
-export GITHUB_TOKEN=47241b5a1f9cc45cc7388cf787fc6abacf99eb70
+export GITHUB_TOKEN=<gh-token>
 ```
 
 Check if you cluster is ready for Flux
@@ -32,10 +32,12 @@ Install Flux into your cluster
 
 ```sh
 flux bootstrap github \
+  --version=0.13.1 \
   --owner=luander \
   --repository=k3s-cluster \
-  --path=cluster \
+  --path=cluster/base \
   --personal \
+  --private=false \
   --network-policy=false
 ```
 
