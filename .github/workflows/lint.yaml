@@ -1,0 +1,15 @@
+---
+name: Lint
+
+on: # yamllint disable-line rule:truthy
+  pull_request:
+
+jobs:
+  yamllint:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: yamllint
+      uses: reviewdog/action-yamllint@v1
+      with:
+        yamllint_flags: "-c .github/yamllint.config.yaml ./cluster"
