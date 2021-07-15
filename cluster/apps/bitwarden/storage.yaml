@@ -1,0 +1,35 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: bitwarden
+spec:
+  capacity:
+    storage: 1Gi # must match size of Longhorn volume
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  csi:
+    driver: driver.longhorn.io # driver must match this
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: '2' # must match Longhorn volume value
+      staleReplicaTimeout: '30' # in minutes
+    volumeHandle: bitwarden # must match volume name from Longhorn
+  storageClassName: longhorn # must be same name that we will use later
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: bitwarden-bitwardenrs-0
+  namespace: bitwarden
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi # must match size from earlier
+  storageClassName: longhorn # must match name from earlier
+  volumeName: bitwarden # must reference Persistent Volume

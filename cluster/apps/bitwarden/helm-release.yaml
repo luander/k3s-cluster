@@ -65,7 +65,7 @@ spec:
       accessMode: ReadWriteOnce
       storageClass: longhorn
       ## Use existing Persistent Volume Claim
-      # existingClaim:
+      existingClaim: "bitwarden-bitwardenrs-0"
 
     ingress:
       enabled: true
