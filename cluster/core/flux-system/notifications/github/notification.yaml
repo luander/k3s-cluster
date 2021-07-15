@@ -20,31 +20,7 @@ spec:
     name: github
   eventSeverity: info
   eventSources:
-  - kind: HelmRelease
-    namespace: 'cert-manager'
+  - kind: Kustomization
     name: '*'
   - kind: HelmRelease
-    namespace: 'bitwarden'
     name: '*'
-  - kind: HelmRelease
-    namespace: 'kube-system'
-    name: '*'
-  - kind: HelmRelease
-    namespace: 'longhorn-system'
-    name: '*'
-  - kind: HelmRelease
-    namespace: 'media'
-    name: '*'
-  - kind: HelmRelease
-    namespace: 'monitoring'
-    name: '*'
-  - kind: HelmRelease
-    namespace: 'networking'
-    name: '*'
-  - kind: HelmRelease
-    namespace: 'airflow'
-    name: '*'
-  - kind: HelmRelease
-    namespace: 'app-dashboard'
-    name: '*'
-  suspend: false
