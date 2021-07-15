@@ -1,3 +1,4 @@
 ---
 creation_rules:
 - encrypted_regex: '^(data|stringData)$'
+  azure_keyvault: https://sops-ec4fba156758404d.vault.azure.net/keys/sops-key/1f0762a5e1c5491bac78d22ed00545ac
