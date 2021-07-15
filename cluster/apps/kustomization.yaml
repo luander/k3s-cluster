@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
 - app-dashboard
 - bitwarden
+- flux-system
 - media
 - monitoring
 - networking
