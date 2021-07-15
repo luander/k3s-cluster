@@ -25,6 +25,7 @@ jobs:
         VERSION="v${UGLY_VERSION#*flux version }"
         flux install --version="${VERSION}" \
           --network-policy=false \
+          --components-extra=image-reflector-controller,image-automation-controller \
           --export > ./cluster/base/flux-system/gotk-components.yaml
         echo "::set-output name=flux_version::$VERSION"
 
