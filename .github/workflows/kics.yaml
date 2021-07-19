@@ -1,7 +1,6 @@
 name: KICS Scan
 
-on:
-  pull_request:
+on: [push]
 
 jobs:
   kics-job:
