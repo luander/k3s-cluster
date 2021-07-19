@@ -62,7 +62,7 @@ spec:
     postgresql:
       image:
         repository: postgres
-        tag: 12.7
+        tag: 13.3
       postgresqlDataDir: "/data/pgdata"
 
       master:
