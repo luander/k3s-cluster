@@ -25,7 +25,7 @@ jobs:
           fail_on: high,medium
           platform_type: kubernetes
           output_formats: 'json,sarif'
-          exclude_paths: 'cluster/base/flux-system/gotk-components.yaml,cluster/base/flux-system/gotk-patches.yaml,cluster/apps/media/transmission/helm-release.yaml,cluster/apps/system-upgrade/system-upgrade-controller/agent-plan.yaml,cluster/apps/bitwarden/helm-release.yaml'
+          exclude_paths: 'cluster/apps/media/emby/deployment.yaml,cluster/base/flux-system/gotk-components.yaml,cluster/base/flux-system/gotk-patches.yaml,cluster/apps/media/transmission/helm-release.yaml,cluster/apps/system-upgrade/system-upgrade-controller/agent-plan.yaml,cluster/apps/bitwarden/helm-release.yaml'
           verbose: true
       - name: Show results
         if: always()
