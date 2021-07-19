@@ -10,7 +10,7 @@ _... heavily inspired by the works of [onedr0p](https://onedr0p.github.io/home-c
 
 <br/>
 
-[![k3s](https://img.shields.io/badge/k3s-v1.20.4-blue?style=for-the-badge)](https://k3s.io/)
+[![k3s](https://img.shields.io/badge/k3s-v1.21.2-blue?style=for-the-badge)](https://k3s.io/)
 
 <br/>
 
