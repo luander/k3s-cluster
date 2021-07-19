@@ -50,7 +50,7 @@ spec:
           enabled: true
           name: "bitwardensmtp"
           userKey: "username"
-          passwordKey: "password"
+          passwordKey: "password" # f996f3cb-00fc-480c-8973-8ab04d44a8cc
       yubico:
         enabled: true
         clientId: "${BITWARDEN_YUBIKEY_CLIENT_ID}"

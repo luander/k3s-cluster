@@ -13,9 +13,11 @@ spec:
     metadata:
       labels:
         app: emby
-    spec:
+    automountServiceAccountToken: false
       securityContext:
-        fsGroup: 0
+        seccompProfile:
+          type: RuntimeDefault
+    spec:
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -28,6 +30,10 @@ spec:
       containers:
       - name: emby
         image: linuxserver/emby:4.5.4.0-ls78
+        securityContext:
+          runAsUser: 10000
+          runAsGroup: 30000
+          allowPrivilegeEscalation: false
         ports:
         - name: https
           containerPort: 8920
@@ -43,6 +49,13 @@ spec:
           - name: data
             mountPath: /mnt/share
             readOnly: false
+        resources:
+          limits:
+            memory: 12000Mi
+            cpu: 6
+          requests:
+            memory: 100Mi
+            cpu: 100m
       volumes:
         - name: data
           persistentVolumeClaim:
