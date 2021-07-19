@@ -13,11 +13,11 @@ spec:
     metadata:
       labels:
         app: emby
-    spec:
-      automountServiceAccountToken: false
+    automountServiceAccountToken: false
       securityContext:
         seccompProfile:
           type: RuntimeDefault
+    spec:
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -31,8 +31,8 @@ spec:
       - name: emby
         image: linuxserver/emby:4.5.4.0-ls78
         securityContext:
-          runAsUser: 1000
-          runAsGroup: 3000
+          runAsUser: 10000
+          runAsGroup: 30000
           allowPrivilegeEscalation: false
         ports:
         - name: https
