@@ -13,11 +13,12 @@ spec:
     metadata:
       labels:
         app: emby
-    automountServiceAccountToken: false
+    spec:
+      automountServiceAccountToken: false
       securityContext:
+        fsGroup: 0
         seccompProfile:
           type: RuntimeDefault
-    spec:
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -29,10 +30,10 @@ spec:
                       - amd64
       containers:
       - name: emby
-        image: linuxserver/emby:4.5.4.0-ls78
+        image: linuxserver/emby:beta-version-4.7.0.3
         securityContext:
-          runAsUser: 10000
-          runAsGroup: 30000
+          # runAsUser: 10000
+          # runAsGroup: 30000
           allowPrivilegeEscalation: false
         ports:
         - name: https
@@ -41,6 +42,11 @@ spec:
         - name: http
           containerPort: 8096
           protocol: TCP
+        env:
+          - name: PUID
+            value: "10000"
+          - name: PGID
+            value: "30000"
         volumeMounts:
           - name: data
             mountPath: /config
