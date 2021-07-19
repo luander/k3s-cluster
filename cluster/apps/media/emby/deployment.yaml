@@ -14,6 +14,7 @@ spec:
       labels:
         app: emby
     spec:
+      automountServiceAccountToken: false
       securityContext:
         fsGroup: 0
       affinity:
@@ -28,6 +29,10 @@ spec:
       containers:
       - name: emby
         image: linuxserver/emby:4.5.4.0-ls78
+        securityContext:
+          runAsUser: 1000
+          runAsGroup: 3000
+          allowPrivilegeEscalation: false
         ports:
         - name: https
           containerPort: 8920
