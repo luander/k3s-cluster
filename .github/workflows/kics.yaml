@@ -29,10 +29,12 @@ jobs:
           exclude_paths: 'cluster/base/flux-system/gotk-components.yaml,cluster/base/flux-system/gotk-patches.yaml'
           verbose: true
       - name: Show results
+        if: always()
         run: |
           cat results-dir/results.sarif
           cat results-dir/results.json
       - name: Upload SARIF file
+        if: always()
         uses: github/codeql-action/upload-sarif@v1
         with:
           sarif_file: results-dir/results.sarif
