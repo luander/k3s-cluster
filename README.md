@@ -11,6 +11,8 @@ _... heavily inspired by the works of [onedr0p](https://onedr0p.github.io/home-c
 <br/>
 
 [![k3s](https://img.shields.io/badge/k3s-v1.21.2-blue?style=for-the-badge)](https://k3s.io/)
+[![KICS Scan](https://github.com/luander/k3s-cluster/actions/workflows/kics.yaml/badge.svg)](https://github.com/luander/k3s-cluster/actions/workflows/kics.yaml)
+[![Schedule - Update Flux](https://github.com/luander/k3s-cluster/actions/workflows/flux-schedule.yaml/badge.svg)](https://github.com/luander/k3s-cluster/actions/workflows/flux-schedule.yaml)
 
 <br/>
 

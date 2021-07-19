@@ -24,8 +24,10 @@ jobs:
           # - results-dir/results.sarif
           output_path: results-dir
           fail_on: high,medium
+          ignore_on_exit: results
           platform_type: kubernetes
           output_formats: 'json,sarif'
+          verbose: true
       - name: Show results
         run: |
           cat results-dir/results.sarif
