@@ -27,6 +27,7 @@ jobs:
           ignore_on_exit: results
           platform_type: kubernetes
           output_formats: 'json,sarif'
+          exclude_paths: 'cluster/base/flux-system/gotk-components.yaml,cluster/base/flux-system/gotk-patches.yaml'
           verbose: true
       - name: Show results
         run: |
