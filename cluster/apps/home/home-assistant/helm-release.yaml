@@ -25,6 +25,8 @@ spec:
     # envFrom:
     # - secretRef:
     #     name: home-assistant
+    hostNetwork: true
+    dnsPolicy: ClusterFirstWithHostNet
     ingress:
       main:
         enabled: true
