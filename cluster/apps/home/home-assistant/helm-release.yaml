@@ -30,13 +30,13 @@ spec:
         enabled: true
         ingressClassName: "nginx"
         hosts:
-        - host: "hass.${SECRET_DOMAIN}"
+        - host: "hass.${SECRET_CLUSTER_DOMAIN}"
           paths:
           - path: /
             pathType: Prefix
         tls:
         - hosts:
-          - "hass.${SECRET_DOMAIN}"
+          - "hass.${SECRET_CLUSTER_DOMAIN}"
     probes:
       liveness:
         enabled: false
