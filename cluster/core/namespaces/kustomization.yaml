@@ -6,7 +6,6 @@ resources:
 - cert-manager.yaml
 - longhorn-system.yaml
 - flux-system.yaml
-- teslamate.yaml
 - networking.yaml
 - monitoring.yaml
 - media.yaml

@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
 - app-dashboard
 - bitwarden
+- home
 - media
 - monitoring
 - networking
