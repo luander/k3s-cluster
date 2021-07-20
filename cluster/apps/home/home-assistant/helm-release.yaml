@@ -68,13 +68,13 @@ spec:
           enabled: true
           ingressClassName: "nginx"
           hosts:
-          - host: "hass-config.${SECRET_DOMAIN}"
+          - host: "hass-config.${SECRET_CLUSTER_DOMAIN}"
             paths:
             - path: /
               pathType: Prefix
           tls:
           - hosts:
-            - "hass-config.${SECRET_DOMAIN}"
+            - "hass-config.${SECRET_CLUSTER_DOMAIN}"
         volumeMounts:
         - name: config
           mountPath: /config
