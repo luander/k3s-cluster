@@ -15,6 +15,11 @@ spec:
     - {key: k3s.io/hostname, operator: Exists}
     - {key: k3os.io/mode, operator: DoesNotExist}
     - {key: node-role.kubernetes.io/master, operator: In, values: ["true"]}
+  tolerations:
+    - key: "node-role.kubernetes.io/master"
+      operator: "Exists"
+    - key: CriticalAddonsOnly
+      operator: "Exists"
   cordon: true
   upgrade:
     image: rancher/k3s-upgrade

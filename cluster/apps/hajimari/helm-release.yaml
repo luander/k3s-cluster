@@ -9,12 +9,12 @@ spec:
   chart:
     spec:
       # renovate: registryUrl=https://hajimari.io
-      chart: hajimari/hajimari
+      chart: hajimari
       version: 1.1.1
       sourceRef:
         kind: HelmRepository
         name: hajimari-charts
-        namespace: hajimari
+        namespace: flux-system
       interval: 5m
   values:
     image:
