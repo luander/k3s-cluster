@@ -12,6 +12,7 @@ resources:
 - falco-security-charts.yaml
 - gitea-charts.yaml
 - grafana-charts.yaml
+- hajimari.yaml
 - infracloudio-charts.yaml
 - ingress-nginx-charts.yaml
 - jetstack-charts.yaml

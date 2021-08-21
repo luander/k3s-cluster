@@ -8,5 +8,6 @@ resources:
 - networking.yaml
 - monitoring.yaml
 - media.yaml
+- hajimari.yaml
 - home.yaml
 - falco-system.yaml
