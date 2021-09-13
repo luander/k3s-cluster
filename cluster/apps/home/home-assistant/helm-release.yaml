@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://k8s-at-home.com/charts/
       chart: home-assistant
-      version: 10.0.0
+      version: 11.0.2
       sourceRef:
         kind: HelmRepository
         name: k8s-at-home-charts
@@ -86,6 +86,14 @@ spec:
         memory: 100Mi
       limits:
         memory: 4000Mi
-    prometheus:
+    metrics:
+      enabled: true
       serviceMonitor:
-        enabled: true
+        interval: 1m
+        scrapeTimeout: 30s
+        ## See https://www.home-assistant.io/docs/authentication/ for where to find
+        ## long lived access token creation under your account profile, which is
+        ## needed to monitor Home Assistant
+        bearerTokenSecret:
+          name: "home-assistant-prometheus"
+          key: "token"
