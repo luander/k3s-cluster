@@ -4,4 +4,5 @@ kind: Kustomization
 resources:
 - config-pvc.yaml
 - code-server.enc.yaml
+- prometheus-secret.enc.yaml
 - helm-release.yaml
