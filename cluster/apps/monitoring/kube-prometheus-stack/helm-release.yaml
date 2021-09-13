@@ -86,13 +86,34 @@ spec:
           - __meta_kubernetes_pod_node_name
           targetLabel: kubernetes_node
  
+    kube-state-metrics:
+      fullnameOverride: kube-state-metrics
+    prometheus-node-exporter:
+      fullnameOverride: node-exporter
+
     grafana:
       enabled: false
+      forceDeployDashboards: true
 
+    kubeApiServer:
+      enabled: true
+    kubeControllerManager:
+      enabled: true
+      endpoints:
+        - 10.0.0.50
+    kubeScheduler:
+      enabled: true
+      endpoints:
+        - 10.0.0.50
+    kubeProxy:
+      enabled: true
+      endpoints:
+        - 10.0.0.50
     kubeEtcd:
       enabled: false
 
     kubelet:
+      enabled: true
       serviceMonitor:
         metricRelabelings:
         - action: replace
@@ -111,7 +132,7 @@ spec:
         - hosts:
           - "prometheus.${SECRET_CLUSTER_DOMAIN}"
       prometheusSpec:
-        retention: 30d
+        retention: 90d
         ruleSelector: {}
         ruleNamespaceSelector: {}
         ruleSelectorNilUsesHelmValues: false
