@@ -37,17 +37,11 @@ spec:
         - name: router
           url: 10.0.0.1
           module: icmp
-        - name: protect
-          url: 10.0.0.61
-          module: icmp
-        - name: phono
-          url: 10.0.0.59
-          module: icmp
         - name: lock
           url: 10.0.100.51
           module: icmp
         - name: vpn
-          url: 10.0.0.20
+          url: 10.0.0.10
           module: icmp
     prometheusRule:
       enabled: true
