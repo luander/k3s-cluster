@@ -35,16 +35,16 @@ spec:
       web:
         annotations:
           kubernetes.io/ingress.class: "nginx"
-        path: ""
-        pathType: "ImplementationSpecific"
+        path: "/"
+        pathType: "Prefix"
         host: "airflow.${SECRET_CLUSTER_DOMAIN}"
 
       # Configs for the Ingress of the flower Service
       flower:
         annotations:
           kubernetes.io/ingress.class: "nginx"
-        path: ""
-        pathType: "ImplementationSpecific"
+        path: "/"
+        pathType: "Prefix"
         host: "flower.${SECRET_CLUSTER_DOMAIN}"
 
     # Airflow Worker Config
