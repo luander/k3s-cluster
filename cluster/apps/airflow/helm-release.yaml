@@ -17,9 +17,9 @@ spec:
       interval: 5m
   values:
     # Select certain nodes for airflow pods.
-    nodeSelector: 
+    nodeSelector:
       kubernetes.io/arch: amd64
-    affinity: 
+    affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
@@ -151,7 +151,7 @@ spec:
     # Airflow Triggerer Config
     triggerer:
       # Select certain nodes for airflow triggerer pods.
-      nodeSelector: 
+      nodeSelector:
         kubernetes.io/arch: amd64
       affinity:
         podAntiAffinity:
@@ -184,7 +184,7 @@ spec:
                     operator: In
                     values:
                       - amd64
-      
+
     # Statsd settings
     statsd:
       nodeSelector:
