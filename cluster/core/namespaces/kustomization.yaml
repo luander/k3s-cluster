@@ -11,3 +11,4 @@ resources:
 - hajimari.yaml
 - home.yaml
 - falco-system.yaml
+- airflow.yaml

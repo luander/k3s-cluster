@@ -1,0 +1,286 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: airflow
+  namespace: airflow
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: airflow
+      version: 1.2.0
+      sourceRef:
+        kind: HelmRepository
+        name: airflow-helm
+        namespace: flux-system
+      interval: 5m
+  values:
+    # Select certain nodes for airflow pods.
+    nodeSelector: 
+      kubernetes.io/arch: amd64
+    affinity: 
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/arch
+                  operator: In
+                  values:
+                    - amd64
+
+    # Ingress configuration
+    ingress:
+      enabled: true
+      web:
+        annotations:
+          kubernetes.io/ingress.class: "nginx"
+        path: ""
+        host: "airflow.${SECRET_CLUSTER_DOMAIN}"
+
+      # Configs for the Ingress of the flower Service
+      flower:
+        annotations:
+          kubernetes.io/ingress.class: "nginx"
+        path: ""
+        host: "flower.${SECRET_CLUSTER_DOMAIN}"
+
+    # Airflow Worker Config
+    workers:
+      persistence:
+        # Enable persistent volumes
+        enabled: true
+        # Volume size for worker StatefulSet
+        size: 1Gi
+
+      # Select certain nodes for airflow worker pods.
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    component: worker
+                topologyKey: "kubernetes.io/hostname"
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: beta.kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
+
+    # Airflow scheduler settings
+    scheduler:
+      # Select certain nodes for airflow scheduler pods.
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    component: scheduler
+                topologyKey: "kubernetes.io/hostname"
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: beta.kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
+
+    # Airflow create user job settings
+    createUserJob:
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
+
+    # Airflow database migration job settings
+    migrateDatabaseJob:
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
+
+    # Airflow webserver settings
+    webserver:
+      # Select certain nodes for airflow webserver pods.
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    component: webserver
+                topologyKey: "kubernetes.io/hostname"
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: beta.kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
+
+    # Airflow Triggerer Config
+    triggerer:
+      # Select certain nodes for airflow triggerer pods.
+      nodeSelector: 
+        kubernetes.io/arch: amd64
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    component: triggerer
+                topologyKey: "kubernetes.io/hostname"
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: beta.kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
+
+    # Flower settings
+    flower:
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
+      
+    # Statsd settings
+    statsd:
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
+
+    # Configuration for the redis provisioned by the chart
+    redis:
+      # Select certain nodes for redis pods.
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: beta.kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
+
+    # This runs as a CronJob to cleanup old pods.
+    cleanup:
+      enabled: true
+      # Run every 15 minutes
+      schedule: "*/15 * * * *"
+      # Command to use when running the cleanup cronjob (templated).
+      command: ~
+      # Args to use when running the cleanup cronjob (templated).
+      args: ["bash", "-c", "exec airflow kubernetes cleanup-pods --namespace={{ .Release.Namespace }}"]
+
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
+
+    # Configuration for postgresql subchart
+    # Not recommended for production
+    postgresql:
+      enabled: true
+
+      master:
+        podAnnotations:
+          cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: beta.kubernetes.io/arch
+                      operator: In
+                      values:
+                        - amd64
+      slave:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: beta.kubernetes.io/arch
+                      operator: In
+                      values:
+                        - amd64
+
+    # Git sync
+    dags:
+      gitSync:
+        ## if the git-sync sidecar container is enabled
+        ##
+        enabled: true
+        repo: "https://github.com/AnnaGMiguel/airflow-dags.git"
+
+        ## the sub-path (within your repo) where dags are located
+        ##
+        ## NOTE:
+        ## - only dags under this path (within your repo) will be seen by airflow,
+        ##   but the full repo will be cloned
+        ##
+        repoSubPath: "dags"
+
+        ## the git branch to check out
+        ##
+        branch: main
