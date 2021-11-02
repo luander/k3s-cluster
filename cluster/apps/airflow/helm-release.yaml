@@ -243,10 +243,9 @@ spec:
     postgresql:
       enabled: true
 
-      master:
-        podAnnotations:
-          cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
-
+      primary:
+        nodeSelector:
+          kubernetes.io/arch: amd64
         affinity:
           nodeAffinity:
             requiredDuringSchedulingIgnoredDuringExecution:
@@ -256,7 +255,9 @@ spec:
                       operator: In
                       values:
                         - amd64
-      slave:
+      readReplicas:
+        nodeSelector:
+          kubernetes.io/arch: amd64
         affinity:
           nodeAffinity:
             requiredDuringSchedulingIgnoredDuringExecution:
