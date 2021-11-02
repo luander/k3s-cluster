@@ -279,7 +279,7 @@ spec:
         ## - only dags under this path (within your repo) will be seen by airflow,
         ##   but the full repo will be cloned
         ##
-        repoSubPath: "dags"
+        subPath: "dags"
 
         ## the git branch to check out
         ##
