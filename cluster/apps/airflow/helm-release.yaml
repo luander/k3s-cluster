@@ -8,6 +8,7 @@ spec:
   interval: 5m
   chart:
     spec:
+      # renovate: registryUrl=https://airflow.apache.org
       chart: airflow
       version: 1.2.0
       sourceRef:
