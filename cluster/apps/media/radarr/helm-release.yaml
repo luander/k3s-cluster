@@ -35,33 +35,20 @@ spec:
         port: 7878
 
     ingress:
-      enabled: true
-      annotations:
-        kubernetes.io/ingress.class: "nginx"
-        nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_CLUSTER_DOMAIN}/oauth2/auth"
-        nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_CLUSTER_DOMAIN}/oauth2/start"
-      hosts:
-      - host: "radarr.${SECRET_CLUSTER_DOMAIN}"
-        paths:
-        - path: /
-          pathType: Prefix
-      tls:
-      - hosts:
-        - "radarr.${SECRET_CLUSTER_DOMAIN}"
-      additionalIngresses:
-      - enabled: true
-        nameSuffix: "api"
+      main:
+        enabled: true
         annotations:
           kubernetes.io/ingress.class: "nginx"
+          nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_CLUSTER_DOMAIN}/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_CLUSTER_DOMAIN}/oauth2/start"
         hosts:
         - host: "radarr.${SECRET_CLUSTER_DOMAIN}"
           paths:
-          - path: /api
+          - path: /
             pathType: Prefix
         tls:
-      - hosts:
-        - "radarr.${SECRET_CLUSTER_DOMAIN}"
-
+        - hosts:
+          - "radarr.${SECRET_CLUSTER_DOMAIN}"
     probes:
       liveness:
         enabled: true
