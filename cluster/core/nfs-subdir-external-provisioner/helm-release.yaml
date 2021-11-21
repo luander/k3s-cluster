@@ -19,7 +19,7 @@ spec:
   values:
     nfs:
       server: "nas.luander.net"
-      path: /media
+      path: /volume1/Media
       mountOptions:
       volumeName: nfs-subdir-external-provisioner-root
       # Reclaim policy for the main nfs volume
