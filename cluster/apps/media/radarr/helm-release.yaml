@@ -66,8 +66,7 @@ spec:
       config:
         enabled: true
         type: pvc
-        accessMode: ReadWriteOnce
-        size: 5Gi
+        existingClaim: radarrconf
       media:
         enabled: true
         mountPath: "/media"
