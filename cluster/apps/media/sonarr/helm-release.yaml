@@ -72,13 +72,11 @@ spec:
         storageClass: "longhorn"
         accessMode: ReadWriteOnce
         size: "25Gi"
-    additionalVolumeMounts:
-    - name: media
-      mountPath: "/media"
-    additionalVolumes:
-    - name: media
-      persistentVolumeClaim:
-        claimName: media
+      media:
+        enabled: true
+        mountPath: "/media"
+        type: pvc
+        existingClaim: media
     resources:
       requests:
         memory: 250Mi
