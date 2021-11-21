@@ -17,14 +17,6 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
-    image:
-      repository: linuxserver/radarr
-      pullPolicy: IfNotPresent
-      tag: version-3.0.2.4552
-
-    strategy:
-      type: Recreate
-
     env: 
       TZ: "Europe/Amsterdam"
       PUID: 1000
