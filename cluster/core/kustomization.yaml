@@ -7,3 +7,4 @@ resources:
 - longhorn-system
 - system-upgrade
 - external-secrets
+- nfs-subdir-external-provisioner
