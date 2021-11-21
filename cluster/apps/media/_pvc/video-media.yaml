@@ -5,9 +5,9 @@ metadata:
   namespace: "media"
   name: "video-media"
 spec:
-  storageClassName: longhorn
+  storageClassName: nfs-client
   accessModes:
     - ReadWriteMany
   resources:
     requests:
-      storage: "100Gi"
+      storage: "1000Gi"
