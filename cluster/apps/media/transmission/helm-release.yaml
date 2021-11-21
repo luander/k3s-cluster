@@ -72,7 +72,7 @@ spec:
     volumes:
       - name: "media-data"
         persistentVolumeClaim:
-          claimName: "video-media" # PersistentVolumeClaim created earlier
+          claimName: "media" # PersistentVolumeClaim created earlier
       - name: "dev-tun" # Needed for VPN
         hostPath:
           path: "/dev/net/tun"

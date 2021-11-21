@@ -78,7 +78,7 @@ spec:
     additionalVolumes:
     - name: media
       persistentVolumeClaim:
-        claimName: video-media
+        claimName: media
     resources:
       requests:
         memory: 250Mi
