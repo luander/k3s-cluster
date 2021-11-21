@@ -17,6 +17,10 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
+    image:
+      repository: ghcr.io/k8s-at-home/radarr
+      tag: v3.2.2.5080
+
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
@@ -28,12 +32,10 @@ spec:
                     - amd64
     env: 
       TZ: "Europe/Amsterdam"
-      PUID: 1000
-      PGID: 1000
 
-    service:
-      port:
-        port: 7878
+    podSecurityContext:
+      supplementalGroups:
+        - 100
 
     ingress:
       main:
@@ -50,26 +52,6 @@ spec:
         tls:
         - hosts:
           - "radarr.${SECRET_CLUSTER_DOMAIN}"
-    probes:
-      liveness:
-        enabled: true
-        ## Set this to true if you wish to specify your own livenessProbe
-        custom: true
-        ## The spec field contains the values for the default livenessProbe.
-        ## If you selected custom: true, this field holds the definition of the livenessProbe.
-        spec:
-          exec:
-            command:
-            - /usr/bin/env
-            - bash
-            - -c
-            - curl --fail localhost:7878/api/v3/system/status?apiKey=`IFS=\> && while
-              read -d \< E C; do if [[ $E = "ApiKey" ]]; then echo $C; fi; done < /config/config.xml`
-          failureThreshold: 5
-          initialDelaySeconds: 60
-          periodSeconds: 10
-          successThreshold: 1
-          timeoutSeconds: 10
 
     persistence:
       config:
