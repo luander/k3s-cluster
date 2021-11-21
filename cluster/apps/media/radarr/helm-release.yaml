@@ -75,7 +75,8 @@ spec:
       config:
         enabled: true
         type: pvc
-        existingClaim: radarrconf
+        size: "5Gi"
+        storageClass: "longhorn"
       media:
         enabled: true
         mountPath: "/media"
