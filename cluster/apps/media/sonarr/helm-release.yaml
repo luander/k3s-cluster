@@ -68,10 +68,7 @@ spec:
 
     persistence:
       config:
-        enabled: true
-        storageClass: "longhorn"
-        accessMode: ReadWriteOnce
-        size: "25Gi"
+        enabled: false
       media:
         enabled: true
         mountPath: "/media"
