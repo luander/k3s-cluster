@@ -34,8 +34,12 @@ spec:
       TZ: "Europe/Amsterdam"
 
     podSecurityContext:
+      fsGroup: 568
+      runAsGroup: 568
+      runAsUser: 568
       supplementalGroups:
-        - 100
+      - 568
+      - 100
 
     ingress:
       main:
