@@ -62,8 +62,8 @@ spec:
         - '/etc/alertmanager/config/*.tmpl'
       ingress:
         enabled: true
-        annotations:
-          kubernetes.io/ingress.class: "nginx"
+        pathType: Prefix
+        ingressClassName: "nginx"
         hosts:
         - "alert-manager.${SECRET_CLUSTER_DOMAIN}"
       alertmanagerSpec:
@@ -124,8 +124,8 @@ spec:
     prometheus:
       ingress:
         enabled: true
-        annotations:
-          kubernetes.io/ingress.class: "nginx"
+        pathType: Prefix
+        ingressClassName: "nginx"
         hosts:
         - "prometheus.${SECRET_CLUSTER_DOMAIN}"
         tls:
