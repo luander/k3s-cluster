@@ -9,4 +9,3 @@ resources:
 - networking
 - system-upgrade
 - hajimari
-- airflow
