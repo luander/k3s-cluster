@@ -11,5 +11,3 @@ resources:
 - nfs.yaml
 - hajimari.yaml
 - home.yaml
-- falco-system.yaml
-- airflow.yaml
