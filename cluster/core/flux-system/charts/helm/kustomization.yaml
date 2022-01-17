@@ -8,9 +8,9 @@ resources:
 - coredns-charts.yaml
 - deliveryhero-charts.yaml
 - drone-charts.yaml
+- elastic.yaml
 - emberstack-charts.yaml
 - falco-security-charts.yaml
-- gitea-charts.yaml
 - grafana-charts.yaml
 - hajimari-charts.yaml
 - infracloudio-charts.yaml
