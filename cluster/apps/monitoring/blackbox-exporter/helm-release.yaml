@@ -38,7 +38,7 @@ spec:
           url: 10.0.0.1
           module: icmp
         - name: lock
-          url: 10.0.100.51
+          url: 10.0.100.52
           module: icmp
         - name: vpn
           url: 10.0.0.10
