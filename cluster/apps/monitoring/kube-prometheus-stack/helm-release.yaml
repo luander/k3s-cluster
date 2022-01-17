@@ -101,10 +101,26 @@ spec:
       enabled: true
       endpoints:
         - 10.0.0.50
+      service:
+        enabled: true
+        port: 10257
+        targetPort: 10257
+      serviceMonitor:
+        enabled: true
+        https: true
+        insecureSkipVerify: true
     kubeScheduler:
       enabled: true
       endpoints:
         - 10.0.0.50
+      service:
+        enabled: true
+        port: 10259
+        targetPort: 10259
+      serviceMonitor:
+        enabled: true
+        https: true
+        insecureSkipVerify: true
     kubeProxy:
       enabled: true
       endpoints:
