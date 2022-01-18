@@ -37,9 +37,6 @@ spec:
         - name: router
           url: 10.0.0.1
           module: icmp
-        - name: lock
-          url: 10.0.100.52
-          module: icmp
         - name: vpn
           url: 10.0.0.10
           module: icmp
