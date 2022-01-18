@@ -68,7 +68,10 @@ spec:
 
     persistence:
       config:
-        enabled: false
+        enabled: true
+        type: pvc
+        size: "5Gi"
+        storageClass: "longhorn"
       media:
         enabled: true
         mountPath: "/media"
