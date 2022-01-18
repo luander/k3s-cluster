@@ -35,10 +35,6 @@ spec:
       - package:
           name: kubernetes
         name: kubernetes-1
-  http:
-   service:
-     spec:
-       type: LoadBalancer
   podTemplate:
     spec:
       containers:
