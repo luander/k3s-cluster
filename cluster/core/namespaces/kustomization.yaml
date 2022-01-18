@@ -4,6 +4,7 @@ resources:
 - bitwarden.yaml
 - cert-manager.yaml
 - longhorn-system.yaml
+- elastic-system.yaml
 - flux-system.yaml
 - networking.yaml
 - monitoring.yaml

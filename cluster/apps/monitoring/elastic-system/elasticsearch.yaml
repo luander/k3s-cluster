@@ -1,0 +1,35 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: elasticsearch
+  namespace: elastic-system
+spec:
+  version: 7.15.0
+  nodeSets:
+  - name: default
+    config:
+      # most Elasticsearch configuration parameters are possible to set, e.g: node.attr.attr_name: attr_value
+      node.roles: ["master", "data", "ingest", "ml"]
+      node.store.allow_mmap: false
+    podTemplate:
+      spec:
+        containers:
+        - name: elasticsearch
+          resources:
+            limits:
+              memory: 4Gi
+              cpu: 1
+          env:
+          - name: ES_JAVA_OPTS
+            value: "-Xms2g -Xmx2g"
+    count: 2
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data # Do not change this name unless you set up a volume mount for the data path.
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10Gi
+        storageClassName: longhorn
