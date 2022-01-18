@@ -3,6 +3,7 @@ apiVersion: enterprisesearch.k8s.elastic.co/v1
 kind: EnterpriseSearch
 metadata:
   name: enterprisesearch
+  namespace: monitoring
 spec:
   version: 7.15.0
   count: 1
