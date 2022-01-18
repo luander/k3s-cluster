@@ -1,0 +1,24 @@
+---
+apiVersion: agent.k8s.elastic.co/v1alpha1
+kind: Agent
+metadata:
+  name: fleet-server
+  namespace: monitoring
+spec:
+  version: 7.15.0
+  kibanaRef:
+    name: kibana
+    namespace: monitoring
+  elasticsearchRefs:
+  - name: elasticsearch
+    namespace: monitoring
+  mode: fleet
+  fleetServerEnabled: true
+  deployment:
+    replicas: 1
+    podTemplate:
+      spec:
+        serviceAccountName: fleet-server
+        automountServiceAccountToken: true
+        securityContext:
+          runAsUser: 0
