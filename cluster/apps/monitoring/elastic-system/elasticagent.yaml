@@ -22,3 +22,6 @@ spec:
         automountServiceAccountToken: true
         securityContext:
           runAsUser: 0
+        tolerations:
+        - operator: Exists
+          effect: NoSchedule
