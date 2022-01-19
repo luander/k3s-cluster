@@ -3,4 +3,3 @@ kind: Kustomization
 resources:
 - longhorn-system
 - nfs-subdir-external-provisioner
-- local-path-provisioner

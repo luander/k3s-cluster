@@ -18,7 +18,7 @@ spec:
       interval: 5m
   values:
     persistence:
-      defaultClass: false
+      defaultClass: true
       defaultClassReplicaCount: 1
       reclaimPolicy: Delete
       recurringJobs:
