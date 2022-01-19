@@ -4,8 +4,6 @@ resources:
 - namespaces
 - cert-manager
 - flux-system
-- longhorn-system
 - system-upgrade
 - external-secrets
-- nfs-subdir-external-provisioner
-- rook-ceph
+- storage
