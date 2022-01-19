@@ -12,3 +12,4 @@ resources:
 - nfs.yaml
 - hajimari.yaml
 - home.yaml
+- rook-ceph.yaml
