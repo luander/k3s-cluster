@@ -32,5 +32,5 @@ spec:
         - ReadWriteOnce
         resources:
           requests:
-            storage: 10Gi
-        storageClassName: longhorn
+            storage: 50Gi
+        storageClassName: nfs-client
