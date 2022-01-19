@@ -70,8 +70,7 @@ spec:
       config:
         enabled: true
         type: pvc
-        size: "5Gi"
-        storageClass: "longhorn"
+        size: "25Gi"
       media:
         enabled: true
         mountPath: "/media"
