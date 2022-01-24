@@ -10,6 +10,10 @@ spec:
   elasticsearchRef:
     name: "elasticsearch"
     namespace: monitoring
+  http:
+    tls:
+      selfSignedCertificate:
+        disabled: true 
   config:
     xpack.fleet.agents.elasticsearch.host: "https://elasticsearch-es-http.monitoring.svc:9200"
     xpack.fleet.agents.fleet_server.hosts: ["https://fleet-server-agent-http.monitoring.svc:8220"]
