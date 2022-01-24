@@ -11,8 +11,8 @@ spec:
     name: "elasticsearch"
     namespace: monitoring
   config:
-    xpack.fleet.agents.elasticsearch.host: "https://elasticsearch-es-http.default.svc:9200"
-    xpack.fleet.agents.fleet_server.hosts: ["https://fleet-server-agent-http.default.svc:8220"]
+    xpack.fleet.agents.elasticsearch.host: "https://elasticsearch-es-http.monitoring.svc:9200"
+    xpack.fleet.agents.fleet_server.hosts: ["https://fleet-server-agent-http.monitoring.svc:8220"]
     xpack.fleet.packages:
     - name: kubernetes
       # pinning this version as the next one introduced a kube-proxy host setting default that breaks this recipe,
