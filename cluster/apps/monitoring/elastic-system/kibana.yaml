@@ -15,6 +15,7 @@ spec:
       selfSignedCertificate:
         disabled: true 
   config:
+    server.publicBaseUrl: "https://kibana.${SECRET_CLUSTER_DOMAIN}"
     xpack.fleet.agents.elasticsearch.host: "https://elasticsearch-es-http.monitoring.svc:9200"
     xpack.fleet.agents.fleet_server.hosts: ["https://fleet-server-agent-http.monitoring.svc:8220"]
     xpack.fleet.packages:
