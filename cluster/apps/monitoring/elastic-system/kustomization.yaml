@@ -8,6 +8,7 @@ patchesStrategicMerge:
 resources:
   - elasticsearch.yaml
   - kibana.yaml
+  - kibana-ingress.yaml
   - enterprisesearch.yaml
   - fleet-server.yaml
   - elasticagent.yaml

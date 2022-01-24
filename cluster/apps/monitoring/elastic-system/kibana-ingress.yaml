@@ -2,18 +2,18 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: emby
-  namespace: media
+  name: kibana
+  namespace: monitoring
 spec:
   ingressClassName: nginx
   rules:
-    - host: "emby.${SECRET_CLUSTER_DOMAIN}"
+    - host: "kibana.${SECRET_CLUSTER_DOMAIN}"
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: emby
+                name: kibana-kb-http
                 port:
-                  number: 80
+                  number: 5601
