@@ -11,7 +11,7 @@ spec:
     namespace: monitoring
   fleetServerRef: 
     name: fleet-server
-    namespace: default
+    namespace: monitoring
   mode: fleet
   daemonSet:
     podTemplate:
