@@ -12,4 +12,3 @@ resources:
   - enterprisesearch.yaml
   - fleet-server.yaml
   - elasticagent.yaml
-  - elasticagentrbac.yaml
