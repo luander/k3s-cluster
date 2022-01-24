@@ -3,7 +3,6 @@ apiVersion: agent.k8s.elastic.co/v1alpha1
 kind: Agent
 metadata:
   name: fleet-server
-  namespace: monitoring
 spec:
   version: 7.15.0
   kibanaRef:
