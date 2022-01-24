@@ -12,9 +12,6 @@ spec:
   fleetServerRef: 
     name: fleet-server
     namespace: monitoring
-  elasticsearchRefs:
-  - name: elasticsearch
-    namespace: monitoring
   mode: fleet
   daemonSet:
     podTemplate:
