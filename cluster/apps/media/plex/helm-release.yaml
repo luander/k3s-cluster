@@ -49,10 +49,8 @@ spec:
     persistence:
       config:
         enabled: true
-        mountPath: "/media"
         type: pvc
         existingClaim: media
-        subPath: "configs/plex/config" 
       media:
         enabled: true
         mountPath: "/media"
