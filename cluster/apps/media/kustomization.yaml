@@ -4,6 +4,7 @@ resources:
 - _pvc
 - emby
 - jackett
+- plex
 - radarr
 - sonarr
 - transmission
