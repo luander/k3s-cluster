@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
 - bitwarden
 - home
+- kube-system
 - media
 - monitoring
 - networking
