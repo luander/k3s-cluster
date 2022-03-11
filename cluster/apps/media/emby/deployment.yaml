@@ -56,12 +56,13 @@ spec:
             mountPath: /mnt/share
             readOnly: false
         resources:
-          limits:
-            memory: 12000Mi
-            cpu: 6
           requests:
-            memory: 100Mi
-            cpu: 100m
+            gpu.intel.com/i915: 1
+            cpu: 1000m
+            memory: 1000Mi
+          limits:
+            gpu.intel.com/i915: 1
+            memory: 16000Mi
       volumes:
         - name: data
           persistentVolumeClaim:
