@@ -39,7 +39,7 @@ spec:
         enabled: true
         ingressClassName: "nginx"
         hosts:
-          - host: &host "emby.${SECRET_CLUSTER_DOMAIN}"
+          - host: &host "plex.${SECRET_CLUSTER_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
