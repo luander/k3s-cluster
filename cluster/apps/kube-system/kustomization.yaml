@@ -4,4 +4,3 @@ kind: Kustomization
 resources:
 - node-feature-discovery
 - intel-gpu-plugin
-- cilium
