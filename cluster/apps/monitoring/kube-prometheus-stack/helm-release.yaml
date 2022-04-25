@@ -148,7 +148,7 @@ spec:
         - hosts:
           - "prometheus.${SECRET_CLUSTER_DOMAIN}"
       prometheusSpec:
-        retention: 90d
+        retention: 30d
         ruleSelector: {}
         ruleNamespaceSelector: {}
         ruleSelectorNilUsesHelmValues: false
