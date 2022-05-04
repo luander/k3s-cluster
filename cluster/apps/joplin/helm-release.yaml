@@ -38,7 +38,7 @@ spec:
     env:
       APP_BASE_URL: "https://joplin.${SECRET_CLUSTER_DOMAIN}"
       DB_CLIENT: pg
-      POSTGRES_HOST: joplin-postgresql
+      POSTGRES_HOST: joplin-server-postgresql
       POSTGRES_PORT: 5432
 
     # -- Configures service settings for the chart.
