@@ -70,6 +70,10 @@ spec:
     postgresql:
       enabled: true
       primary:
+        initdb:
+          scripts:
+            init.sql: | 
+              CREATE DATABASE joplin;  
         nodeSelector:
           kubernetes.io/arch: amd64
         affinity:
@@ -100,6 +104,5 @@ spec:
         enabled: true
       
       initdbScripts:
-        init.sql: | 
-          CREATE DATABASE joplin;
+        
         # storageClass: ""
