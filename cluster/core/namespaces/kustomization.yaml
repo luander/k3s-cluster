@@ -13,3 +13,4 @@ resources:
 - hajimari.yaml
 - home.yaml
 - local-path-storage.yaml
+- joplin.yaml

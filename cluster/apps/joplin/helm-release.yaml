@@ -1,0 +1,97 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: joplin-server
+  namespace: joplin
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: joplin-server
+      version: 2.1.11
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    image:
+      repository: joplin/server
+      tag: 2.1.2
+
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: kubernetes.io/arch
+                  operator: In
+                  values:
+                    - amd64
+
+    envFrom:
+      - secretRef:
+          name: joplin-env
+
+    env:
+      APP_BASE_URL: "https://joplin.${SECRET_CLUSTER_DOMAIN}"
+      DB_CLIENT: pg
+      POSTGRES_HOST: joplin-postgresql
+      POSTGRES_PORT: 5432
+
+    # -- Configures service settings for the chart.
+    # @default -- See values.yaml
+    service:
+      main:
+        ports:
+          http:
+            port: 22300
+
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: "nginx"
+        hosts:
+        - host: "joplin.${SECRET_CLUSTER_DOMAIN}"
+          paths:
+          - path: /
+            pathType: Prefix
+        tls:
+        - hosts:
+          - "joplin.${SECRET_CLUSTER_DOMAIN}"
+
+    postgresql:
+      enabled: true
+      primary:
+        nodeSelector:
+          kubernetes.io/arch: amd64
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: beta.kubernetes.io/arch
+                      operator: In
+                      values:
+                        - amd64
+      readReplicas:
+        nodeSelector:
+          kubernetes.io/arch: amd64
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: beta.kubernetes.io/arch
+                      operator: In
+                      values:
+                        - amd64
+      auth:
+        existingSecret: joplin-db
+
+      persistence:
+        enabled: true
+        # storageClass: ""

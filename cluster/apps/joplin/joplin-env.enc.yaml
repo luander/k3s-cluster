@@ -1,0 +1,27 @@
+apiVersion: v1
+data:
+    POSTGRES_DATABASE: ENC[AES256_GCM,data:jzD+v9a398E=,iv:HBvyNKPmskgjZg9opkI6Zsy4/0yShFxfXY2WZl02KPE=,tag:HscRQ7W6Nmv20q/HDpKcKA==,type:str]
+    POSTGRES_PASSWORD: ENC[AES256_GCM,data:/DXBmW+fHUJChyZxfFUDc12fFrgehBkflGNuK9yizwPuEdTwLwk3uaO571o=,iv:rAfBIR7BoZQeMiBtw19Q3JRy1z77PXoHSLA0vU0ysIA=,tag:0lwGBOMqug30KRgjxF4FmQ==,type:str]
+    POSTGRES_USER: ENC[AES256_GCM,data:9TXj5zFyJtPRbrhu,iv:w0+DXkPCJaRvp11kvKgSxU+pTBzgq9NWYRHwXa8/HEc=,tag:fQTcRVMhXDQiGtC4TBY1eQ==,type:str]
+    TZ: ENC[AES256_GCM,data:kyzRSw2OlCRe0GYhtCiVPbvkfUb2frre,iv:PVNwwM0xVrWB7GfeMiTfZImPscYu2/cP1nSU9ml9VsM=,tag:6/b0tJK4YHmc2lm9L/pvdA==,type:str]
+kind: Secret
+metadata:
+    creationTimestamp: null
+    name: joplin-db
+    namespace: joplin
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv:
+        - vault_url: https://sops-ec4fba156758404d.vault.azure.net
+          name: sops-key
+          version: 1f0762a5e1c5491bac78d22ed00545ac
+          created_at: "2022-05-04T06:11:57Z"
+          enc: n6B-RND4Qsdrhnx_HmMZ_1g1DaVEMCt3Ts3288mywZN_th5x4dOjcYsaeB5PTxyAZAl8A8Vi5gnBjI2LMpxdlQtRInqdVzWcXk9tir4HwUX4S6CgGQAAammVeg0v0FcL9Cy4RcROjOwy7wgXWqliJn1UcG-EKIIBEm3pmJe4coiSEwiZRJmUQglP9CIsAoqcJvhf5QZMPBDBazp4H9hSrFa9mdkV7I7bHSDvBsnU7ZL0dqFaPnUAGhqVjzUkrIsXoNazg41xhSwHXgdHFVI6h7w5Ojyf-7jEG5h4w3zOREE3ZNKPdN3SPSZztrYL4xoNFSYs4ksj31tJkLCJeuX42jdjRtdZUDoxcOF1AyIbXhLc2XU8rSkRI8quNQCyGEkuhVAjxeY9UTH-i47EhmlDRnrA7Qo0MOd-u_6kbOi99cMhifmiNRIKd2DMjm9p5R5vNGeIc7rXQ43AuDufqEshYh8fnc84ojh086Eiqj9pwcgjeflfo_Ks9FtolnFCef9qh_5dcmv-ck6JW8kQ9ydg1k63adoDFwkjWuxXXYOV0JktwElgeeBKC7DXhONo1Y0blKp_z4aWMxKioCxtCXu38lb6mm_Yvg0r2iSmptq2Umt--vzEN02EYhfTtBhdxGoBE5y6uHly_ML4X1NY5Ufhjv0_M38Z8QG52DewpdhywAE
+    hc_vault: []
+    age: []
+    lastmodified: "2022-05-04T06:11:57Z"
+    mac: ENC[AES256_GCM,data:2SPnSGfygCiXvPZbQWHWmTJa6BW3XN04VSfSo0E8lh2PMlZSOjONewdYB5ivzT5oEWsUBqDbepsDgLkXIOAX1620MByRt/jAs7M4Zc71K62mV3OaaiwcCdA6H/R89+EpHpRV8sUygC5yRgBJO9pB8HaomU9QJdEz2PDe1zx5mZ0=,iv:LYsjvlzopTMC3Yrt1MYpnbQVzT5mP0uKSDUluU/TnZs=,tag:MUyjBfu05frQit0ktxa1tA==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.1
