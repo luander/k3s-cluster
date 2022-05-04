@@ -31,15 +31,19 @@ spec:
                   values:
                     - amd64
 
-    envFrom:
-      - secretRef:
-          name: joplin-env
-
     env:
+      TZ: "Europe/Amsterdam"
       APP_BASE_URL: "https://joplin.${SECRET_CLUSTER_DOMAIN}"
       DB_CLIENT: pg
       POSTGRES_HOST: joplin-server-postgresql
       POSTGRES_PORT: 5432
+      POSTGRES_DATABASE: joplin
+      POSTGRES_PASSWORD:
+        valueFrom: 
+          secretKeyRef:
+            name: "joplin-db"
+            key: "postgres-password"
+      POSTGRES_USER: postgres
 
     # -- Configures service settings for the chart.
     # @default -- See values.yaml
