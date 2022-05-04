@@ -98,4 +98,8 @@ spec:
 
       persistence:
         enabled: true
+      
+      initdbScripts:
+        init.sql: | 
+          CREATE DATABASE joplin;
         # storageClass: ""
