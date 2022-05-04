@@ -7,7 +7,7 @@ data:
 kind: Secret
 metadata:
     creationTimestamp: null
-    name: joplin-db
+    name: joplin-env
     namespace: joplin
 sops:
     kms: []
