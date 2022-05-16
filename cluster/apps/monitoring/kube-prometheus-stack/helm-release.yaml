@@ -18,6 +18,11 @@ spec:
       interval: 5m
   timeout: 20m
   values: 
+    prometheusOperator:
+      admissionWebhooks:
+        enabled: false
+        patch:
+          enabled: false
     alertmanager:
       config:
         global:
