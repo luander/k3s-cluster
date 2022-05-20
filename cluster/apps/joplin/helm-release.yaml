@@ -104,5 +104,3 @@ spec:
         enabled: true
       
       initdbScripts:
-        
-        # storageClass: ""
