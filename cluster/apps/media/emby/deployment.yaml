@@ -30,7 +30,7 @@ spec:
                       - amd64
       containers:
       - name: emby
-        image: linuxserver/emby:4.7.0-beta
+        image: linuxserver/emby:4.8.0-beta
         securityContext:
           # runAsUser: 10000
           # runAsGroup: 30000
