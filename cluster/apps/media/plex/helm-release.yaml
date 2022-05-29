@@ -47,13 +47,13 @@ spec:
         tls:
           - hosts:
               - *host
-    autoscaling:
-      enabled: true
-      target: plex
-      minReplicas: 1
-      maxReplicas: 5
-      targetCPUUtilizationPercentage: 80
-      targetMemoryUtilizationPercentage: 80
+    # autoscaling:
+    #   enabled: true
+    #   target: plex
+    #   minReplicas: 1
+    #   maxReplicas: 5
+    #   targetCPUUtilizationPercentage: 80
+    #   targetMemoryUtilizationPercentage: 80
     persistence:
       config:
         enabled: true
