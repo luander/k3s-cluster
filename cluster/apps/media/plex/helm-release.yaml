@@ -24,10 +24,14 @@ spec:
       tag: v1.25.6.5577-c8bd13540
     env:
       TZ: "${TIMEZONE}"
+      PLEX_PREFERENCE_7: "TreatWanIpAsLocal=1"
     podSecurityContext:
+        runAsUser: 568
+        runAsGroup: 568
+        fsGroup: 0
       supplementalGroups:
         - 44
-        - 109
+        - 106
         - 100
     service:
       main:
