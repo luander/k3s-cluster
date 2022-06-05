@@ -59,7 +59,6 @@ spec:
         enabled: true
         type: pvc
         size: "25Gi"
-        storageClass: "nfs-client"
       media:
         enabled: true
         mountPath: "/media"
