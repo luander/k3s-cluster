@@ -40,6 +40,8 @@ spec:
     envFrom:
     - secretRef:
         name: bitwardensmtp
+    - secretRef:
+        name: bitwarden-admin-token
 
     persistence:
       config:
