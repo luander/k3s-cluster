@@ -42,12 +42,9 @@ spec:
         name: bitwardensmtp
 
     persistence:
-      config:
+      data:
         enabled: true
-        mountPath: /data
-        size: 1Gi
         accessMode: ReadWriteOnce
-        storageClass: longhorn
         ## Use existing Persistent Volume Claim
         existingClaim: "bitwarden-bitwardenrs-0"
 
