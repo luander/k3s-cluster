@@ -42,13 +42,14 @@ spec:
         name: bitwardensmtp
 
     persistence:
-      type: statefulset
-      enabled: true
-      size: 1Gi
-      accessMode: ReadWriteOnce
-      storageClass: longhorn
-      ## Use existing Persistent Volume Claim
-      existingClaim: "bitwarden-bitwardenrs-0"
+      config:
+        enabled: true
+        mountPath: /data
+        size: 1Gi
+        accessMode: ReadWriteOnce
+        storageClass: longhorn
+        ## Use existing Persistent Volume Claim
+        existingClaim: "bitwarden-bitwardenrs-0"
 
     ingress:
       enabled: true
