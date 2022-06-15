@@ -9,8 +9,8 @@ spec:
   chart:
     spec:
       # renovate: registryUrl=https://k8s-at-home.com/charts/
-      chart: bitwardenrs
-      version: 2.1.11
+      chart: vaultwarden
+      version: 4.2.3
       sourceRef:
         kind: HelmRepository
         name: k8s-at-home-charts
@@ -19,44 +19,27 @@ spec:
   values:
     replicaCount: 1
 
-    bitwardenrs:
-      domain: "https://bitwarden.${SECRET_CLUSTER_DOMAIN}"
-      signupsAllowed: false
-      websockets:
-        enabled: true
-        port: 3012
-      admin:
-        enabled: true
-        disableAdminToken: false
-        existingSecret:
-          enabled: false
-          name: ""
-          tokenKey: ""
-      # Enable SMTP. https://github.com/dani-garcia/bitwarden_rs/wiki/SMTP-configuration
-      smtp:
-        enabled: true
-        # SMTP hostname, required if SMTP is enabled
-        host: "${BITWARDEN_SMTP_HOST}"
-        # SMTP sender e-mail address, required if SMTP is enabled
-        from: "${BITWARDEN_SMTP_FROM}"
-        # SMTP sender name, defaults to 'Bitwarden_RS'
-        fromName: "Bitwarden"
-        # Enable SSL connection
-        ssl: true
-        # SMTP port
-        port: 587
-        # Use existing secret for SMTP authentication
-        existingSecret:
-          enabled: true
-          name: "bitwardensmtp"
-          userKey: "username"
-          passwordKey: "password" # f996f3cb-00fc-480c-8973-8ab04d44a8cc
-      yubico:
-        enabled: true
-        clientId: "${BITWARDEN_YUBIKEY_CLIENT_ID}"
-        secretKey: "${BITWARDEN_YUBIKEY_SECRET_KEY}"
+    env:
+      SIGNUPS_ALLOWED: true
+      DOMAIN: "https://bitwarden.${SECRET_CLUSTER_DOMAIN}"
+      WEBSOCKET_ENABLED: true
+      WEBSOCKET_PORT: 3012
+      SENDS_ALLOWED: true
+      DISABLE_ADMIN_TOKEN: false
+      SMTP_HOST: "${BITWARDEN_SMTP_HOST}"
+      SMTP_FROM: "${BITWARDEN_SMTP_FROM}"
+      SMTP_FROM_NAME: "Bitwarden"
+      SMTP_SECURITY: starttls
+      SMTP_PORT: 587
+      SMTP_USERNAME: username
+      SMTP_PASSWORD: password
+      SMTP_TIMEOUT: 15
+      YUBICO_CLIENT_ID: "${BITWARDEN_YUBIKEY_CLIENT_ID}"
+      YUBICO_SECRET_KEY: "${BITWARDEN_YUBIKEY_SECRET_KEY}"
 
-    env: {}
+    envFrom:
+      secretRef:
+        name: bitwardensmtp
 
     persistence:
       type: statefulset
@@ -77,9 +60,6 @@ spec:
         paths:
         - "/"
       tls: []
-      #  - secretName: chart-example-tls
-      #    hosts:
-      #      - chart-example.local
 
     resources:
       limits:
