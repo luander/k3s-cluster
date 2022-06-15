@@ -38,7 +38,7 @@ spec:
       YUBICO_SECRET_KEY: "${BITWARDEN_YUBIKEY_SECRET_KEY}"
 
     envFrom:
-      secretRef:
+    - secretRef:
         name: bitwardensmtp
 
     persistence:
