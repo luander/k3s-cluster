@@ -17,7 +17,7 @@ spec:
         namespace: flux-system
       interval: 5m
   values:
-    env: 
+    env:
       TZ: "Europe/Amsterdam"
     ingress:
       main:
@@ -40,7 +40,7 @@ spec:
       fsGroup: 568
       fsGroupChangePolicy: "OnRootMismatch"
       supplementalGroups:
-        - 100
+      - 100
     persistence:
       config:
         enabled: true
