@@ -11,3 +11,4 @@ resources:
 - nfs.yaml
 - home.yaml
 - joplin.yaml
+- searx.yaml
