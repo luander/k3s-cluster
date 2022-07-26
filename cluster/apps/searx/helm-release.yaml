@@ -1,0 +1,53 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app searx
+  namespace: searx
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      chart: *app
+      version: 5.5.2
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    image:
+      repository: searxng/searxng
+      tag: 2022.07.26-50ec821e
+    env:
+      TZ: "Europe/Amsterdam"
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: "nginx"
+          nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_CLUSTER_DOMAIN}/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_CLUSTER_DOMAIN}/oauth2/start"
+        hosts:
+        - host: &host "{{ .Release.Name }}.${SECRET_CLUSTER_DOMAIN}"
+          paths:
+          - path: /
+            pathType: Prefix
+        tls:
+        - hosts:
+          - *host
+    podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: "OnRootMismatch"
+      supplementalGroups:
+      - 100
+    resources:
+      requests:
+        memory: 250Mi
+        cpu: 50m
+      limits:
+        CPU: 500m
+        memory: 500Mi

@@ -9,4 +9,5 @@ resources:
 - media
 - monitoring
 - networking
+- searx
 - system-upgrade
