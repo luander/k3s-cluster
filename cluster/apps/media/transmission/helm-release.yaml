@@ -34,6 +34,7 @@ spec:
 
     env:
       TZ: "Europe/Amsterdam"
+      TRANSMISSION_WEB_HOME: /config/flood-for-transmission/
 
     podSecurityContext:
       runAsUser: 568
