@@ -68,6 +68,12 @@ spec:
         memory: 250Mi
 
     persistence:
+      config:
+        enabled: true
+        mountPath: /config
+        type: pvc
+        size: "5Gi"
+        storageClass: "longhorn"
       downloads:
         enabled: true
         mountPath: /downloads
