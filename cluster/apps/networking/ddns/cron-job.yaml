@@ -1,0 +1,22 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ddnspy
+  namespace: networking
+spec:
+  schedule: "5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: ddnspy
+            image: ghcr.io/luander/ddnspy:main
+            imagePullPolicy: IfNotPresent
+            command:
+            - home.luander.net
+            envFrom:
+            - secretRef:
+                name: cloudflare-api
+          restartPolicy: OnFailure
