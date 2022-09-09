@@ -14,7 +14,7 @@ spec:
           - name: ddnspy
             image: ghcr.io/luander/ddnspy:main
             imagePullPolicy: IfNotPresent
-            args: [ "home.luander.net" ]
+            args: [ "home.${SECRET_CLUSTER_DOMAIN}" ]
             envFrom:
             - secretRef:
                 name: cloudflare-api
