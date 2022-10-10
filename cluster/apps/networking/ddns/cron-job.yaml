@@ -10,6 +10,7 @@ spec:
     spec:
       template:
         spec:
+          automountServiceAccountToken: false
           containers:
           - name: ddnspy
             image: ghcr.io/luander/ddnspy:main
@@ -18,4 +19,18 @@ spec:
             envFrom:
             - secretRef:
                 name: cloudflare-api
+            securityContext:
+              runAsUser: 65532 # corresponds to tag 'nonroot' user
+              runAsGroup: 65532
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                - all
+            resources:
+              limits:
+                cpu: 500m
+                memory: 512Mi
+              requests:
+                cpu: 100m
+                memory: 128Mi
           restartPolicy: OnFailure
