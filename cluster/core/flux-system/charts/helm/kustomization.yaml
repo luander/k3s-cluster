@@ -6,6 +6,7 @@ resources:
 - blakeshome-charts.yaml
 - cilium-charts.yaml
 - coredns-charts.yaml
+- datadog.yaml
 - deliveryhero-charts.yaml
 - drone-charts.yaml
 - elastic.yaml
