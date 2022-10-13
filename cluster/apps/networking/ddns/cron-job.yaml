@@ -13,7 +13,7 @@ spec:
           automountServiceAccountToken: false
           containers:
           - name: ddnspy
-            image: ghcr.io/luander/ddnspy:main
+            image: ghcr.io/luander/ddnspy:main@sha256:69b06abbe42225735109ea1358f6b94b737a932dd29455803caeae1e04832f29
             imagePullPolicy: IfNotPresent
             args: [ "home.luander.net" ]
             envFrom:
