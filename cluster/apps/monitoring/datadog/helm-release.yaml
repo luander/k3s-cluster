@@ -20,7 +20,9 @@ spec:
     targetSystem: "linux"
     datadog:
       apiKeyExistingSecret: datadog-secret
+      appKeyExistingSecret: datadog-secret
       clusterName: home
+      site: "datadoghq.eu"
       tags: []
       logs:
         enabled: true
@@ -35,5 +37,5 @@ spec:
         processCollection: false
       systemProbe:
         enableTCPQueueLength: false
-        enableOOMKill: true
+        enableOOMKill: false
         collectDNSStats: false
