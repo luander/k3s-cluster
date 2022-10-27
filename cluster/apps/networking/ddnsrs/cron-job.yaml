@@ -1,0 +1,45 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ddnsrs
+  namespace: networking
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          automountServiceAccountToken: false
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                - matchExpressions:
+                  - key: feature.node.kubernetes.io/custom-intel-gpu
+                    operator: In
+                    values:
+                    - "true"
+          containers:
+          - name: ddnspy
+            image: ghcr.io/luander/ddnsrs:main@sha256:98013df5cc744e317a3900fa1b014388dfff4457eb26ab481b6d459d4d0c9296
+            imagePullPolicy: IfNotPresent
+            args: [ "home.luander.net" ]
+            envFrom:
+            - secretRef:
+                name: cloudflare-api
+            securityContext:
+              runAsUser: 65532 # corresponds to tag 'nonroot' user
+              runAsGroup: 65532
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                - all
+            resources:
+              limits:
+                cpu: 500m
+                memory: 512Mi
+              requests:
+                cpu: 100m
+                memory: 128Mi
+          restartPolicy: OnFailure
