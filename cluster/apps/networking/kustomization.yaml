@@ -4,5 +4,4 @@ resources:
 - ingress-nginx
 - oauth2-proxy
 - wildcard-certificate
-- ddns
 - ddnsrs
