@@ -20,16 +20,20 @@ spec:
     createNamespace: true
   values:
     image:
-      repository: ghcr.io/k8s-at-home/plex
-      tag: v1.25.6.5577-c8bd13540
+      repository: ghcr.io/onedr0p/plex
+      tag: 1.29.2.6364-6d72b0cf6
     env:
       TZ: "${TIMEZONE}"
       PLEX_PREFERENCE_7: "TreatWanIpAsLocal=1"
     podSecurityContext:
+      fsGroup: 568
+      runAsGroup: 568
+      runAsUser: 568
       supplementalGroups:
-        - 44
-        - 106
-        - 100
+      - 568
+      - 44
+      - 106
+      - 100
     service:
       main:
         type: LoadBalancer
