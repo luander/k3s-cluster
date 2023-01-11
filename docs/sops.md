@@ -1,6 +1,11 @@
 # Mozilla SOPS
 sops is an editor of encrypted files that supports YAML, JSON, ENV, INI and BINARY formats and encrypts with AWS KMS, GCP KMS, Azure Key Vault, age, and PGP.
 
+## Install sops
+```bash
+brew install sops
+```
+
 ## Azure Key Vault Setup
 
 ### Create a service principal:
