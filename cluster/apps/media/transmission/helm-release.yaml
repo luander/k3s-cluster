@@ -24,7 +24,7 @@ spec:
         command:
         - "/bin/sh"
         - "-c"
-        - "curl -o- -sL https://github.com/johman10/flood-for-transmission/releases/download/latest/flood-for-transmission.tar.gz | tar xzf - -C /config"
+        - "curl -o- -sL https://github.com/johman10/flood-for-transmission/releases/download/2022-11-27T11-31-25/flood-for-transmission.tar.gz | tar xzf - -C /config"
         volumeMounts:
         - name: config
           mountPath: /config
@@ -35,6 +35,8 @@ spec:
     env:
       TZ: "Europe/Amsterdam"
       TRANSMISSION_WEB_HOME: /config/flood-for-transmission/
+      TRANSMISSION_SPEED_LIMIT_UP_ENABLED: true
+      TRANSMISSION_SPEED_LIMIT_UP: 100
 
     podSecurityContext:
       runAsUser: 568
