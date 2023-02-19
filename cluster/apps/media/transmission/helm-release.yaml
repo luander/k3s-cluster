@@ -37,6 +37,7 @@ spec:
       TRANSMISSION_WEB_HOME: /config/flood-for-transmission/
       TRANSMISSION_SPEED_LIMIT_UP_ENABLED: true
       TRANSMISSION_SPEED_LIMIT_UP: 100
+      TRANSMISSION_TRASH_ORIGINAL_TORRENT_FILES: true
 
     podSecurityContext:
       runAsUser: 568
