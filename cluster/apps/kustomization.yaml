@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
 - bitwarden
 - home
-- joplin
 - kube-system
 - media
 - monitoring
