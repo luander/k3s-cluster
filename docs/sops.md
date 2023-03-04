@@ -36,5 +36,5 @@ az keyvault key show --name sops-key --vault-name $keyvault_name --query key.kid
 ### Encrypt a file with SOPS
 ```
 export key_url=`az keyvault key show --name sops-key --vault-name $keyvault_name --query key.kid`
-sops --encrypt --azure-kv $key_url test.yaml > test.enc.yaml
+sops --encrypt --azure-kv $key_url /tmp/test.yaml > test.enc.yaml
 ```

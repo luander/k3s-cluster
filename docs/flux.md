@@ -14,6 +14,21 @@ command -v flux >/dev/null && . <(flux completion zsh) && compdef _flux flux
 
 ## Install the cluster components
 
+### Dependencies
+Two secrets are needed to be configured to the cluster before bootstrapping Flux:
+```
+azkv-credentials: used by external secrets operator
+```
+```
+sops-secret: use by sops
+```
+Both secret should have the following data:
+```
+AZURE_TENANT_ID
+AZURE_CLIENT_ID
+AZURE_CLIENT_SECRET
+```
+
 _For full installation guide visit the [Flux installation guide](https://toolkit.fluxcd.io/guides/installation/)_
 
 Set the `GITHUB_TOKEN` environment variable to a personal access token you created in Github.

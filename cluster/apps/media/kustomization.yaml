@@ -5,6 +5,5 @@ resources:
 - jackett
 - plex
 - radarr
-- readarr
 - sonarr
 - transmission
