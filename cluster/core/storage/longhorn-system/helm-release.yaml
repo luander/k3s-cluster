@@ -25,7 +25,5 @@ spec:
         nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_CLUSTER_DOMAIN}/oauth2/auth"
         nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_CLUSTER_DOMAIN}/oauth2/start"
 
-    enablePSP: true
-
     defaultSettings:
-      backupTarget: nfs://10.0.0.193:/mnt/backup
+      backupTarget: nfs://10.0.8.12:/mnt/backup
