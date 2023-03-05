@@ -10,14 +10,14 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.jetstack.io/
       chart: cert-manager
-      version: v1.10.1
+      version: v1.11.0
       sourceRef:
         kind: HelmRepository
         name: jetstack-charts
         namespace: flux-system
       interval: 5m
   values:
-    installCRDs: true
+    # installCRDs: true
     webhook:
       enabled: true
     extraArgs:
