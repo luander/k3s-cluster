@@ -22,8 +22,6 @@ spec:
       host: "lh.${SECRET_CLUSTER_DOMAIN}"
       annotations:
         kubernetes.io/ingress.class: nginx
-        nginx.ingress.kubernetes.io/auth-url: "https://auth.${SECRET_CLUSTER_DOMAIN}/oauth2/auth"
-        nginx.ingress.kubernetes.io/auth-signin: "https://auth.${SECRET_CLUSTER_DOMAIN}/oauth2/start"
 
     defaultSettings:
       backupTarget: nfs://10.0.8.12:/mnt/backup
