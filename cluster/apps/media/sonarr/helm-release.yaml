@@ -64,6 +64,13 @@ spec:
           successThreshold: 1
           timeoutSeconds: 10
 
+    podSecurityContext:
+      fsGroup: 568
+      runAsGroup: 568
+      runAsUser: 568
+      supplementalGroups:
+      - 568
+      - 100
     persistence:
       config:
         enabled: true
