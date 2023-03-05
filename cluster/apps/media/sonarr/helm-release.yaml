@@ -69,7 +69,7 @@ spec:
         enabled: true
         type: pvc
         size: "25Gi"
-        storageClass: "nfs-client"
+        storageClass: longhorn
       media:
         enabled: true
         mountPath: "/media"
