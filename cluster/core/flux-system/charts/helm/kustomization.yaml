@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
 - external-secrets-charts.yaml
 - bitnami-charts.yaml
+- bjw-s.yaml
 - blakeshome-charts.yaml
 - cilium-charts.yaml
 - coredns-charts.yaml
