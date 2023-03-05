@@ -9,37 +9,31 @@ spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://external-secrets.github.io/kubernetes-external-secrets/
-      chart: kubernetes-external-secrets
-      version: 8.5.5
+      # renovate: registryUrl=https://charts.external-secrets.io
+      chart: external-secrets
+      version: 0.7.2
       sourceRef:
         kind: HelmRepository
-        name: kubernetes-external-secrets-charts
+        name: external-secrets-charts
         namespace: flux-system
       interval: 5m
   values:
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-              - key: beta.kubernetes.io/arch
-                operator: In
-                values:
-                  - amd64
-    nameOverride: external-secrets
-    fullnameOverride: external-secrets
-    env:
-      POLLER_INTERVAL_MILLISECONDS: 100000
-    envVarsFromSecret:
-      AZURE_TENANT_ID:
-        secretKeyRef: azkv-credentials
-        key: AZURE_TENANT_ID
-      AZURE_CLIENT_ID:
-        secretKeyRef: azkv-credentials
-        key: AZURE_CLIENT_ID
-      AZURE_CLIENT_SECRET:
-        secretKeyRef: azkv-credentials
-        key: AZURE_CLIENT_SECRET
-    serviceMonitor:
-      enabled: true
+    podSecurityContext:
+      fsGroup: 2000
+
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true
+      runAsUser: 1000
+
+    resources:
+      requests:
+        cpu: 10m
+        memory: 32Mi
+      limits:
+        cpu: 500m
+        memory: 512Mi
+
