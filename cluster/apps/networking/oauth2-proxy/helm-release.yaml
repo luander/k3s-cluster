@@ -8,32 +8,22 @@ spec:
   interval: 5m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
+      # renovate: registryUrl=https://oauth2-proxy.github.io/manifests
       chart: oauth2-proxy
-      version: 5.0.7
+      version: 6.9.1
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: oauth2-proxy-charts
         namespace: flux-system
       interval: 5m
   values:
     image:
-      tag: v7.1.1-arm64
+      tag: v7.4.0
     replicaCount: 2
     config:
       clientID: "${OAUTH2_PROXY_CLIENT_ID}"
       clientSecret: "${OAUTH2_PROXY_CLIENT_SECRET}"
       cookieSecret: "${OAUTH2_PROXY_COOKIE_SECRET}"
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: beta.kubernetes.io/arch
-                  operator: In
-                  values:
-                    - arm64
-
     ingress:
       enabled: true
       path: /oauth2
@@ -50,10 +40,11 @@ spec:
       tls:
       - hosts:
         - "auth.${SECRET_CLUSTER_DOMAIN}"
-  
+
     extraArgs:
       provider: "azure"
       azure-tenant: "${OAUTH2_PROXY_AZURE_TENANT}"
+      oidc-issuer-url: "https://login.microsoftonline.com/${OAUTH2_PROXY_AZURE_TENANT}/v2.0"
       email-domain: "*"
       whitelist-domain: ".${SECRET_CLUSTER_DOMAIN}"
       cookie-domain: ".${SECRET_CLUSTER_DOMAIN}"
