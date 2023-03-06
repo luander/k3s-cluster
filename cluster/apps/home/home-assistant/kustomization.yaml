@@ -4,3 +4,9 @@ kind: Kustomization
 resources:
 - external-secret.yaml
 - helm-release.yaml
+patchesStrategicMerge:
+- ./addons.yaml
+labels:
+  - pairs:
+      app.kubernetes.io/name: home-assistant
+      app.kubernetes.io/instance: home-assistant
