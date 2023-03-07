@@ -1,64 +1,69 @@
 ---
+# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/helmrelease_v2beta1.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: plex
   namespace: media
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
-      chart: plex
-      version: 6.4.3
+      chart: app-template
+      version: 1.3.2
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: bjw-s
         namespace: flux-system
-      interval: 5m
+  maxHistory: 3
   install:
     createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
   values:
+    controller:
+      type: statefulset
     image:
       repository: ghcr.io/onedr0p/plex
       tag: 1.31.1.6733-bc0674160@sha256:5f947ea61b09f20af58a385548af2253c99cfe0dd91b9f13114654dc24f2be66
     env:
       TZ: "${TIMEZONE}"
       PLEX_PREFERENCE_7: "TreatWanIpAsLocal=1"
-    podSecurityContext:
-      fsGroup: 568
-      runAsGroup: 568
-      runAsUser: 568
-      supplementalGroups:
-      - 568
-      - 44
-      - 106
-      - 100
     service:
       main:
         type: LoadBalancer
-        externalIPs:
-          - "10.0.0.193"
+        externalIPs: ["10.0.8.13","10.0.8.12"]
         externalTrafficPolicy: Local
+        ports:
+          http:
+            port: 32400
     ingress:
       main:
         enabled: true
         ingressClassName: "nginx"
+        annotations:
+          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+          hajimari.io/icon: mdi:plex
         hosts:
-          - host: &host "plex.${SECRET_CLUSTER_DOMAIN}"
+          - host: &host "{{ .Release.Name }}.${SECRET_CLUSTER_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - hosts:
               - *host
-    # autoscaling:
-    #   enabled: true
-    #   target: plex
-    #   minReplicas: 1
-    #   maxReplicas: 5
-    #   targetCPUUtilizationPercentage: 80
-    #   targetMemoryUtilizationPercentage: 80
+    podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: OnRootMismatch
+      supplementalGroups: [44, 106, 100, 568]
     persistence:
       config:
         enabled: true
@@ -69,23 +74,13 @@ spec:
         type: pvc
         existingClaim: media
         readOnly: true
-      backup:
-        enabled: false
       transcode:
         enabled: true
         type: emptyDir
         medium: Memory
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: feature.node.kubernetes.io/custom-intel-gpu
-                  operator: In
-                  values:
-                    - "true"
-    podAnnotations:
-      configmap.reloader.stakater.com/reload: "plex-promtail"
+    nodeSelector:
+      node-role.kubernetes.io/worker: "true"
+      intel.feature.node.kubernetes.io/gpu: "true"
     resources:
       requests:
         gpu.intel.com/i915: 1
