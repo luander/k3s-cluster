@@ -1,7 +1,6 @@
 
 
 [![k3s](https://img.shields.io/badge/k3s-v1.25-blue?style=flat&logo=k3s)](https://k3s.io/)
-[![Lines of code](https://img.shields.io/tokei/lines/github/luander/k3s-cluster?style=flat&color=brightgreen&label=lines&logo=codefactor&logoColor=white)](https://github.com/luander/k3s-cluster/graphs/contributors)
 
 
 ## My home Kubernetes cluster :sailboat:
