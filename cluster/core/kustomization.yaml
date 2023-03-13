@@ -4,6 +4,5 @@ resources:
 - namespaces
 - cert-manager
 - flux-system
-- system-upgrade
 - external-secrets
 - storage
