@@ -5,5 +5,4 @@ resources:
 - ingress-nginx
 - wildcard-certificate
 - ddnsrs
-# - cilium
 
