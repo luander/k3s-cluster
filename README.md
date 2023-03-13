@@ -1,8 +1,6 @@
 
 
-[![k3s](https://img.shields.io/badge/k3s-v1.23-blue?style=flat&logo=k3s)](https://k3s.io/)
-[![KICS Scan](https://img.shields.io/github/workflow/status/luander/k3s-cluster/KICS%20Scan?label=kics)](https://github.com/luander/k3s-cluster/actions/workflows/kics.yaml)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/luander/k3s-cluster/Schedule%20-%20Renovate%20Helm%20Releases?label=renovate&logo=renovatebot&style=flat)](https://github.com/luander/k3s-cluster/actions/workflows/schedule-renovate.yaml)
+[![k3s](https://img.shields.io/badge/k3s-v1.25-blue?style=flat&logo=k3s)](https://k3s.io/)
 [![Lines of code](https://img.shields.io/tokei/lines/github/luander/k3s-cluster?style=flat&color=brightgreen&label=lines&logo=codefactor&logoColor=white)](https://github.com/luander/k3s-cluster/graphs/contributors)
 
 
