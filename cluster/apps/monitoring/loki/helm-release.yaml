@@ -29,12 +29,6 @@ spec:
     minio:
       enabled: true
     loki:
-      storage:
-        type: "s3"
-        bucketNames:
-          chunks: chunks
-          ruler: ruler
-          admin: admin
       structuredConfig:
         auth_enabled: false
         server:
