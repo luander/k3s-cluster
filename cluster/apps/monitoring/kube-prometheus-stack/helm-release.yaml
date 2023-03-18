@@ -143,9 +143,9 @@ spec:
           - hosts:
             - *host
       thanosService:
-        enabled: true
+        enabled: false
       thanosServiceMonitor:
-        enabled: true
+        enabled: false
       prometheusSpec:
         replicas: 3
         replicaExternalLabelName: __replica__
@@ -155,11 +155,6 @@ spec:
         serviceMonitorSelectorNilUsesHelmValues: false
         podMonitorSelectorNilUsesHelmValues: false
         enableAdminAPI: true
-        thanos:
-          image: quay.io/thanos/thanos:v0.30.2
-          objectStorageConfig:
-            name: thanos-objstore-secret
-            key: objstore.yml
         resources: 
           requests:
             memory: 400Mi
