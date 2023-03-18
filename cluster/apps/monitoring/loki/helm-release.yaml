@@ -26,7 +26,11 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    minio:
+      enabled: true
     loki:
+      storage:
+        type: "s3"
       structuredConfig:
         auth_enabled: false
         server:
