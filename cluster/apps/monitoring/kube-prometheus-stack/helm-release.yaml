@@ -30,6 +30,8 @@ spec:
     keepHistory: false
   values:
     prometheusOperator:
+      tls:
+        enabled: false
       admissionWebhooks:
         enabled: false
         patch:
