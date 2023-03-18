@@ -148,7 +148,7 @@ spec:
         replicas: 3
         replicaExternalLabelName: __replica__
         retention: 30d
-        retentionSize: 15Gi
+        retentionSize: 15GB
         ruleSelectorNilUsesHelmValues: false
         serviceMonitorSelectorNilUsesHelmValues: false
         podMonitorSelectorNilUsesHelmValues: false
