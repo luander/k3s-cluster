@@ -5,26 +5,23 @@ metadata:
   name: grafana
   namespace: monitoring
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
       # renovate: registryUrl=https://grafana.github.io/helm-charts
       chart: grafana
-      version: 6.48.2
+      version: 6.53.4
       sourceRef:
         kind: HelmRepository
         name: grafana-charts
         namespace: flux-system
-      interval: 5m
   values:
     deploymentStrategy:
         type: Recreate
-
     env:
       GF_EXPLORE_ENABLED: true
       GF_PANELS_DISABLE_SANITIZE_HTML: true
       GF_LOG_FILTERS: rendering:debug
-
     dashboardProviders:
       dashboardproviders.yaml:
         apiVersion: 1
@@ -37,7 +34,6 @@ spec:
           editable: true
           options:
             path: /var/lib/grafana/dashboards/default
-
     ingress:
       enabled: true
       ingressClassName: nginx
@@ -45,12 +41,10 @@ spec:
       pathType: Prefix
       hosts:
         - "grafana.${SECRET_CLUSTER_DOMAIN}"
-  
     persistence:
       enabled: true
       storageClassName: longhorn
       size: 3Gi
-
     datasources:
       datasources.yaml:
         apiVersion: 1
@@ -60,7 +54,6 @@ spec:
           url: http://prometheus-operated:9090
           access: proxy
           isDefault: true
-
     dashboards:
       default:
         prometheus-stats:
@@ -110,9 +103,7 @@ spec:
           gnetId: 10176
           revision: 2
           datasource: Prometheus
-
     envFromSecret: grafana-auth
-
     sidecar:
       dashboards:
         enabled: true
@@ -120,7 +111,6 @@ spec:
       datasources:
         enabled: true
         searchNamespace: ALL
-
     plugins:
     - natel-discrete-panel
     - pr0ps-trackmap-panel
@@ -128,10 +118,8 @@ spec:
     - vonage-status-panel
     - grafana-worldmap-panel
     - grafana-clock-panel
-
     serviceMonitor:
       enabled: true
-
     grafana.ini:
       paths:
         data: /var/lib/grafana/data
@@ -153,7 +141,6 @@ spec:
         allowed_domains: luander.net
         allowed_groups:
         scopes: openid email profile
-
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:

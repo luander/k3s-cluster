@@ -5,19 +5,30 @@ metadata:
   name: kube-prometheus-stack
   namespace: monitoring
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
       # renovate: registryUrl=https://prometheus-community.github.io/helm-charts
       chart: kube-prometheus-stack
-      version: 43.2.1
+      version: 45.7.1
       sourceRef:
         kind: HelmRepository
         name: prometheus-community-charts
         namespace: flux-system
-      interval: 5m
-  timeout: 20m
-  values: 
+  maxHistory: 3
+  install:
+    createNamespace: true
+    crds: CreateReplace
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    crds: CreateReplace
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
     prometheusOperator:
       admissionWebhooks:
         enabled: false
@@ -29,19 +40,15 @@ spec:
           slack_api_url: "${SECRET_SLACK_WEBHOOK_URL}"
           resolve_timeout: 5m
         route:
-          group_by: ['job']
-          group_wait: 30s
-          group_interval: 5m
+          group_by: ['alertname', 'job']
+          group_wait: 1m
+          group_interval: 10m
           repeat_interval: 12h
-          receiver: 'null'
+          receiver: 'slack'
           routes:
-          - match:
-              alertname: Watchdog
-            receiver: 'null'
           - receiver: 'slack'
-            match_re:
-              # severity: critical|warning
-              severity: critical
+            matchers:
+            - severity = critical
             continue: true
         receivers:
         - name: 'null'
@@ -64,13 +71,16 @@ spec:
                 {{ end }}
               {{ end }}
         templates:
-        - '/etc/alertmanager/config/*.tmpl'
+          - '/etc/alertmanager/config/*.tmpl'
       ingress:
         enabled: true
         pathType: Prefix
         ingressClassName: "nginx"
         hosts:
-        - "alert-manager.${SECRET_CLUSTER_DOMAIN}"
+          - &host "alert-manager.${SECRET_CLUSTER_DOMAIN}"
+        tls:
+          hosts:
+            - *host
       alertmanagerSpec:
         storage:
         volumeClaimTemplate:
@@ -79,8 +89,7 @@ spec:
             accessModes: ["ReadWriteOnce"]
             resources:
               requests:
-                storage: 5Gi
-
+                storage: 1Gi
     nodeExporter:
       serviceMonitor:
         relabelings:
@@ -104,35 +113,15 @@ spec:
       enabled: true
     kubeControllerManager:
       enabled: true
-      endpoints:
-        - 10.0.0.50
-      service:
-        enabled: true
-        port: 10257
-        targetPort: 10257
-      serviceMonitor:
-        enabled: true
-        https: true
-        insecureSkipVerify: true
+      endpoints: [ "10.0.8.10" ]
     kubeScheduler:
       enabled: true
-      endpoints:
-        - 10.0.0.50
-      service:
-        enabled: true
-        port: 10259
-        targetPort: 10259
-      serviceMonitor:
-        enabled: true
-        https: true
-        insecureSkipVerify: true
+      endpoints: [ "10.0.8.10" ]
     kubeProxy:
-      enabled: true
-      endpoints:
-        - 10.0.0.50
+      enabled: false
+      endpoints: [ "10.0.8.10" ]
     kubeEtcd:
       enabled: false
-
     kubelet:
       enabled: true
       serviceMonitor:
@@ -141,7 +130,6 @@ spec:
           sourceLabels:
           - node
           targetLabel: instance
-
     prometheus:
       ingress:
         enabled: true
@@ -152,19 +140,24 @@ spec:
         tls:
         - hosts:
           - "prometheus.${SECRET_CLUSTER_DOMAIN}"
+      thanosService:
+        enabled: true
+      thanosServiceMonitor:
+        enabled: true
       prometheusSpec:
+        replicas: 3
+        replicaExternalLabelName: __replica__
         retention: 30d
-        ruleSelector: {}
-        ruleNamespaceSelector: {}
+        retentionSize: 15Gi
         ruleSelectorNilUsesHelmValues: false
-        serviceMonitorSelector: {}
-        serviceMonitorNamespaceSelector: {}
         serviceMonitorSelectorNilUsesHelmValues: false
-        podMonitorSelector: {}
-        podMonitorNamespaceSelector: {}
         podMonitorSelectorNilUsesHelmValues: false
         enableAdminAPI: true
-        walCompression: true
+        thanos:
+          image: quay.io/thanos/thanos:v0.30.2
+          objectStorageConfig:
+            name: thanos-objstore-secret
+            key: objstore.yml
         resources: 
           requests:
             memory: 400Mi
@@ -174,7 +167,7 @@ spec:
              storageClassName: longhorn
              resources:
                requests:
-                 storage: 50Gi
+                 storage: 20Gi
         additionalScrapeConfigs:
         - job_name: pihole_exporter
           honor_timestamps: true
