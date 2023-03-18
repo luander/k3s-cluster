@@ -79,7 +79,7 @@ spec:
         hosts:
           - &host "alert-manager.${SECRET_CLUSTER_DOMAIN}"
         tls:
-          hosts:
+          - hosts:
             - *host
       alertmanagerSpec:
         storage:
@@ -136,10 +136,10 @@ spec:
         pathType: Prefix
         ingressClassName: "nginx"
         hosts:
-        - "prometheus.${SECRET_CLUSTER_DOMAIN}"
+          - &host "prometheus.${SECRET_CLUSTER_DOMAIN}"
         tls:
-        - hosts:
-          - "prometheus.${SECRET_CLUSTER_DOMAIN}"
+          - hosts:
+            - *host
       thanosService:
         enabled: true
       thanosServiceMonitor:
