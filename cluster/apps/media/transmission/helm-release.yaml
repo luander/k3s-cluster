@@ -45,8 +45,8 @@ spec:
       fsGroup: 568
       fsGroupChangePolicy: "OnRootMismatch"
       supplementalGroups:
+      - 568
       - 100
-      - 1000
 
     ingress:
       main:
