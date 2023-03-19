@@ -32,7 +32,7 @@ spec:
     env:
       tz: "europe/amsterdam"
       UP_UNIFI_DEFAULT_ROLE: "homelab-controller"
-      UP_UNIFI_DEFAULT_URL: "https://10.0.0.1"
+      UP_UNIFI_DEFAULT_URL: "https://10.0.8.1"
       UP_UNIFI_DEFAULT_VERIFY_SSL: false
       UP_UNIFI_DEFAULT_USER: "unifipoller"
       UP_UNIFI_DEFAULT_SAVE_SITES: true
