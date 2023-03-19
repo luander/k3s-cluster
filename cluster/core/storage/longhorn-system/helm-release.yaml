@@ -25,3 +25,6 @@ spec:
 
     defaultSettings:
       backupTarget: nfs://10.0.8.12:/mnt/backup
+
+    persistence:
+      defaultClassReplicaCount: 2
