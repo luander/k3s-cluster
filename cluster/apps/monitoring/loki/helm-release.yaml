@@ -61,7 +61,6 @@ spec:
           storage:
             azure:
               container_name: loki
-              use_namaged_identity: false
           ring:
             kvstore:
               store: memberlist
