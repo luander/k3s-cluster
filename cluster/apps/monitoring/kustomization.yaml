@@ -5,4 +5,5 @@ resources:
 - kube-prometheus-stack
 # - unifi-poller
 - blackbox-exporter
-- loki-stack
+- loki
+- promtail
