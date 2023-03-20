@@ -54,6 +54,11 @@ spec:
           url: http://prometheus-operated:9090
           access: proxy
           isDefault: true
+        - name: Loki
+          type: loki
+          url: http://loki-gateway.monitoring.svc.cluster.local
+          jsonData:
+            maxLines: 250
     dashboards:
       default:
         prometheus-stats:
