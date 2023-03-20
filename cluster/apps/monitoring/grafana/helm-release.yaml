@@ -92,6 +92,11 @@ spec:
           gnetId: 11312
           revision: 8
           datasource: Prometheus
+        # Ref: https://grafana.com/grafana/dashboards/1860-node-exporter-full/
+        node-exporter-full:
+          gnetId: 1860
+          revision: 30
+          datasource: Prometheus
         radarr:
           url: https://raw.githubusercontent.com/k8s-at-home/grafana-dashboards/main/radarr.json
           datasource: Prometheus
