@@ -48,10 +48,13 @@ spec:
           repeat_interval: 12h
           receiver: 'slack'
           routes:
-          - receiver: 'slack'
-            matchers:
-            - severity = critical
-            continue: true
+            - receiver: "null" # quote
+              matchers:
+                - alertname =~ "InfoInhibitor"
+            - receiver: 'slack'
+              matchers:
+              - severity = critical
+              continue: true
         receivers:
         - name: 'null'
         - name: 'slack'
@@ -116,9 +119,25 @@ spec:
     kubeControllerManager:
       enabled: true
       endpoints: [ "10.0.8.10" ]
+      service:
+        enabled: true
+        port: 10257
+        targetPort: 10257
+      serviceMonitor:
+        enabled: true
+        https: true
+        insecureSkipVerify: true
     kubeScheduler:
       enabled: true
       endpoints: [ "10.0.8.10" ]
+      service:
+        enabled: true
+        port: 10259
+        targetPort: 10259
+      serviceMonitor:
+        enabled: true
+        https: true
+        insecureSkipVerify: true
     kubeProxy:
       enabled: false
       endpoints: [ "10.0.8.10" ]
