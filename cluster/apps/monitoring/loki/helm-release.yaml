@@ -27,6 +27,8 @@ spec:
     keepHistory: false
   values:
     loki:
+      storage:
+        type: azure
       structuredConfig:
         auth_enabled: false
         server:
