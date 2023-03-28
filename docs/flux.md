@@ -21,6 +21,12 @@ azkv-credentials: used by external secrets operator
 ```
 ```
 sops-secret: use by sops
+```bash
+kubectl create secret generic sops-secret -n flux-system \
+    --from-literal AZURE_TENANT_ID=tenant_id \
+    --from-literal AZURE_CLIENT_ID=client_id \
+    --from-literal AZURE_CLIENT_SECRET=secret
+```
 ```
 Both secret should have the following data:
 ```
