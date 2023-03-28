@@ -64,6 +64,13 @@ flux bootstrap github \
 
 **Note**: When using k3s I found that the network-policy flag has to be set to false, or Flux will not work
 
+## Node label
+For each worker node, make sure you label them as worker:
+```
+kubectl label node nodeX node-role.kubernetes.io/worker="true"
+```
+This is necessary so that node-feature-discovery correctly configures labels on nodes, think Plex support with intel GPUs.
+
 ## Useful commands
 
 Force flux to sync your repository:
