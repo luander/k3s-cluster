@@ -38,3 +38,7 @@ az keyvault key show --name sops-key --vault-name $keyvault_name --query key.kid
 export key_url=`az keyvault key show --name sops-key --vault-name $keyvault_name --query key.kid`
 sops --encrypt --azure-kv $key_url /tmp/test.yaml > test.enc.yaml
 ```
+### Apply an encrypted secret
+```
+sops --decrypt cluster/cluster-secrets.yaml | kubectl apply -f -
+```
