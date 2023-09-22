@@ -8,3 +8,4 @@ resources:
 - monitoring
 - networking
 - system-upgrade
+- trivy-system
