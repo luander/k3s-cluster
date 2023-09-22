@@ -10,7 +10,6 @@ spec:
     spec:
       template:
         spec:
-          startingDeadlineSeconds: 10
           automountServiceAccountToken: false
           affinity:
             nodeAffinity:
