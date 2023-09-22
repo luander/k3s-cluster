@@ -10,3 +10,4 @@ resources:
 - media.yaml
 - nfs.yaml
 - home.yaml
+- trivy-system.yaml
