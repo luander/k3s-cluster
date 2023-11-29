@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://helm.datadoghq.com
       chart: datadog
-      version: 3.33.10
+      version: 3.49.5
       sourceRef:
         kind: HelmRepository
         name: datadog
