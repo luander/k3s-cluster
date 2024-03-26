@@ -33,7 +33,7 @@ spec:
         reloader.stakater.com/auto: "true"
     image:
       repository: ghcr.io/onedr0p/home-assistant
-      tag: 2023.9.3@sha256:d6e4c153f71b544e0e216706beda9511e106d535f96a0fce75500efa7cbee01d
+      tag: 2024.3.3@sha256:a4c2b7a75e8d5168a9e9f78d9d9f7f36435e2da07899e7faf5f6e3cdc4eebe56
     env:
       TZ: Europe/Amsterdam
     envFrom:
