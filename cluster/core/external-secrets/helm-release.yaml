@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: external-secrets
@@ -11,7 +11,7 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.external-secrets.io
       chart: external-secrets
-      version: 0.9.9
+      version: 0.9.13
       sourceRef:
         kind: HelmRepository
         name: external-secrets-charts
