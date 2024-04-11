@@ -1,0 +1,40 @@
+all:
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    ansible_user: luander
+    k3s_release_version: v1.29.3+k3s1
+
+    k3s_state: installed
+    k3s_become: true
+    k3s_server:
+      disable:
+        - traefik
+
+    # Manifests to install in K3s
+    k3s_server_manifests_templates:
+      - secrets.yaml.j2
+
+k3s_cluster:
+  hosts:
+    control:
+      ansible_host: 10.0.8.10
+      k3s_control_node: true
+    node1:
+      ansible_host: 10.0.8.11
+    node2:
+      ansible_host: 10.0.8.12
+      # I honestly have no clue why the gather_facts step fails for this node only
+      # So I decided to manually set the vars until I reinstall the OS on that node
+      ansible_distribution: 'Ubuntu'
+      ansible_distribution_file_parsed: true
+      ansible_distribution_file_path: "/etc/os-release"
+      ansible_distribution_file_variety: "Debian"
+      ansible_distribution_major_version: "22"
+      ansible_distribution_release: "jammy"
+      ansible_distribution_version: "22.04"
+    node4:
+      ansible_host: 10.0.8.14
+    node5:
+      ansible_host: 10.0.8.15
+    node6:
+      ansible_host: 10.0.8.16

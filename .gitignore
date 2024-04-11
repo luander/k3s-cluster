@@ -15,3 +15,5 @@ bin
 .private/
 .logs/
 .task/
+.facts
+.venv/
