@@ -16,19 +16,22 @@ command -v flux >/dev/null && . <(flux completion zsh) && compdef _flux flux
 
 ### Dependencies
 Two secrets are needed to be configured to the cluster before bootstrapping Flux:
+
 ```
 azkv-credentials: used by external secrets operator
 ```
-```
+
 sops-secret: use by sops
+
 ```bash
 kubectl create secret generic sops-secret -n flux-system \
     --from-literal AZURE_TENANT_ID=tenant_id \
     --from-literal AZURE_CLIENT_ID=client_id \
     --from-literal AZURE_CLIENT_SECRET=secret
 ```
-```
-Both secret should have the following data:
+
+Both secrets should have the following data:
+
 ```
 AZURE_TENANT_ID
 AZURE_CLIENT_ID
