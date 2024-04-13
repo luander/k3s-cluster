@@ -9,6 +9,9 @@ all:
     k3s_server:
       disable:
         - traefik
+      # Stop k3s control plane having workloads scheduled on them
+      node-taint:
+        - "node-role.kubernetes.io/controlplane=true:NoSchedule"
 
     # Manifests to install in K3s
     k3s_server_manifests_templates:
@@ -38,3 +41,4 @@ k3s_cluster:
       ansible_host: 10.0.8.15
     node6:
       ansible_host: 10.0.8.16
+      data_disk_device: /dev/sda

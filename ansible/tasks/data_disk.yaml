@@ -1,0 +1,63 @@
+---
+- name: Get the device info
+  ansible.builtin.stat:
+    path: "{{ data_disk_device }}"
+  register: device_path
+
+- name: Device update notification
+  ansible.builtin.debug:
+    msg: "[{{ device_path.stat.lnk_source }}] will be used as device instead of [{{ data_disk_device }}]"
+  when:
+    - device_path.stat.islnk
+  ignore_errors: "{{ ansible_check_mode }}"
+
+# If device is a soft link, then assume it's a "logical path" and use its target as the device.
+- name: Update device
+  ansible.builtin.set_fact:
+    data_disk_device: "{{ device_path.stat.lnk_source }}"
+  when:
+    - device_path.stat.islnk
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: Create Partition
+  community.general.parted:
+    device: "{{ data_disk_device }}"
+    fs_type: "{{ data_disk_fstype }}"
+    label: "{{ data_disk_label }}"
+    number: 1
+    state: present
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: Create Filesystem
+  tags: data_disk
+  community.general.filesystem:
+    dev: "{{ data_disk_device }}1"
+    fstype: "{{ data_disk_fstype }}"
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: Get Data Disk's UUID
+  tags: data_disk
+  ansible.builtin.command: lsblk {{ data_disk_device }}1 -no UUID
+  changed_when: false
+  register: device_uuid
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: Create Mount Path
+  tags: data_disk
+  ansible.builtin.file:
+    group: "{{ data_disk_mount_path_group }}"
+    mode: "0755"
+    owner: "{{ data_disk_mount_path_owner }}"
+    path: "{{ data_disk_mount_path }}"
+    state: directory
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: Mount Data Disk
+  tags: data_disk
+  ansible.posix.mount:
+    fstype: "{{ data_disk_fstype }}"
+    opts: defaults,nofail
+    path: "{{ data_disk_mount_path }}"
+    src: UUID={{ device_uuid.stdout_lines[0] }}
+    state: mounted
+  when: not ansible_check_mode

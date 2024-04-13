@@ -8,6 +8,10 @@
       ansible.builtin.pause:
         seconds: 2
   tasks:
+    - name: Prepare nodes
+      ansible.builtin.include_tasks:
+        file: tasks/prepare.yaml
+
     - name: Install Kubernetes
       ansible.builtin.include_role:
         name: xanmanning.k3s
