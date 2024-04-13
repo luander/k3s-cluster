@@ -20,7 +20,7 @@ spec:
     image:
       repository: ghcr.io/onedr0p/sonarr
       pullPolicy: IfNotPresent
-      tag: 3.0.10.1567
+      tag: 4.0.4.1491
 
     strategy:
       type: Recreate
