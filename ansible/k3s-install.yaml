@@ -25,6 +25,10 @@
           {% endfor %}
           {{ servers }}
 
+    - name: Pause for 30 seconds to wait for cluster to catch up
+      ansible.builtin.pause:
+        seconds: 30
+
     - name: add label to existing namespace
       kubernetes.core.k8s:
         kubeconfig: /etc/rancher/k3s/k3s.yaml
