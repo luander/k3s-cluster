@@ -35,6 +35,7 @@
           metadata:
             labels:
               node-role.kubernetes.io/worker: 'true'
+              k3s-upgrade: 'true'
       when:
         - k3s_primary_control_node
       loop: "{{ worker_nodes }}"
