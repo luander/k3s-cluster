@@ -1,0 +1,17 @@
+---
+
+- name: Set hostname {{ inventory_hostname }}
+  hostname:
+    name: "{{ inventory_hostname }}"
+
+- name: Configure data disk
+  ansible.builtin.include_tasks:
+    file: tasks/data_disk.yaml
+  vars:
+    data_disk_fstype: xfs
+    data_disk_label: gpt
+    data_disk_mount_path: /data
+    data_disk_mount_path_owner: root
+    data_disk_mount_path_group: root
+  when: data_disk_device | default(false)
+
