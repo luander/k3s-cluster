@@ -6,6 +6,7 @@ metadata:
   namespace: networking
 spec:
   schedule: "*/5 * * * *"
+  startingDeadlineSeconds: 100
   jobTemplate:
     spec:
       template:
