@@ -9,7 +9,7 @@ metadata:
 spec:
   concurrency: 2 # Batch size (roughly maps to maximum number of unschedulable nodes)
   # renovate: datasource=github-releases depName=k3s-io/k3s
-  version: v1.29.3+k3s1
+  version: v1.29.6+k3s2
   nodeSelector:
     matchExpressions:
       - {key: k3s-upgrade, operator: Exists}

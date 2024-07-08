@@ -8,4 +8,4 @@ resources:
 - monitoring
 - networking
 - system-upgrade
-- trivy-system
+# - trivy-system # Disabled for now
