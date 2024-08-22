@@ -97,12 +97,6 @@ spec:
           gnetId: 1860
           revision: 30
           datasource: Prometheus
-        radarr:
-          url: https://raw.githubusercontent.com/k8s-at-home/grafana-dashboards/main/radarr.json
-          datasource: Prometheus
-        sonarr:
-          url: https://raw.githubusercontent.com/k8s-at-home/grafana-dashboards/main/sonarr.json
-          datasource: Prometheus
         pihole:
           gnetId: 10176
           revision: 2
