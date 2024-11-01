@@ -31,7 +31,7 @@ spec:
       type: statefulset
     image:
       repository: ghcr.io/onedr0p/prowlarr-develop
-      tag: 1.25.1.4770@sha256:8b59eb7f9e5321b702bdacae3468b63d71720091ba3b0e9dfaca686a7705d2b8
+      tag: 1.25.4.4818@sha256:5a936e5c73ebedfc45f1fa2541e84862a6c0df75b8f5148a082119fb65d55e2b
     env:
       TZ: Europe/Amsterdam
       PROWLARR__INSTANCE_NAME: Prowlarr
