@@ -15,3 +15,14 @@
     data_disk_mount_path_group: root
   when: data_disk_device | default(false)
 
+- name: Install prerequisite apps
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  become: true
+  loop:
+    - python3
+    - python3-pip
+    - python3-kubernetes
+    - nfs-common
+    - cifs-utils
