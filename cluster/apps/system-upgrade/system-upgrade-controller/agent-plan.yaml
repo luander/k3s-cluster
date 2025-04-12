@@ -9,12 +9,11 @@ metadata:
 spec:
   concurrency: 2 # Batch size (roughly maps to maximum number of unschedulable nodes)
   # renovate: datasource=github-releases depName=k3s-io/k3s
-  version: v1.29.6+k3s2
+  version: v1.32.3+k3s1
   nodeSelector:
     matchExpressions:
       - {key: k3s-upgrade, operator: Exists}
       - {key: k3s-upgrade, operator: NotIn, values: ["disabled", "false"]}
-      - {key: k3os.io/mode, operator: DoesNotExist}
       - {key: node-role.kubernetes.io/control-plane, operator: DoesNotExist}
   serviceAccountName: system-upgrade
   prepare:
