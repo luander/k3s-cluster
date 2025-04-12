@@ -19,7 +19,7 @@ spec:
   values:
     image:
       repository: ghcr.io/onedr0p/radarr
-      tag: 5.11.0.9244
+      tag: 5.20.1.9773
 
     affinity:
       nodeAffinity:
