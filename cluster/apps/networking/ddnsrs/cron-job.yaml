@@ -23,7 +23,7 @@ spec:
                       - amd64
           containers:
           - name: ddnspy
-            image: ghcr.io/luander/ddnsrs:main@sha256:98013df5cc744e317a3900fa1b014388dfff4457eb26ab481b6d459d4d0c9296
+            image: ghcr.io/luander/ddnsrs:main@sha256:fa4291e45f7c65192ad1b6210a4468e452a38e1e7073a658e3437fdec69e1055
             imagePullPolicy: IfNotPresent
             args: [ "home.luander.net" ]
             envFrom:
