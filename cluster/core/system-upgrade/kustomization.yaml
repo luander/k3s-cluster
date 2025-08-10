@@ -5,10 +5,10 @@ kind: Kustomization
 resources:
   # renovate: datasource=docker image=rancher/system-upgrade-controller
   - https://github.com/rancher/system-upgrade-controller/releases/download/v0.15.2/crd.yaml
-  - https://github.com/rancher/system-upgrade-controller?ref=v0.15.2
+  - https://github.com/rancher/system-upgrade-controller?ref=v0.15.3
 images:
   - name: rancher/system-upgrade-controller
-    newTag: v0.15.2
+    newTag: v0.15.3
 patchesStrategicMerge:
   - |
     $patch: delete
