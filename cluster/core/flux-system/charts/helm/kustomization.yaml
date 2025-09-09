@@ -10,6 +10,7 @@ resources:
 - coredns-charts.yaml
 - datadog.yaml
 - deliveryhero-charts.yaml
+- dependency-track-charts.yaml
 - drone-charts.yaml
 - elastic.yaml
 - emberstack-charts.yaml
