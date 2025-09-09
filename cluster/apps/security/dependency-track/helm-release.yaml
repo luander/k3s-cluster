@@ -222,15 +222,13 @@ spec:
       nodeSelector: {}
 
     ingress:
-      enabled: false
-      annotations: {}
-      hostname: "example.com"
-      ingressClassName: ""
-      tls: []
-      #  - secretName: dt-tls
-      #    hosts:
-      #      - example.com
-
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: "nginx"
+      hostname: &host "dependency-track.${SECRET_CLUSTER_DOMAIN}"
+      tls:
+      - hosts:
+        - *host
     # -- Create extra manifests via values.
     extraObjects:
       []
