@@ -11,4 +11,5 @@ resources:
 - media.yaml
 - nfs.yaml
 - home.yaml
+- security.yaml
 - trivy-system.yaml
