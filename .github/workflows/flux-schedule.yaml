@@ -11,7 +11,7 @@ jobs:
   flux-upgrade:
     runs-on: ubuntu-24.04
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
       with:
         fetch-depth: 1
 
@@ -30,7 +30,7 @@ jobs:
         echo "::set-output name=flux_version::$VERSION"
 
     - name: Create pull request for Flux upgrade
-      uses: peter-evans/create-pull-request@v7
+      uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         branch: "flux/upgrade-${{ steps.upgrade.outputs.flux_version }}"
