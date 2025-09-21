@@ -23,9 +23,14 @@ spec:
                       - amd64
           containers:
           - name: ddnspy
-            image: ghcr.io/luander/ddnsrs:main@sha256:1e22576083f884a19c8f45eb462607e798fd59dd2b2406e418b4c3a81aa3a72f
+            image: ghcr.io/luander/ddnsrs:main@sha256:f6c900fd560edb9b14ff9b78fc2905f08f8b5790d9cbb9e9d7ba3bbb0033a2da
             imagePullPolicy: IfNotPresent
             args: [ "home.luander.net" ]
+            env:
+            - name: TMPDIR
+              value: "/tmp"
+            - name: RUST_LOG
+              value: "debug"
             envFrom:
             - secretRef:
                 name: cloudflare-api
