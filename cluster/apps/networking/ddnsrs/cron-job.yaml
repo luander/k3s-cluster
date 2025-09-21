@@ -12,6 +12,15 @@ spec:
       template:
         spec:
           automountServiceAccountToken: false
+          securityContext:
+            runAsUser: 65532 # corresponds to tag 'nonroot' user
+            runAsGroup: 65532
+            fsGroup: 65532 # ensures /tmp is mounted with permissions to 'nonroot' user
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - all
           affinity:
             nodeAffinity:
               requiredDuringSchedulingIgnoredDuringExecution:
@@ -34,15 +43,6 @@ spec:
             envFrom:
             - secretRef:
                 name: cloudflare-api
-            securityContext:
-              runAsUser: 65532 # corresponds to tag 'nonroot' user
-              runAsGroup: 65532
-              fsGroup: 65532 # ensures /tmp is mounted with permissions to 'nonroot' user
-              readOnlyRootFilesystem: true
-              allowPrivilegeEscalation: false
-              capabilities:
-                drop:
-                - all
             resources:
               limits:
                 cpu: 500m
