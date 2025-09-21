@@ -54,5 +54,12 @@ spec:
               mountPath: /tmp
           volumes:
           - name: tmp-volume
-            emptyDir: {}
+            ephemeral:
+              volumeClaimTemplate:
+                spec:
+                  accessModes: [ "ReadWriteOnce" ]
+                  storageClassName: "longhorn"
+                  resources:
+                    requests:
+                      storage: 1Mi
           restartPolicy: OnFailure
