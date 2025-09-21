@@ -44,4 +44,10 @@ spec:
               requests:
                 cpu: 500m
                 memory: 512Mi
+            volumeMounts:
+            - name: tmp-volume
+              mountPath: /tmp
+          volumes:
+          - name: tmp-volume
+            emptyDir: {}
           restartPolicy: OnFailure
