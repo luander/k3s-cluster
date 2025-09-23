@@ -16,11 +16,6 @@ spec:
             runAsUser: 65532 # corresponds to tag 'nonroot' user
             runAsGroup: 65532
             fsGroup: 65532 # ensures /tmp is mounted with permissions to 'nonroot' user
-            readOnlyRootFilesystem: true
-            allowPrivilegeEscalation: false
-            capabilities:
-              drop:
-              - all
           affinity:
             nodeAffinity:
               requiredDuringSchedulingIgnoredDuringExecution:
@@ -35,6 +30,14 @@ spec:
             image: ghcr.io/luander/ddnsrs:main@sha256:f6c900fd560edb9b14ff9b78fc2905f08f8b5790d9cbb9e9d7ba3bbb0033a2da
             imagePullPolicy: IfNotPresent
             args: [ "home.luander.net" ]
+            securityContext:
+              runAsUser: 65532 # corresponds to tag 'nonroot' user
+              runAsGroup: 65532
+              readOnlyRootFilesystem: true
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                - all
             env:
             - name: TMPDIR
               value: "/tmp"
