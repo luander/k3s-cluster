@@ -18,8 +18,8 @@ spec:
       interval: 5m
   values:
     image:
-      repository: ghcr.io/onedr0p/radarr
-      tag: 5.20.1.9773
+      repository: ghcr.io/home-operations/radarr
+      tag: 6.0.0.10217
 
     affinity:
       nodeAffinity:
@@ -30,7 +30,7 @@ spec:
                   operator: In
                   values:
                     - amd64
-    env: 
+    env:
       TZ: "Europe/Amsterdam"
 
     podSecurityContext:

@@ -18,14 +18,14 @@ spec:
       interval: 5m
   values:
     image:
-      repository: ghcr.io/onedr0p/sonarr
+      repository: ghcr.io/home-operations/sonarr
       pullPolicy: IfNotPresent
-      tag: 4.0.14.2938
+      tag: 4.0.15.2940
 
     strategy:
       type: Recreate
 
-    env: 
+    env:
       TZ: "Europe/Amsterdam"
       PUID: 1000
       PGID: 1000

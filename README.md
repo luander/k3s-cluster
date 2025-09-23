@@ -43,7 +43,7 @@ Some important directories/files on this project are:
 ## :computer:&nbsp; Cluster setup
 
 My cluster is [k3s](https://k3s.io/) and multi-architecture being composed by:
-- 3 [Raspberry PI 4 model b 4Gb](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/) 
+- 3 [Raspberry PI 4 model b 4Gb](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/)
 - 2 Intel NUC [Skull Canyon](https://www.intel.com/content/www/us/en/products/docs/boards-kits/nuc/nuc-kit-nuc6i7kyk-features-configurations-video.html).
 
 ---

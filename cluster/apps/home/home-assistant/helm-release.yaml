@@ -32,8 +32,8 @@ spec:
       annotations:
         reloader.stakater.com/auto: "true"
     image:
-      repository: ghcr.io/onedr0p/home-assistant
-      tag: 2024.12.5@sha256:638e519c874a06389ce6f03e435dd80a6697e8692eac88b459775839410f3439
+      repository: ghcr.io/home-operations/home-assistant
+      tag: 2025.9.4
     env:
       TZ: Europe/Amsterdam
     envFrom:
