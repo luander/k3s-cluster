@@ -187,7 +187,7 @@ spec:
         replicas: 3
         replicaExternalLabelName: __replica__
         retention: 25d
-        retentionSize: 10GB
+        retentionSize: 50GB
         ruleSelectorNilUsesHelmValues: false
         serviceMonitorSelectorNilUsesHelmValues: false
         podMonitorSelectorNilUsesHelmValues: false
@@ -201,5 +201,5 @@ spec:
              storageClassName: longhorn
              resources:
                requests:
-                 storage: 10Gi
+                 storage: 50Gi
 
