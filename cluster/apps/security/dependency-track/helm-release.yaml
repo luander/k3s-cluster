@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://dependencytrack.github.io/helm-charts
       chart: dependency-track
-      version: 0.36.0
+      version: 0.39.0
       sourceRef:
         kind: HelmRepository
         name: dependency-track-charts
