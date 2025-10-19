@@ -88,7 +88,5 @@ spec:
         enabled: true
         type: hostPath
         hostPath: /run/dbus
-        readOnly: true
         globalMounts:
           - path: /run/dbus
-            readOnly: true
