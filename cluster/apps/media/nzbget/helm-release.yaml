@@ -32,6 +32,8 @@ spec:
       tag: 25.4.20251009
     env:
       TZ: Europe/Amsterdam
+      PUID: 568
+      PGID: 568
     service:
       main:
         type: LoadBalancer
