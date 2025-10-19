@@ -83,3 +83,12 @@ spec:
         memory: 100Mi
       limits:
         memory: 750Mi
+    persistence:
+      dbus:
+        enabled: true
+        type: hostPath
+        hostPath: /run/dbus
+        readOnly: true
+        globalMounts:
+          - path: /run/dbus
+            readOnly: true
