@@ -7,6 +7,5 @@ resources:
 - media
 - monitoring
 - networking
-- security
 - system-upgrade
 # - trivy-system # Disabled for now
