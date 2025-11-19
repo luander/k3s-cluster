@@ -14,7 +14,7 @@ jobs:
         # make sure results dir is created
         run: mkdir -p results-dir
       - name: Run KICS Scan with SARIF result
-        uses: checkmarx/kics-action@86775e425429260b2044a0611f3031e0a0f71b0b # v2.1.15
+        uses: checkmarx/kics-action@6b6fc1162a0f06704e4cca6e5f8e008ab20fabe5 # v2.1.16
         with:
           path: 'cluster'
           # when provided with a directory on output_path
