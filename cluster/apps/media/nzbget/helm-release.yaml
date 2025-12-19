@@ -29,7 +29,7 @@ spec:
   values:
     image:
       repository: linuxserver/nzbget
-      tag: 25.4.20251107
+      tag: 25.4.20251219
     env:
       TZ: Europe/Amsterdam
     service:
