@@ -6,6 +6,8 @@ resources:
 - helm-release.yaml
 - httproute.yaml
 - httproute-codeserver.yaml
+- security-policy.yaml
+
 patchesStrategicMerge:
 - ./addons.yaml
 labels:

@@ -20,5 +20,5 @@ spec:
         type: PathPrefix
         value: /
     backendRefs:
-    - name: home-assistant-codeserver
-      port: 8080
+    - name: home-assistant-addon-codeserver
+      port: 12321
