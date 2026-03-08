@@ -10,6 +10,7 @@ spec:
     kubernetes:
       envoyService:
         type: LoadBalancer
+        externalTrafficPolicy: Cluster
   telemetry:
     metrics:
       prometheus: {}
