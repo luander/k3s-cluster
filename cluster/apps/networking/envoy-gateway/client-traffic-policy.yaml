@@ -13,7 +13,7 @@ spec:
     # Use CF-Connecting-IP exclusively for Cloudflare
     customHeader:
       name: "CF-Connecting-IP"
-      failClosed: true
+      failClosed: false
   timeout:
     http:
       requestReceivedTimeout: 300s
