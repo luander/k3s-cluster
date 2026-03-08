@@ -6,4 +6,5 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  url: https://gateway.envoyproxy.io/charts
+  type: oci
+  url: oci://docker.io/envoyproxy/gateway-helm
