@@ -10,9 +10,7 @@ spec:
     kind: Gateway
     name: envoy-gateway
   clientIPDetection:
-    xForwardedFor:
-      numTrustedHops: 1
-    # Explicitly trust Cloudflare CIDRs as used in Nginx config
+    # Use CF-Connecting-IP exclusively for Cloudflare
     customHeader:
       name: "CF-Connecting-IP"
       failClosed: true
