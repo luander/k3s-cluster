@@ -186,8 +186,8 @@ spec:
       prometheusSpec:
         replicas: 3
         replicaExternalLabelName: __replica__
-        retention: 25d
-        retentionSize: 50GB
+        retention: 15d
+        retentionSize: 40GB
         ruleSelectorNilUsesHelmValues: false
         serviceMonitorSelectorNilUsesHelmValues: false
         podMonitorSelectorNilUsesHelmValues: false
