@@ -14,5 +14,9 @@ spec:
     customHeader:
       name: "CF-Connecting-IP"
       failClosed: true
-  http:
-    requestTimeout: 300s
+  timeout:
+    http:
+      requestReceivedTimeout: 300s
+  tls:
+    minVersion: "1.2"
+    maxVersion: "1.3"

@@ -10,10 +10,6 @@ spec:
     kubernetes:
       envoyService:
         type: LoadBalancer
-  routing:
-    host:
-      maxBodySize: 104857600 # 100MB
-  security:
-    tls:
-      minVersion: VersionTLS12
-      maxVersion: VersionTLS13
+  telemetry:
+    metrics:
+      prometheus: {}
