@@ -17,6 +17,3 @@ spec:
     tls:
       minVersion: VersionTLS12
       maxVersion: VersionTLS13
-  # Global timeouts
-  http:
-    requestTimeout: 300s
