@@ -1,0 +1,17 @@
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: BackendTrafficPolicy
+metadata:
+  name: codeserver-upgrade
+  namespace: home
+spec:
+  targetRefs:
+  - group: gateway.networking.k8s.io
+    kind: HTTPRoute
+    name: home-assistant-codeserver
+  httpUpgrade:
+  - type: websocket
+  tcpKeepalive:
+    idleTime: 60s
+    interval: 30s
+    probes: 5
