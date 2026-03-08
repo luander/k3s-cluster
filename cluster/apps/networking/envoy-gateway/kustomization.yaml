@@ -5,4 +5,5 @@ resources:
   - client-traffic-policy.yaml
   - envoy-proxy.yaml
   - backend-traffic-policy.yaml
+  - redirect-httproute.yaml
   - service-monitor.yaml

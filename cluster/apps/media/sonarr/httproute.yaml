@@ -8,6 +8,7 @@ spec:
   parentRefs:
   - name: envoy-gateway
     namespace: networking
+    sectionName: https
   hostnames:
   - "sonarr.${SECRET_CLUSTER_DOMAIN}"
   rules:

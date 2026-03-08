@@ -8,6 +8,7 @@ spec:
   parentRefs:
   - name: envoy-gateway
     namespace: networking
+    sectionName: https
   hostnames:
   - "prowlarr.${SECRET_CLUSTER_DOMAIN}"
   rules:

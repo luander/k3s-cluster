@@ -1,0 +1,19 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: global-http-redirect
+  namespace: networking
+spec:
+  parentRefs:
+  - name: envoy-gateway
+    namespace: networking
+    sectionName: http
+  # No hostnames specified = matches all hostnames on this listener
+  rules:
+  - filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        port: 8443
+        statusCode: 301

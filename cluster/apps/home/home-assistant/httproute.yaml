@@ -10,19 +10,10 @@ spec:
   parentRefs:
   - name: envoy-gateway
     namespace: networking
+    sectionName: https
   hostnames:
   - "hass.${SECRET_CLUSTER_DOMAIN}"
   rules:
-  - matches:
-    - path:
-        type: PathPrefix
-        value: /
-    filters:
-    - type: RequestRedirect
-      requestRedirect:
-        scheme: https
-        port: 8443
-        statusCode: 301
   - matches:
     - path:
         type: PathPrefix
