@@ -1,0 +1,18 @@
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: ClientTrafficPolicy
+metadata:
+  name: cloudflare-real-ip
+  namespace: networking
+spec:
+  targetRefs:
+  - group: gateway.networking.k8s.io
+    kind: Gateway
+    name: envoy-gateway
+  clientIPDetection:
+    xForwardedFor:
+      numTrustedHops: 1
+    # Explicitly trust Cloudflare CIDRs as used in Nginx config
+    customHeader:
+      name: "CF-Connecting-IP"
+      failClosed: true

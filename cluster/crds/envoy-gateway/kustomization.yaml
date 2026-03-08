@@ -1,0 +1,7 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+# renovate: github-release=envoyproxy/gateway
+- https://github.com/envoyproxy/gateway/releases/download/v1.7.0/install.yaml
+# Note: The install.yaml includes CRDs and potentially other bootstrap resources
+# In a granular setup, we might only want the CRDs, but typically EG expects these to be present.

@@ -2,19 +2,19 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: webhook-receiver
-  namespace: flux-system
+  name: transmission
+  namespace: media
 spec:
   parentRefs:
   - name: envoy-gateway
     namespace: networking
   hostnames:
-  - "flux-receiver.${SECRET_CLUSTER_DOMAIN}"
+  - "transmission.${SECRET_CLUSTER_DOMAIN}"
   rules:
   - matches:
     - path:
         type: PathPrefix
         value: /
     backendRefs:
-    - name: webhook-receiver
-      port: 80
+    - name: transmission
+      port: 9091

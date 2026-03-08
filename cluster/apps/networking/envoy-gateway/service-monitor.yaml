@@ -1,0 +1,26 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: envoy-gateway
+  namespace: networking
+spec:
+  selector:
+    matchLabels:
+      gateway.envoyproxy.io/own-control-plane: "true"
+  endpoints:
+  - port: metrics
+    interval: 30s
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: envoy-stats
+  namespace: networking
+spec:
+  selector:
+    matchLabels:
+      gateway.networking.k8s.io/gateway-name: envoy-gateway
+  endpoints:
+  - port: metrics
+    interval: 30s

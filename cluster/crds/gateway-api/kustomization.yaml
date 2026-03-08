@@ -1,7 +1,4 @@
----
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - config-pvc.yaml
-  - helm-release.yaml
-  - httproute.yaml
+- https://github.com/kubernetes-sigs/gateway-api/config/crd?ref=v1.5.0
