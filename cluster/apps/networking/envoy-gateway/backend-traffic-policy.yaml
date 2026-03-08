@@ -11,3 +11,7 @@ spec:
     name: envoy-gateway
   requestBuffer:
     limit: 100Mi
+  tcpKeepalive:
+    idleTime: 60s
+    interval: 30s
+    probes: 5
