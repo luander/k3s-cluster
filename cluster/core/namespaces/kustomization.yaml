@@ -11,4 +11,3 @@ resources:
 - nfs.yaml
 - home.yaml
 - security.yaml
-- trivy-system.yaml
