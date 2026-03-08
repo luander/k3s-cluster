@@ -16,6 +16,11 @@ spec:
       - {key: k3s-upgrade, operator: NotIn, values: ["disabled", "false"]}
       - {key: node-role.kubernetes.io/control-plane, operator: Exists}
   serviceAccountName: system-upgrade
+  tolerations:
+    - key: "node-role.kubernetes.io/controlplane"
+      operator: "Equal"
+      value: "true"
+      effect: "NoSchedule"
   cordon: true
   upgrade:
     image: rancher/k3s-upgrade
