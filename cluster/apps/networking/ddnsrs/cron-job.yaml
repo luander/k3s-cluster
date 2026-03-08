@@ -5,10 +5,14 @@ metadata:
   name: ddnsrs
   namespace: networking
 spec:
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
   schedule: "*/5 * * * *"
   startingDeadlineSeconds: 100
   jobTemplate:
     spec:
+      activeDeadlineSeconds: 120
       template:
         spec:
           automountServiceAccountToken: false
