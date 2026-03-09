@@ -6,5 +6,6 @@ resources:
 - prowlarr
 - plex
 - radarr
+- sabnzbd
 - sonarr
 - transmission
