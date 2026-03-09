@@ -31,8 +31,6 @@ spec:
       type: statefulset
       annotations:
         reloader.stakater.com/auto: "true"
-    hostNetwork: true
-    dnsPolicy: ClusterFirstWithHostNet
     image:
       repository: ghcr.io/home-operations/home-assistant
       tag: 2026.1.1
