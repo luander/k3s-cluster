@@ -8,6 +8,16 @@ spec:
   provider:
     type: Kubernetes
     kubernetes:
+      envoyDeployment:
+        replicas: 3
+        pod:
+          affinity:
+            podAntiAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - labelSelector:
+                    matchLabels:
+                      gateway.envoyproxy.io/owning-gateway-name: envoy-gateway
+                  topologyKey: kubernetes.io/hostname
       envoyService:
         type: LoadBalancer
         externalTrafficPolicy: Cluster
