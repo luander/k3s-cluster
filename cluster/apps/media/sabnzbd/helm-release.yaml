@@ -36,6 +36,7 @@ spec:
       TZ: Europe/Amsterdam
       PUID: 568
       PGID: 568
+      SABNZBD__GENERAL__HOST_WHITELIST: "sabnzbd.${SECRET_CLUSTER_DOMAIN}"
     service:
       main:
         ports:
@@ -77,6 +78,6 @@ spec:
     resources:
       requests:
         cpu: 10m
-        memory: 250Mi
+        memory: 500Mi
       limits:
-        memory: 1000Mi
+        memory: 4Gi
