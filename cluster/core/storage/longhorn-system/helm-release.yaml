@@ -35,14 +35,28 @@ spec:
     # Required to allow hotfix version tags
     upgradeVersionCheck: false
 
+    defaultSettings:
+      backupTarget: nfs://10.0.8.12:/mnt/backup
+      
+      # STABILITY FIXES:
+      # Automatically delete pods when a node goes down to trigger rescheduling
+      nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
+      
+      # Ensure pods are deleted if the volume is detached unexpectedly (e.g. CSI crash)
+      autoDeletePodWhenVolumeDetachedUnexpectedly: true
+      
+      # Allow the node to drain even if it contains the last replica (rely on backups/other nodes)
+      # This prevents "stuck" nodes during maintenance/upgrades
+      nodeDrainPolicy: always-allow-eviction
+
+      # Enable automatic salvage to recover from unexpected shutdowns
+      autoSalvage: true
+
+    persistence:
+      defaultClassReplicaCount: 2
+
     ingress:
       enabled: true
       host: "lh.${SECRET_CLUSTER_DOMAIN}"
       annotations:
         kubernetes.io/ingress.class: nginx
-
-    defaultSettings:
-      backupTarget: nfs://10.0.8.12:/mnt/backup
-
-    persistence:
-      defaultClassReplicaCount: 2
