@@ -26,3 +26,24 @@
     - python3-kubernetes
     - nfs-common
     - cifs-utils
+
+- name: Disable and mask multipathd to prevent conflicts with Longhorn iSCSI
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    state: stopped
+    enabled: false
+    masked: true
+  loop:
+    - multipathd.service
+    - multipathd.socket
+  become: true
+  ignore_errors: true
+
+- name: Flush multipath maps to release block device locks
+  ansible.builtin.command:
+    cmd: multipath -F
+  become: true
+  ignore_errors: true
+  register: multipath_flush
+  changed_when: multipath_flush.rc == 0
+
