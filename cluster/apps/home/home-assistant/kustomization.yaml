@@ -8,6 +8,7 @@ resources:
 - httproute-codeserver.yaml
 - security-policy.yaml
 - btp-codeserver.yaml
+- btp-hass.yaml
 patchesStrategicMerge:
 - ./addons.yaml
 labels:
