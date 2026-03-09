@@ -78,9 +78,8 @@ spec:
         templates:
           - '/etc/alertmanager/config/*.tmpl'
       ingress:
-        enabled: true
+        enabled: false
         pathType: Prefix
-        ingressClassName: "nginx"
         hosts:
           - &host "alert-manager.${SECRET_CLUSTER_DOMAIN}"
         tls:
@@ -171,9 +170,8 @@ spec:
             action: keep
     prometheus:
       ingress:
-        enabled: true
+        enabled: false
         pathType: Prefix
-        ingressClassName: "nginx"
         hosts:
           - &host "prometheus.${SECRET_CLUSTER_DOMAIN}"
         tls:

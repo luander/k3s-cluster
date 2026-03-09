@@ -45,8 +45,7 @@ spec:
             port: 32400
     ingress:
       main:
-        enabled: true
-        ingressClassName: "nginx"
+        enabled: false
         annotations:
           hajimari.io/icon: mdi:plex
         hosts:

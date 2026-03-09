@@ -47,8 +47,7 @@ spec:
             port: 8123
     ingress:
       main:
-        enabled: true
-        ingressClassName: nginx
+        enabled: false
         annotations:
           hajimari.io/icon: mdi:home-assistant
         hosts:

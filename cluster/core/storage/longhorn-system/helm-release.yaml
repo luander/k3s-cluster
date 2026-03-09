@@ -56,7 +56,5 @@ spec:
       defaultClassReplicaCount: 2
 
     ingress:
-      enabled: true
+      enabled: false
       host: "lh.${SECRET_CLUSTER_DOMAIN}"
-      annotations:
-        kubernetes.io/ingress.class: nginx

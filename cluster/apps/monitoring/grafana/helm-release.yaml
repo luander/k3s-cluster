@@ -35,8 +35,7 @@ spec:
           options:
             path: /var/lib/grafana/dashboards/default
     ingress:
-      enabled: true
-      ingressClassName: nginx
+      enabled: false
       path: /
       pathType: Prefix
       hosts:
