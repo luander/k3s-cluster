@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://charts.longhorn.io
       chart: longhorn
-      version: 1.10.2
+      version: 1.11.0
       sourceRef:
         kind: HelmRepository
         name: longhorn-charts
@@ -24,7 +24,15 @@ spec:
       retries: 3
       strategy: rollback
   values:
-    # Disable version check to allow hotfix images in 1.11.x (prep)
+    # Use hotfix images for v1.11.0 as recommended in release notes
+    image:
+      longhorn:
+        manager:
+          tag: v1.11.0-hotfix-1
+        instanceManager:
+          tag: v1.11.0-hotfix-2
+    
+    # Required to allow hotfix version tags
     upgradeVersionCheck: false
 
     ingress:
