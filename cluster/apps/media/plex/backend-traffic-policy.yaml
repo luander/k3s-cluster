@@ -9,7 +9,9 @@ spec:
   - group: gateway.networking.k8s.io
     kind: HTTPRoute
     name: plex
-  responseTimeout: 0s
+  timeout:
+    http:
+      requestTimeout: 0s
   httpUpgrade:
   - type: websocket
   tcpKeepalive:

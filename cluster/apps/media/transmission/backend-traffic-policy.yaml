@@ -9,7 +9,9 @@ spec:
   - group: gateway.networking.k8s.io
     kind: HTTPRoute
     name: transmission
-  responseTimeout: 120s
+  timeout:
+    http:
+      requestTimeout: 120s
   tcpKeepalive:
     idleTime: 60s
     interval: 30s
