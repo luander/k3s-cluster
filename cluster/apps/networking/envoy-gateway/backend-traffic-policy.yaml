@@ -19,8 +19,7 @@ spec:
       http:
         path: /
         expectedStatuses:
-          - start: 200
-            end: 499
+          - 200
       interval: 10s
       unhealthyThreshold: 2
       healthyThreshold: 1
