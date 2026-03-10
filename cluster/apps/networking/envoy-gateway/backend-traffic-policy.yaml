@@ -9,9 +9,24 @@ spec:
   - group: gateway.networking.k8s.io
     kind: Gateway
     name: envoy-gateway
-  requestBuffer:
-    limit: 100Mi
   tcpKeepalive:
     idleTime: 60s
     interval: 30s
     probes: 5
+  healthCheck:
+    active:
+      type: HTTP
+      http:
+        path: /
+        expectedStatuses:
+          - start: 200
+            end: 499
+      interval: 10s
+      unhealthyThreshold: 2
+      healthyThreshold: 1
+  retry:
+    numRetries: 2
+    retryOn:
+      triggers:
+        - reset
+        - connect-failure

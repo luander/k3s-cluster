@@ -20,7 +20,7 @@ spec:
                   topologyKey: kubernetes.io/hostname
       envoyService:
         type: LoadBalancer
-        externalTrafficPolicy: Cluster
+        externalTrafficPolicy: Local
   telemetry:
     metrics:
       prometheus: {}
