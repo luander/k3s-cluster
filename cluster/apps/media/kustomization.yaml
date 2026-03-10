@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
 - _pvc
 - lidarr
+- nzbget
 - prowlarr
 - plex
 - radarr
