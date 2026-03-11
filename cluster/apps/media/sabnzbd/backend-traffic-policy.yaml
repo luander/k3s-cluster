@@ -9,8 +9,7 @@ spec:
   - group: gateway.networking.k8s.io
     kind: HTTPRoute
     name: sabnzbd
-  httpUpgrade:
-  - type: websocket
+  useClientProtocol: true
   timeout:
     http:
       requestTimeout: 300s
