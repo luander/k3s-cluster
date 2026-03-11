@@ -10,8 +10,11 @@ spec:
     kind: HTTPRoute
     name: sabnzbd
   useClientProtocol: true
+  httpUpgrade:
+  - type: websocket
   timeout:
     http:
       requestTimeout: 300s
+      maxStreamDuration: 0s
   requestBuffer:
     limit: 100Mi
