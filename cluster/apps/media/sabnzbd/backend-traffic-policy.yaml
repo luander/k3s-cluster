@@ -9,12 +9,15 @@ spec:
   - group: gateway.networking.k8s.io
     kind: HTTPRoute
     name: sabnzbd
-  useClientProtocol: true
   httpUpgrade:
   - type: websocket
   timeout:
     http:
       requestTimeout: 300s
       maxStreamDuration: 0s
+  tcpKeepalive:
+    idleTime: 60s
+    interval: 30s
+    probes: 5
   requestBuffer:
     limit: 100Mi
