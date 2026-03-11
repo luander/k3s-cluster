@@ -31,7 +31,7 @@ spec:
       type: statefulset
     image:
       repository: linuxserver/sabnzbd
-      tag: 5.0.0-unstable
+      tag: 4.5.5
     env:
       TZ: Europe/Amsterdam
       PUID: 568
