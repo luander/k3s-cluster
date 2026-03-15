@@ -22,7 +22,7 @@ spec:
     http:
       requestReceivedTimeout: 300s
       idleTimeout: 4h
-      streamIdleTimeout: 10m
+      streamIdleTimeout: 0s
   tls:
     minVersion: "1.2"
     maxVersion: "1.3"

@@ -11,9 +11,8 @@ spec:
     name: home-assistant
   httpUpgrade:
   - type: websocket
-  timeout:
-    http:
-      requestTimeout: 60s
+  retry:
+    numRetries: 0
   tcpKeepalive:
     idleTime: 60s
     interval: 30s

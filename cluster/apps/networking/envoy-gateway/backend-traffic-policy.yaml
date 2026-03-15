@@ -13,19 +13,4 @@ spec:
     idleTime: 60s
     interval: 30s
     probes: 5
-  healthCheck:
-    active:
-      type: HTTP
-      http:
-        path: /
-        expectedStatuses:
-          - 200
-      interval: 10s
-      unhealthyThreshold: 2
-      healthyThreshold: 1
-  retry:
-    numRetries: 2
-    retryOn:
-      triggers:
-        - reset
-        - connect-failure
+

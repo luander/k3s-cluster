@@ -21,3 +21,5 @@ spec:
     probes: 5
   requestBuffer:
     limit: 100Mi
+  retry:
+    numRetries: 0

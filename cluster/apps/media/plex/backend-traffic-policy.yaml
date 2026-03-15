@@ -18,3 +18,5 @@ spec:
     idleTime: 60s
     interval: 30s
     probes: 5
+  retry:
+    numRetries: 0
