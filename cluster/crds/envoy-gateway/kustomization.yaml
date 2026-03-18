@@ -2,4 +2,4 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
 # renovate: github-release=envoyproxy/gateway
-- https://github.com/envoyproxy/gateway/releases/download/v1.7.0/envoy-gateway-crds.yaml
+- https://github.com/envoyproxy/gateway/releases/download/v1.7.1/envoy-gateway-crds.yaml
