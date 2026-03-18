@@ -1,0 +1,85 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/helmrelease_v2beta1.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: immich-postgres
+  namespace: media
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: app-template
+      version: 1.5.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controller:
+      type: statefulset
+      strategy: Recreate
+    image:
+      # renovate: datasource=docker
+      repository: ghcr.io/tensorchord/vchord-postgres
+      tag: pg17-v1.1.1
+    env:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_DB: immich
+      POSTGRES_USER:
+        valueFrom:
+          secretKeyRef:
+            name: immich-database
+            key: username
+      POSTGRES_PASSWORD:
+        valueFrom:
+          secretKeyRef:
+            name: immich-database
+            key: password
+    service:
+      main:
+        ports:
+          http:
+            port: 5432
+    probes:
+      liveness:
+        enabled: false
+      readiness:
+        enabled: false
+      startup:
+        enabled: false
+    podSecurityContext:
+      runAsUser: 999
+      runAsGroup: 999
+      fsGroup: 999
+      fsGroupChangePolicy: OnRootMismatch
+    volumeClaimTemplates:
+      - name: data
+        mountPath: /var/lib/postgresql/data
+        accessMode: ReadWriteOnce
+        size: 10Gi
+        storageClass: longhorn
+    persistence:
+      init-scripts:
+        enabled: true
+        type: configMap
+        name: immich-postgres-init
+        mountPath: /docker-entrypoint-initdb.d
+        defaultMode: 0755
+    resources:
+      requests:
+        cpu: 50m
+        memory: 256Mi
+      limits:
+        memory: 1Gi

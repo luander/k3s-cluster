@@ -1,0 +1,55 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: immich
+  namespace: media
+spec:
+  interval: 15m
+  chart:
+    spec:
+      # renovate: registryUrl=oci://ghcr.io/immich-app/immich-charts
+      chart: immich
+      version: 0.10.3
+      sourceRef:
+        kind: HelmRepository
+        name: immich-charts
+        namespace: flux-system
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  dependsOn:
+    - name: immich-postgres
+      namespace: media
+  values:
+    image:
+      # renovate: datasource=docker depName=ghcr.io/immich-app/immich-server
+      tag: v2.0.0
+    env:
+      TZ: Europe/Amsterdam
+      DB_HOSTNAME: immich-postgres
+      DB_DATABASE_NAME: immich
+      DB_USERNAME:
+        valueFrom:
+          secretKeyRef:
+            name: immich-database
+            key: username
+      DB_PASSWORD:
+        valueFrom:
+          secretKeyRef:
+            name: immich-database
+            key: password
+    immich:
+      persistence:
+        library:
+          existingClaim: media
+    valkey:
+      enabled: true

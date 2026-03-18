@@ -1,0 +1,11 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: immich-postgres-init
+  namespace: media
+data:
+  init.sql: |
+    CREATE EXTENSION IF NOT EXISTS cube CASCADE;
+    CREATE EXTENSION IF NOT EXISTS earthdistance CASCADE;
+    CREATE EXTENSION IF NOT EXISTS vchord CASCADE;
