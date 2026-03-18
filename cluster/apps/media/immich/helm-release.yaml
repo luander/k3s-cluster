@@ -30,23 +30,27 @@ spec:
     - name: immich-postgres
       namespace: media
   values:
-    image:
-      # renovate: datasource=docker depName=ghcr.io/immich-app/immich-server
-      tag: v2.0.0
-    env:
-      TZ: Europe/Amsterdam
-      DB_HOSTNAME: immich-postgres
-      DB_DATABASE_NAME: immich
-      DB_USERNAME:
-        valueFrom:
-          secretKeyRef:
-            name: immich-database
-            key: username
-      DB_PASSWORD:
-        valueFrom:
-          secretKeyRef:
-            name: immich-database
-            key: password
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              # renovate: datasource=docker depName=ghcr.io/immich-app/immich-server
+              tag: v2.0.0
+            env:
+              TZ: Europe/Amsterdam
+              DB_HOSTNAME: immich-postgres
+              DB_DATABASE_NAME: immich
+              DB_USERNAME:
+                valueFrom:
+                  secretKeyRef:
+                    name: immich-database
+                    key: username
+              DB_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: immich-database
+                    key: password
     immich:
       persistence:
         library:
