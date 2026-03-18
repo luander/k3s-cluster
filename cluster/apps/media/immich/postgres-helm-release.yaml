@@ -29,7 +29,7 @@ spec:
   values:
     controller:
       type: statefulset
-      strategy: Recreate
+      strategy: RollingUpdate
     image:
       # renovate: datasource=docker
       repository: ghcr.io/tensorchord/vchord-postgres
