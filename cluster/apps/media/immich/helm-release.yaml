@@ -54,6 +54,12 @@ spec:
     immich:
       persistence:
         library:
-          existingClaim: immich-photo-library-pvc
+          existingClaim: immich-library-pvc
+        external:
+          enabled: true
+          type: pvc
+          existingClaim: immich-external-photos-pvc
+          mountPath: /external-photos
+          readOnly: true
     valkey:
       enabled: true
