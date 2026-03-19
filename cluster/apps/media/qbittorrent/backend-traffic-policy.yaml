@@ -6,9 +6,15 @@ metadata:
   namespace: media
 spec:
   targetRefs:
-  - group: ""
-    kind: Service
+  - group: gateway.networking.k8s.io
+    kind: HTTPRoute
     name: qbittorrent
-  clientIPDetection:
-    xForwardedFor:
-      numTrustedHops: 1
+  httpUpgrade:
+  - type: websocket
+  timeout:
+    http:
+      requestTimeout: 120s
+  tcpKeepalive:
+    idleTime: 60s
+    interval: 30s
+    probes: 5
