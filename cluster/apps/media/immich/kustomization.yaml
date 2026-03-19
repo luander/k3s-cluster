@@ -5,5 +5,7 @@ resources:
 - postgres-configmap.yaml
 - postgres-helm-release.yaml
 - helm-release.yaml
+- ml-helm-release.yaml
+- redis-helm-release.yaml
 - httproute.yaml
 - nfs-volumes.yaml

@@ -8,12 +8,11 @@ spec:
   interval: 15m
   chart:
     spec:
-      # renovate: registryUrl=oci://ghcr.io/immich-app/immich-charts
-      chart: immich
-      version: 0.10.3
+      chart: app-template
+      version: 1.5.1
       sourceRef:
         kind: HelmRepository
-        name: immich-charts
+        name: bjw-s
         namespace: flux-system
   maxHistory: 3
   install:
@@ -30,46 +29,57 @@ spec:
     - name: immich-postgres
       namespace: media
   values:
-    controllers:
+    image:
+      repository: ghcr.io/immich-app/immich-server
+      tag: v2.5.6
+
+    env:
+      TZ: Europe/Amsterdam
+      DB_HOSTNAME: immich-postgres
+      DB_DATABASE_NAME: immich
+      DB_USERNAME:
+        valueFrom:
+          secretKeyRef:
+            name: immich-database
+            key: username
+      DB_PASSWORD:
+        valueFrom:
+          secretKeyRef:
+            name: immich-database
+            key: password
+      REDIS_HOSTNAME: immich-valkey
+      IMMICH_MACHINE_LEARNING_URL: http://immich-machine-learning:3003
+
+    controller:
+      type: deployment
+      replicas: 1
+
+    service:
       main:
-        containers:
-          main:
-            image:
-              # renovate: datasource=docker depName=ghcr.io/immich-app/immich-server
-              tag: v2.5.6
-            env:
-              TZ: Europe/Amsterdam
-              DB_HOSTNAME: immich-postgres
-              DB_DATABASE_NAME: immich
-              DB_USERNAME:
-                valueFrom:
-                  secretKeyRef:
-                    name: immich-database
-                    key: username
-              DB_PASSWORD:
-                valueFrom:
-                  secretKeyRef:
-                    name: immich-database
-                    key: password
-    immich:
-      persistence:
-        library:
-          existingClaim: immich-library-pvc
-    server:
-      persistence:
-        external:
-          enabled: true
-          type: pvc
-          existingClaim: immich-external-photos-pvc
-          mountPath: /external-photos
-          readOnly: true
-    microservices:
-      persistence:
-        external:
-          enabled: true
-          type: pvc
-          existingClaim: immich-external-photos-pvc
-          mountPath: /external-photos
-          readOnly: true
-    valkey:
-      enabled: true
+        ports:
+          http:
+            port: 2283
+
+    # We use additionalContainers to run machine-learning and valkey in the same release if desired,
+    # OR we define multiple HelmReleases.
+    # Given the existing structure, it's easier to keep them as separate deployments if they were separate before.
+    # But bjw-s app-template 1.5.1 is usually 1 controller per HelmRelease.
+    # To keep it simple and match exactly what was there, I will define the SERVER here.
+    # And I might need separate HRs for ML and Valkey if I want to be 100% clean, 
+    # but I can also use 'additionalContainers' in app-template.
+    
+    # Actually, the user suggested "raw app-template", 
+    # I will stick to the SERVER first and see if I can consolidate or if I need more HRs.
+
+    persistence:
+      library:
+        enabled: true
+        type: pvc
+        existingClaim: immich-library-pvc
+        mountPath: /usr/src/app/upload
+      external:
+        enabled: true
+        type: pvc
+        existingClaim: immich-external-photos-pvc
+        mountPath: /external-photos
+        readOnly: true
