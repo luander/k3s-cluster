@@ -35,6 +35,7 @@ spec:
 
     env:
       TZ: Europe/Amsterdam
+      IMMICH_PORT: "2283"
       DB_HOSTNAME: immich-postgres
       DB_DATABASE_NAME: immich
       DB_USERNAME:
