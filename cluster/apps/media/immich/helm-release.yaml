@@ -55,12 +55,21 @@ spec:
       persistence:
         library:
           existingClaim: immich-library-pvc
+    server:
+      persistence:
         external:
           enabled: true
           type: pvc
           existingClaim: immich-external-photos-pvc
-          globalMounts:
-            - path: /external-photos
+          mountPath: /external-photos
+          readOnly: true
+    microservices:
+      persistence:
+        external:
+          enabled: true
+          type: pvc
+          existingClaim: immich-external-photos-pvc
+          mountPath: /external-photos
           readOnly: true
     valkey:
       enabled: true
