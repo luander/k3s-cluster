@@ -33,7 +33,7 @@ spec:
     image:
       # renovate: datasource=docker
       repository: ghcr.io/immich-app/postgres
-      tag: 15-vectorchord0.4.3-pgvector0.8.1-pgvectors0.2.0
+      tag: 16-vectorchord0.4.3-pgvector0.8.1-pgvectors0.2.0
     env:
       PGDATA: /var/lib/postgresql/data/pgdata
       POSTGRES_DB: immich
