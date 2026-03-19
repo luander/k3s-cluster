@@ -6,6 +6,7 @@ resources:
 - lidarr
 - nzbget
 - prowlarr
+- qbittorrent
 - plex
 - radarr
 - sabnzbd
