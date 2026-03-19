@@ -59,7 +59,8 @@ spec:
           enabled: true
           type: pvc
           existingClaim: immich-external-photos-pvc
-          mountPath: /external-photos
+          globalMounts:
+            - path: /external-photos
           readOnly: true
     valkey:
       enabled: true
