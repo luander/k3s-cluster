@@ -54,6 +54,6 @@ spec:
     immich:
       persistence:
         library:
-          existingClaim: media
+          existingClaim: immich-photo-library-pvc
     valkey:
       enabled: true
