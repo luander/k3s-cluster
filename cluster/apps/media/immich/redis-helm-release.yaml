@@ -27,8 +27,8 @@ spec:
     keepHistory: false
   values:
     image:
-      repository: ghcr.io/immich-app/valkey
-      tag: v2.5.6
+      repository: docker.io/valkey/valkey
+      tag: 9.0-alpine@sha256:1be494495248d53e3558b198a1c704e6b559d5e99fe4c926e14a8ad24d76c6fa
 
     controller:
       type: deployment
