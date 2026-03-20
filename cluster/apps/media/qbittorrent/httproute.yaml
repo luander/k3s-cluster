@@ -6,16 +6,16 @@ metadata:
   namespace: media
 spec:
   parentRefs:
-  - name: envoy-gateway
-    namespace: networking
-    sectionName: https
+    - name: envoy-gateway
+      namespace: networking
+      sectionName: https
   hostnames:
-  - "qbittorrent.${SECRET_CLUSTER_DOMAIN}"
+    - "qbittorrent.${SECRET_CLUSTER_DOMAIN}"
   rules:
-  - matches:
-    - path:
-        type: PathPrefix
-        value: /
-    backendRefs:
-    - name: qbittorrent
-      port: 8080
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: qbittorrent
+          port: 80

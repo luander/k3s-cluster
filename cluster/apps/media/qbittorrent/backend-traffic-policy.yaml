@@ -6,11 +6,11 @@ metadata:
   namespace: media
 spec:
   targetRefs:
-  - group: gateway.networking.k8s.io
-    kind: HTTPRoute
-    name: qbittorrent
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: qbittorrent
   httpUpgrade:
-  - type: websocket
+    - type: websocket
   timeout:
     http:
       requestTimeout: 120s
