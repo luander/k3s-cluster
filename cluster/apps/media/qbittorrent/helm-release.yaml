@@ -18,14 +18,40 @@ spec:
     controller:
       type: statefulset
     image:
-      repository: ghcr.io/home-operations/qbittorrent
-      tag: 5.1.4
+      repository: ghcr.io/home-operations/qbittorrent-libtorrentv1
+      tag: 5.1.4@sha256:f8ded91789511af07db8e47bcfde9440f3c2d235e85b7eee13c9d03a7a4107c9
     env:
       TZ: "Europe/Amsterdam"
-      QBITTORRENT__PORT: &port 8080
-      QBITTORRENT__BT_PORT: &bt-port 50413
+      QBT_WEBUI_PORT: &port 80
+      QBT_TORRENTING_PORT: &torrentPort 31288
       QBITTORRENT__BitTorrent__Session__SavePath: /downloads
       QBITTORRENT__BitTorrent__Session__TempPath: /downloads/incomplete
+    probes:
+      liveness:
+        enabled: true
+        spec:
+          periodSeconds: 30
+          timeoutSeconds: 5
+          failureThreshold: 5
+      readiness:
+        enabled: true
+        custom: true
+        spec:
+          httpGet:
+            path: /api/v2/app/version
+            port: *port
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 5
+      startup:
+        enabled: true
+        spec:
+          failureThreshold: 30
+          periodSeconds: 10
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      capabilities: { drop: ["ALL"] }
     service:
       main:
         ports:
@@ -37,7 +63,7 @@ spec:
         ports:
           bittorrent:
             enabled: true
-            port: *bt-port
+            port: *torrentPort
             protocol: TCP
     podSecurityContext:
       runAsUser: 568
@@ -45,8 +71,8 @@ spec:
       fsGroup: 568
       fsGroupChangePolicy: "OnRootMismatch"
       supplementalGroups:
-      - 568
-      - 100
+        - 568
+        - 100
     persistence:
       config:
         enabled: true
