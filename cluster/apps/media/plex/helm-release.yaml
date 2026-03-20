@@ -31,7 +31,7 @@ spec:
       type: statefulset
     image:
       repository: ghcr.io/home-operations/plex
-      tag: 1.43.0.10492
+      tag: 1.43.0.10492@sha256:8e10b5342354121a7390e493b058174f19c343515f204affb0162e26567c4b8d
     env:
       TZ: "${TIMEZONE}"
       PLEX_PREFERENCE_7: "TreatWanIpAsLocal=1"

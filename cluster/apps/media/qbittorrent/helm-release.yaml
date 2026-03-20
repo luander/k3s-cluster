@@ -19,7 +19,7 @@ spec:
       type: statefulset
     image:
       repository: ghcr.io/home-operations/qbittorrent
-      tag: 5.1.4
+      tag: 5.1.4@sha256:b943e44db853aef78e857b2f1b2138cdd747f2b89161de2598cb4a2d6a253918
     env:
       TZ: "Europe/Amsterdam"
       QBITTORRENT__PORT: &port 8080

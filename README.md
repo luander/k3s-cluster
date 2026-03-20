@@ -4,7 +4,7 @@
 
 
 ## My home Kubernetes cluster :sailboat:
-_... heavily inspired by the works of [onedr0p](https://github.com/onedr0p/home-ops)_ :rocket:
+_... heavily inspired by the [home-operations](https://github.com/home-operations/home-ops) community_ :rocket:
 
 
 > Work in progress :construction_worker:
