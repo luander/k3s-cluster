@@ -29,13 +29,6 @@ spec:
   values:
     controller:
       type: statefulset
-    initContainers:
-      01-init-config:
-        image: busybox:1.37
-        command: ["sh", "-c", "mkdir -p /media/downloads/transmission/complete/lidarr"]
-        volumeMounts:
-          - name: media
-            mountPath: /media
     image:
       repository: ghcr.io/home-operations/lidarr
       tag: 3.1.2.4902
