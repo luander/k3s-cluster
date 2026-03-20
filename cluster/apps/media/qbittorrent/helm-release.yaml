@@ -53,7 +53,7 @@ spec:
         enabled: true
         type: pvc
         existingClaim: media
-        mountPath: /media
+        mountPath: /downloads
         subPath: downloads/qbittorrent
     resources:
       requests:
