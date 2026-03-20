@@ -24,6 +24,8 @@ spec:
       TZ: "Europe/Amsterdam"
       QBITTORRENT__PORT: &port 8080
       QBITTORRENT__BT_PORT: &bt-port 50413
+      QBITTORRENT__BitTorrent__Session__SavePath: /downloads
+      QBITTORRENT__BitTorrent__Session__TempPath: /downloads/incomplete
     service:
       main:
         ports:
