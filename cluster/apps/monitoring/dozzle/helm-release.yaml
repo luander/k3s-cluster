@@ -30,6 +30,9 @@ spec:
     image:
       repository: amir20/dozzle
       tag: v10.1.2
+    args:
+      - --mode
+      - kubernetes
     env:
       TZ: Europe/Amsterdam
     serviceAccount:
