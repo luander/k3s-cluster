@@ -4,3 +4,4 @@ resources:
 - helm-release.yaml
 - httproute.yaml
 - rbac.yaml
+- backend-traffic-policy.yaml
