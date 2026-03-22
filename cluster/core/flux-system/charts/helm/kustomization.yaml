@@ -26,6 +26,7 @@ resources:
 - kasten-charts.yaml
 - kubernetes-external-secrets-charts.yaml
 - kubernetes-sigs-descheduler-charts.yaml
+- metrics-server-charts.yaml
 - longhorn-charts.yaml
 - nfs-subdir-external-provisioner-charts.yaml
 - node-feature-discovery-charts.yaml
