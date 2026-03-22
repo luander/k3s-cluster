@@ -12,5 +12,3 @@ spec:
   timeout:
     http:
       requestTimeout: 0s
-  connection:
-    bufferLimitBytes: 32768
