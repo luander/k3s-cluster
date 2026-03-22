@@ -72,6 +72,19 @@ spec:
     # Actually, the user suggested "raw app-template", 
     # I will stick to the SERVER first and see if I can consolidate or if I need more HRs.
 
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                      - plex
+              topologyKey: kubernetes.io/hostname
+
     persistence:
       library:
         enabled: true
