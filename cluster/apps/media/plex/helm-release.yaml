@@ -35,6 +35,7 @@ spec:
     env:
       TZ: "${TIMEZONE}"
       PLEX_PREFERENCE_7: "TreatWanIpAsLocal=1"
+      PLEX_PREFERENCE_8: "customConnections=https://plex.${SECRET_CLUSTER_DOMAIN}:443"
     service:
       main:
         type: LoadBalancer
