@@ -16,7 +16,7 @@ jobs:
         fetch-depth: 1
 
     - name: Setup Flux CLI
-      uses: fluxcd/flux2/action@main
+      uses: fluxcd/flux2/action@7d27a26665b34463b0ed5fb54fa06642375536f9 # main
 
     - name: Upgrade Flux
       id: upgrade
