@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
 - _pvc
 - immich
+- lazylibrarian
 - lidarr
 - prowlarr
 - qbittorrent
