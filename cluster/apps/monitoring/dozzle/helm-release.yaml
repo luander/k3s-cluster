@@ -32,7 +32,7 @@ spec:
   values:
     image:
       repository: amir20/dozzle
-      tag: v10.1.2
+      tag: v10.5.3
     env:
       TZ: Europe/Amsterdam
       DOZZLE_MODE: k8s
