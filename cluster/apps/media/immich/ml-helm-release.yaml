@@ -28,7 +28,7 @@ spec:
   values:
     image:
       repository: ghcr.io/immich-app/immich-machine-learning
-      tag: v2.5.6
+      tag: v3.0.1
 
     env:
       TZ: Europe/Amsterdam
