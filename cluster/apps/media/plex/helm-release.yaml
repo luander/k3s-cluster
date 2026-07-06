@@ -33,7 +33,7 @@ spec:
       repository: ghcr.io/home-operations/plex
       tag: 1.43.1.10611
     env:
-      TZ: "${TIMEZONE}"
+      TZ: "Europe/Amsterdam"
       PLEX_PREFERENCE_7: "TreatWanIpAsLocal=1"
       PLEX_PREFERENCE_8: "customConnections=https://plex.${SECRET_CLUSTER_DOMAIN}:443"
     service:
