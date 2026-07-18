@@ -10,6 +10,6 @@ jobs:
     steps:
     - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
     - name: yamllint
-      uses: reviewdog/action-yamllint@f01d8a48fd8d89f89895499fca2cff09f9e9e8c0 # v1
+      uses: reviewdog/action-yamllint@e02a49fdf53f51ddd8dfa89b09aa975043aeba38 # v1
       with:
         yamllint_flags: "-c .github/yamllint.config.yaml ./cluster"
