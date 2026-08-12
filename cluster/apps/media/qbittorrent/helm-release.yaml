@@ -19,7 +19,7 @@ spec:
       type: statefulset
     image:
       repository: ghcr.io/home-operations/qbittorrent-libtorrentv1
-      tag: 5.1.4@sha256:f8ded91789511af07db8e47bcfde9440f3c2d235e85b7eee13c9d03a7a4107c9
+      tag: 5.2.3@sha256:8a15de24cabfca8041788773436cb176378ff7735e5cb0b2fd94984d4fac6968
     env:
       TZ: "Europe/Amsterdam"
       QBT_WEBUI_PORT: &port 80
