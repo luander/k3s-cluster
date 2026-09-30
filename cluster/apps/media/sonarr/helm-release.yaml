@@ -20,7 +20,7 @@ spec:
     image:
       repository: ghcr.io/home-operations/sonarr
       pullPolicy: IfNotPresent
-      tag: 4.0.19
+      tag: 4.0.20
 
     strategy:
       type: Recreate
