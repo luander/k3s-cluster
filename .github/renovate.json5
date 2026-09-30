@@ -23,4 +23,19 @@
   kubernetes: {
     managerFilePatterns: ["/\\.yaml(?:\\.j2)?$/"],
   },
+  packageRules: [
+    {
+      description: "Pin home-operations images to their sha256 digest (upstream recommends digests over tags)",
+      matchDatasources: ["docker"],
+      matchPackageNames: ["ghcr.io/home-operations/**"],
+      pinDigests: true,
+    },
+    {
+      description: "Group the one-off digest pinning of home-operations images into a single PR",
+      matchDatasources: ["docker"],
+      matchPackageNames: ["ghcr.io/home-operations/**"],
+      matchUpdateTypes: ["pinDigest"],
+      groupName: "home-operations image digests",
+    },
+  ],
 }
