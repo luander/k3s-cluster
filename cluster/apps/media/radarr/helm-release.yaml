@@ -19,7 +19,7 @@ spec:
   values:
     image:
       repository: ghcr.io/home-operations/radarr
-      tag: 6.1.1.10317@sha256:5e08c0eefd2770d1d29395c4f84fe5bf7dfc3a986598021306a5d8ac017a3989
+      tag: 7.0.0.10815@sha256:c044b4df8e7b2546ef389481626a56fabe291575ff2d65481b1555432d6161ff
 
     affinity:
       nodeAffinity:
