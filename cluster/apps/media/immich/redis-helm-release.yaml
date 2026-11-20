@@ -28,7 +28,7 @@ spec:
   values:
     image:
       repository: docker.io/valkey/valkey
-      tag: 9.0-alpine@sha256:1be494495248d53e3558b198a1c704e6b559d5e99fe4c926e14a8ad24d76c6fa
+      tag: 9.0-alpine@sha256:139d21c97b1a956e42e29b1e4ede4752a6ff52d1a0db9ef0ff4954a570f23976
 
     controller:
       type: deployment
