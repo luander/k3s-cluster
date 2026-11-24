@@ -31,7 +31,7 @@ spec:
       type: statefulset
     image:
       repository: ghcr.io/home-operations/prowlarr
-      tag: 3.0.0.5737@sha256:0954599432e16ccd86129f1eb8eb0247fd0d1591aab400f73e2010a1cda37be8
+      tag: 3.1.0.5799@sha256:15b68a6e69f893a3ede6fed405594d3f5d9e9d13648246a0fefbafe4fd7f595b
     env:
       TZ: Europe/Amsterdam
       PROWLARR__INSTANCE_NAME: Prowlarr
